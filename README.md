@@ -38,16 +38,19 @@ Not yet available
 
 ### My process
 
-	** Day-1 ** 
-    - I started by creating the project by running the command npm create vite app-name --template react-ts
+** Day-1 ** 
+ - I started by creating the project by running the command npm create vite app-name --template react-ts
 
-    - I created a env file and added it to the gitignore file so that my api keys will not be exposed.
+ - I created a env file and added it to the gitignore file so that my api keys will not be exposed.
 
-    - I then created a repository on github and pushed the project to github.
+ - I run npm install --save-dev @types/node in order to use process.env in my project.
 
-    - I then installed the necessary dependencies for the project such as react-router-dom, firebase, redux, react-redux, @reduxjs/toolkit, react-toastify, tailwindcss, dot-env, and many more.
+
+ - I then created a repository on github and pushed the project to github.
+
+ - I then installed the necessary dependencies for the project such as react-router-dom, firebase, redux, react-redux, @reduxjs/toolkit, react-toastify, tailwindcss, dot-env, and many more.
    
-    - I then created the necessary folders and files for the project such as the components folder, pages folder, and the redux folder.
+ - I then created the necessary folders and files for the project such as the components folder, pages folder, and the redux folder.
 
 
 
