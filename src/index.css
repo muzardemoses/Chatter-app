@@ -74,8 +74,16 @@ body {
 }
 
 /* Home Section Three Styles */
-
 .sec-three-divs{
     height: 324px;
     width: 306px;;
+}
+
+/* Home Section Five Styles */
+.sec-five-h3-width{
+  width: 665px;  
+}
+
+.sec-five-p-width{
+    width: 594px;
 }
