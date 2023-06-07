@@ -45,12 +45,13 @@ Not yet available
 
  - I run npm install --save-dev @types/node in order to use process.env in my project.
 
-
  - I then created a repository on github and pushed the project to github.
 
  - I then installed the necessary dependencies for the project such as react-router-dom, firebase, redux, react-redux, @reduxjs/toolkit, react-toastify, tailwindcss, dot-env, and many more.
    
  - I then created the necessary folders and files for the project such as the components folder, pages folder, and the redux folder.
+
+ - Lastly, I created the header component.
 
 
 
