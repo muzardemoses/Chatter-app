@@ -53,6 +53,8 @@ Not yet available
 
  - Lastly, I created the header component.
 
+ ** Day-2 **
+ - I created  and build the home page.
 
 
 

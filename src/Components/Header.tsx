@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export const Header = () => {
   return (
-    <div className="fixed top-0 left-0 w-full flex justify-between items-center px-28 py-6 shadow">
+    <div className="fixed top-0 left-0 z-20 w-full bg-white flex justify-between items-center px-28 py-6 shadow">
       <div className="">
         <h2 className=" uppercase font-bold text-5xl text-blue-700">Chatter</h2>
       </div>

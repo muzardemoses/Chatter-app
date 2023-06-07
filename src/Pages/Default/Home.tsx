@@ -1,11 +1,13 @@
-import { SecOne, SecTwo, SecThree } from "../../Components/Home"
+import { SecOne, SecTwo, SecThree, SecFour, SecFive } from "../../Components/Home"
 
 export const Home = () => {
     return (
-        <div>
+        <div className="pt-1.5">
             <SecOne />
             <SecTwo />
             <SecThree />
+            <SecFour />
+            <SecFive />
         </div>
     )
 }

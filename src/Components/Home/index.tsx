@@ -2,3 +2,5 @@
 export * from './SecOne';
 export * from './SecTwo';
 export * from './SecThree';
+export * from './SecFour';
+export * from './SecFive';
