@@ -1,7 +1,64 @@
 @tailwind base;
+
+body {
+  @apply transition duration-500 ease-in-out;
+}
+
+.middle {
+  @apply before:bg-gray-900  transition duration-500 ease-in-out;
+}
+
 @tailwind components;
 @tailwind utilities;
 
+.middle {
+  position: relative;
+}
+.middle:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -10px;
+  left: 0;
+  visibility: hidden;
+  transform: scaleX(0);
+  transition: all 0.3s ease-in-out;
+}
+
+.middle:hover:before {
+  visibility: visible;
+  transform: scaleX(1);
+}
+
+.un {
+  display: inline-block;
+  padding-bottom: 2px;
+  background-image: linear-gradient(#000 0 0);
+  background-position: 0 100%; /*OR bottom left*/
+  background-size: 0% 2px;
+  background-repeat: no-repeat;
+  transition: background-size 0.3s, background-position 0s 0.3s; /*change after the size immediately*/
+}
+
+.un:hover {
+  background-position: 100% 100%; /*OR bottom right*/
+  background-size: 100% 2px;
+}
+
 body {
   font-family: "DM Sans", sans-serif;
+}
+
+/* Home Section One Styles */
+.sec-one-h1-width {
+  width: 984px;
+}
+
+.sec-one-p-width {
+  width: 740px;
+}
+
+.sec-one-con-height {
+  height: 765px;
 }
