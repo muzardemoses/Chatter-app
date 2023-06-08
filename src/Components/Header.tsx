@@ -26,7 +26,7 @@ export const Header = () => {
             Log In
           </button>
         </Link>
-        <Link to="/signup">
+        <Link to="/register">
           <button className=" text-white font-normal text-lg bg-blue-700 rounded-lg py-3 w-36 hover:bg-blue-800 transition duration-500 ease-in-out">
             Sign Up
           </button>

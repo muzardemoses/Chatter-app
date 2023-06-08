@@ -1,4 +1,4 @@
-import { Home, About, PageNotFound, Login, Profile } from './Pages'
+import { Home, About, PageNotFound, Login, Register, ForgetPassword, Profile } from './Pages'
 import { AuthLayout, DashboardLayout, DefaultLayout } from './Layouts'
 import { Route, Routes } from 'react-router-dom'
 
@@ -27,6 +27,22 @@ function App() {
           element={
             <AuthLayout>
               <Login />
+            </AuthLayout>
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            <AuthLayout>
+              <Register />
+            </AuthLayout>
+          }
+        />
+        <Route
+          path="/forget-password"
+          element={
+            <AuthLayout>
+              <ForgetPassword />
             </AuthLayout>
           }
         />

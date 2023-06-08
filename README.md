@@ -58,6 +58,7 @@ Not yet available
 
 **Day-3**
 - I created the Footer component.
+- I created the Login page and the Register page.
 
 
 ### Built with
