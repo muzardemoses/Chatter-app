@@ -38,7 +38,7 @@ Not yet available
 
 ### My process
 
-** Day-1 ** 
+**Day-1** 
  - I started by creating the project by running the command npm create vite app-name --template react-ts
 
  - I created a env file and added it to the gitignore file so that my api keys will not be exposed.
@@ -53,10 +53,11 @@ Not yet available
 
  - Lastly, I created the header component.
 
- ** Day-2 **
- - I created  and build the home page.
+**Day-2**
+ - I created and build the home page.
 
-
+**Day-3**
+- I created the Footer component.
 
 
 ### Built with
