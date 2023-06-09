@@ -60,6 +60,8 @@ Not yet available
 - I created the Footer component.
 - I created the Login page and the Register page.
 
+**Day-4**
+- Pending...
 
 ### Built with
 
