@@ -66,6 +66,8 @@ Not yet available
 
 **Day-5**
 - Same as day-4
+- Updated the login and register page user interface by adding google, twitter and github sign in buttons.
+
 
 ### Built with
 
