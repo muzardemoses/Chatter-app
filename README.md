@@ -62,6 +62,10 @@ Not yet available
 
 **Day-4**
 - Pending...
+- Working on how the sign in and sign up page will work.
+
+**Day-5**
+- Same as day-4
 
 ### Built with
 
