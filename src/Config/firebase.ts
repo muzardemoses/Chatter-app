@@ -198,4 +198,7 @@ export {
   sendPasswordResetEmail,
   sendEmailVerification,
   db,
+  GithubAuthProvider,
+  GoogleAuthProvider,
+  TwitterAuthProvider,
 };

@@ -70,6 +70,7 @@ Not yet available
 
 **Day-6** ***June 11, 2023***
 - Add the functionality to the login and register page.
+- Set up the firebase config file.
 - I had to change the way I got the config variables from the env file because it was not working. From process.env.API_KEY to import.meta.env.VITE_API_KEY
 
 ### Built with
