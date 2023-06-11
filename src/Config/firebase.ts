@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+//import { getAnalytics } from "firebase/analytics";
 import {
   getAuth,
   signInWithRedirect,
@@ -9,7 +9,11 @@ import {
   GoogleAuthProvider,
   onAuthStateChanged,
   sendPasswordResetEmail,
-   sendEmailVerification,
+  sendEmailVerification,
+  TwitterAuthProvider,
+  GithubAuthProvider,
+  signInWithPopup,
+  User,
 } from "firebase/auth";
 import {
   getFirestore,
@@ -20,37 +24,178 @@ import {
   setDoc,
   doc,
   getDocs,
+  updateDoc,
 } from "firebase/firestore";
 
 
+
 const firebaseConfig = {
-    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-    projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID ,
-    storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
-    messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID ,
-    appId: process.env.REACT_APP_FIREBASE_APP_ID,
-    measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
+  apiKey: import.meta.env.VITE_REACT_APP_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_REACT_APP_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_REACT_APP_FIREBASE_MEASUREMENT_ID,
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+//const analytics = getAnalytics(app);
+
 const auth = getAuth(app);
-const provider = new GoogleAuthProvider();
+
+const googleProvider = new GoogleAuthProvider();
+const twitterProvider = new TwitterAuthProvider();
+const githubProvider = new GithubAuthProvider();
 
 const db = getFirestore(app);
 
+export const createUserProfileDocument = async (userAuth: User, additionalData: any) => {
+  if (!userAuth) return;
+
+  const userRef = doc(db, `users/${userAuth.uid}`);
+  const snapShot = await getDoc(userRef);
+
+  if (!snapShot.exists()) {
+
+    const { displayName, email, photoURL, emailVerified } = userAuth;
+    const createdAt = new Date();
+
+    const followers: string[] = [];
+    const following: string[] = [];
+    const userType = " ";
+
+    //Generate username from email
+    if (email) {
+      const username = email.split("@")[0].replace(/[^a-z]/g, "");
+      if (!username) return;
+      let usernameTaken = true;
+      let usernameToSave = username;
+      let i = 1;
+
+      // Check if username is already taken
+      while (usernameTaken) {
+        const querySnapshot = await getDocs(
+          query(
+            collection(db, "users"),
+            where("username", "==", usernameToSave)
+          )
+        );
+        if (querySnapshot.empty) {
+          usernameTaken = false;
+        } else {
+          usernameToSave = username + i;
+          i++;
+        }
+      }
+
+      try {
+        await setDoc(userRef, {
+          displayName,
+          email,
+          photoURL,
+          emailVerified,
+          createdAt,
+          followers,
+          following,
+          userType,
+          username: usernameToSave, // set the final value of usernameToSave
+          ...additionalData,
+        });
+        //await updateDoc(userRef, { lastLoginAt});
+      } catch (error: unknown) {
+        console.log("error creating user", (error as Error).message);
+      }
+    } else {
+      const username = displayName?.replace(/\s+/g, "").toLowerCase();
+      if (!username) return;
+      let usernameTaken = true;
+      let usernameToSave = username;
+      let i = 1;
+
+      // Check if username is already taken
+      while (usernameTaken) {
+        const querySnapshot = await getDocs(
+          query(
+            collection(db, "users"),
+            where("username", "==", usernameToSave)
+          )
+        );
+        if (querySnapshot.empty) {
+          usernameTaken = false;
+        } else {
+          usernameToSave = username + i;
+          i++;
+        }
+      }
+
+      try {
+        await setDoc(userRef, {
+          displayName, //no forget to have john for users with no displayName
+          email,
+          photoURL,
+          emailVerified,
+          createdAt,
+          followers,
+          following,
+          userType,
+          username: usernameToSave, // set the final value of usernameToSave
+          ...additionalData,
+        });
+        //await updateDoc(userRef, { lastLoginAt});
+      } catch (error: unknown) {
+        console.log("error creating user", (error as Error).message);
+      }
+    }
+
+    // Check if username is "muzardemoses" and if user is not already following "muzardemoses"
+
+    if (email && email.toLowerCase() !== "muzardemoses@gmail.com") {
+      const querySnapshot = await getDocs(
+        query(
+          collection(db, "users"),
+          where("email", "==", "muzardemoses@gmail.com")
+        )
+      );
+      if (!querySnapshot.empty) {
+        const muzarUser = querySnapshot.docs[0];
+        const muzarUserId = muzarUser.id;
+        const muzarData = muzarUser.data();
+        const muzarFollowers = muzarData.followers || [];
+        const muzarFollowing = muzarData.following || [];
+
+        // Check if user is not already following "muzardemoses"
+        if (!muzarFollowing.includes(userAuth.uid)) {
+          // Add user to "muzardemoses" list of followers
+          await updateDoc(doc(db, "users", muzarUserId), {
+            followers: [...muzarFollowers, userAuth.uid],
+          });
+
+          // Add "muzardemoses" to user's list of following
+          await updateDoc(userRef, {
+            following: [...following, muzarUserId],
+          });
+        }
+      }
+    }
+  }
+  return userRef;
+}
+
 export {
-    auth,
-    analytics,
-    provider,
-    signInWithRedirect,
-    signInWithEmailAndPassword,
-    createUserWithEmailAndPassword,
-    signOut,
-    onAuthStateChanged,
-    sendPasswordResetEmail,
-    sendEmailVerification,
-    db,
+  auth,
+  //analytics,
+  googleProvider,
+  twitterProvider,
+  githubProvider,
+  signInWithRedirect,
+  signInWithPopup,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+  sendPasswordResetEmail,
+  sendEmailVerification,
+  db,
 };

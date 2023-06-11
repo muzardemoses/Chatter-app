@@ -59,11 +59,11 @@ export const Register = () => {
 
                     </div>
                     <div className="flex flex-col gap-3">
-                        <label htmlFor="reason" className="text-base font-normal">
+                        <label htmlFor="user-type" className="text-base font-normal">
                             You are joining as?
                         </label>
 
-                        <select name="reason" id="reason" className="text-base font-normal border border-gray-300 shadow rounded-lg p-3  focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent transition ease-in-out duration-500">
+                        <select name="user-type" id="user-type" className="text-base font-normal border border-gray-300 shadow rounded-lg p-3  focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent transition ease-in-out duration-500">
                             <option value="writer">
                                 Writer
                             </option>
