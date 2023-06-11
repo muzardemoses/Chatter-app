@@ -38,7 +38,7 @@ Not yet available
 
 ### My process
 
-**Day-1** 
+**Day-1** ***June 6, 2023***
  - I started by creating the project by running the command npm create vite app-name --template react-ts
 
  - I created a env file and added it to the gitignore file so that my api keys will not be exposed.
@@ -53,21 +53,23 @@ Not yet available
 
  - Lastly, I created the header component.
 
-**Day-2**
+**Day-2** ***June 7, 2023***
  - I created and build the home page.
 
-**Day-3**
+**Day-3** ***June 8, 2023***
 - I created the Footer component.
 - I created the Login page and the Register page.
 
-**Day-4**
+**Day-4** ***June 9, 2023***
 - Pending...
 - Working on how the sign in and sign up page will work.
 
-**Day-5**
+**Day-5** ***June 10, 2023***
 - Same as day-4
 - Updated the login and register page user interface by adding google, twitter and github sign in buttons.
 
+**Day-6** ***June 11, 2023***
+- Add the functionality to the login and register page.
 
 ### Built with
 
