@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
-//import { getAnalytics } from "firebase/analytics";
+import { getAnalytics } from "firebase/analytics";
+
 import {
   getAuth,
   signInWithRedirect,
@@ -14,6 +15,7 @@ import {
   GithubAuthProvider,
   signInWithPopup,
   User,
+  UserCredential,
 } from "firebase/auth";
 import {
   getFirestore,
@@ -27,21 +29,25 @@ import {
   updateDoc,
 } from "firebase/firestore";
 
+const apiKey = import.meta.env.VITE_FIREBASE_API_KEY;
+
 
 
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_REACT_APP_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_REACT_APP_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_REACT_APP_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_REACT_APP_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_REACT_APP_FIREBASE_APP_ID,
-  measurementId: import.meta.env.VITE_REACT_APP_FIREBASE_MEASUREMENT_ID,
+  apiKey: apiKey,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
+
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-//const analytics = getAnalytics(app);
+const analytics = getAnalytics(app);
 
 const auth = getAuth(app);
 
@@ -60,11 +66,11 @@ export const createUserProfileDocument = async (userAuth: User, additionalData: 
   if (!snapShot.exists()) {
 
     const { displayName, email, photoURL, emailVerified } = userAuth;
-    const createdAt = new Date();
+    const createdAt = new Date().toISOString()
 
     const followers: string[] = [];
     const following: string[] = [];
-    const userType = " ";
+    const userType = "writer";
 
     //Generate username from email
     if (email) {
@@ -183,9 +189,15 @@ export const createUserProfileDocument = async (userAuth: User, additionalData: 
   return userRef;
 }
 
+export type {
+  User,
+  UserCredential
+};
+
+
 export {
   auth,
-  //analytics,
+  analytics,
   googleProvider,
   twitterProvider,
   githubProvider,
@@ -200,5 +212,6 @@ export {
   db,
   GithubAuthProvider,
   GoogleAuthProvider,
-  TwitterAuthProvider,
+  TwitterAuthProvider
 };
+

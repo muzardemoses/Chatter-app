@@ -1,4 +1,4 @@
-import { Home, About, PageNotFound, Login, Register, ForgetPassword, Profile } from './Pages'
+import { Home, About, PageNotFound, Login, Register, ForgetPassword, Profile, VerifyEmail } from './Pages'
 import { AuthLayout, DashboardLayout, DefaultLayout } from './Layouts'
 import { Route, Routes } from 'react-router-dom'
 import { ToastContainer } from "react-toastify";
@@ -21,6 +21,7 @@ function App() {
       if (!userRef) return;
 
       const snapShot = await getDoc(userRef);
+      
       if (!snapShot.exists()) return;
       const user = { id: snapShot.id, ...snapShot.data() };
       dispatch(loginUser(user));
@@ -71,6 +72,14 @@ function App() {
           element={
             <AuthLayout>
               <ForgetPassword />
+            </AuthLayout>
+          }
+        />
+        <Route
+          path="/verify-email"
+          element={
+            <AuthLayout>
+              <VerifyEmail />
             </AuthLayout>
           }
         />

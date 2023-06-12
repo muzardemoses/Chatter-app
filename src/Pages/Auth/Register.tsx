@@ -6,7 +6,7 @@ import googleSvg from "../../assets/Svg/Auth/google.svg"
 import { toast } from "react-toastify"
 import { useSelector } from "react-redux";
 import { selectUser } from "../../Config/userSlice"
-import { auth, createUserProfileDocument, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "../../Config/firebase"
+import { auth, createUserProfileDocument, createUserWithEmailAndPassword, GoogleAuthProvider, googleProvider, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup, signInWithRedirect, UserCredential } from "../../Config/firebase"
 
 
 export const Register = () => {
@@ -23,7 +23,7 @@ export const Register = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [userType, setUserType] = useState("")
+    const [userType, setUserType] = useState("writer")
 
 
     useEffect(() => {
@@ -33,7 +33,7 @@ export const Register = () => {
 
     useEffect(() => {
         if (user) {
-            navigate("/")
+            navigate("/verify-email")
         }
     }, [user, navigate])
 
@@ -55,6 +55,8 @@ export const Register = () => {
                 email,
                 userType,
             })
+
+            await sendEmailVerification(user);
             toast.success("Registration successful");
         } catch (error) {
             console.log(error)
@@ -62,6 +64,25 @@ export const Register = () => {
     }
 
     const signInWithGoogle = () => {
+        signInWithRedirect(auth, googleProvider)
+            .then((result: UserCredential) => {
+                // This gives you a Google Access Token. You can use it to access the Google API.
+                const credential = GoogleAuthProvider.credentialFromResult(result);
+                const token = credential?.accessToken;
+                // The signed-in user info.
+                const user = result.user;
+                // IdP data available using getAdditionalUserInfo(result)
+                // ...
+            }).catch((error) => {
+                // Handle Errors here.
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                // The email of the user's account used.
+                const email = error.customData?.email;
+                // The AuthCredential type that was used.
+                const credential = GoogleAuthProvider.credentialFromError(error);
+                // ...
+            });
 
     }
 
@@ -199,7 +220,9 @@ export const Register = () => {
                     <button type="submit" className="bg-blue-700 text-white font-medium text-lg rounded-lg p-3">
                         Create account
                     </button>
-                    <button type="button" className="bg-white text-black font-medium text-lg rounded-lg p-3 flex gap-2 items-center justify-center border border-gray-300 shadow">
+                    <button type="button"
+                        onClick={signInWithGoogle}
+                        className="bg-white text-black font-medium text-lg rounded-lg p-3 flex gap-2 items-center justify-center border border-gray-300 shadow">
                         <img src={googleSvg} alt="google" className="inline-block w-6 mr-2" />
                         Sign in with Google
                     </button>
