@@ -3,8 +3,15 @@ import { RootState } from "./store"
 
 interface UserState  {
     user: {
-        name: string,
+        displayName: string,
         email: string,
+        photoURL: string,
+        createdAt: string,
+        followers: string[],
+        following: string[],
+        userType: string,
+        username: string,
+        id: string,
     } | null
 }
 

@@ -77,7 +77,7 @@ Not yet available
 - Continue working on the login and register page.
 
 **Day-8** ***June 13, 2023***
-- 
+- Implement initial dashboard design
 
 ### Built with
 
