@@ -16,6 +16,9 @@ import {
   signInWithPopup,
   User,
   UserCredential,
+  fetchSignInMethodsForEmail,
+  EmailAuthProvider,
+  linkWithCredential,
 } from "firebase/auth";
 import {
   getFirestore,
@@ -65,7 +68,7 @@ export const createUserProfileDocument = async (userAuth: User, additionalData: 
 
   if (!snapShot.exists()) {
 
-    const { displayName, email, photoURL, emailVerified } = userAuth;
+    const { displayName, email, photoURL } = userAuth;
     const createdAt = new Date().toISOString()
 
     const followers: string[] = [];
@@ -101,7 +104,6 @@ export const createUserProfileDocument = async (userAuth: User, additionalData: 
           displayName,
           email,
           photoURL,
-          emailVerified,
           createdAt,
           followers,
           following,
@@ -141,7 +143,6 @@ export const createUserProfileDocument = async (userAuth: User, additionalData: 
           displayName, //no forget to have john for users with no displayName
           email,
           photoURL,
-          emailVerified,
           createdAt,
           followers,
           following,
@@ -212,6 +213,9 @@ export {
   db,
   GithubAuthProvider,
   GoogleAuthProvider,
-  TwitterAuthProvider
+  TwitterAuthProvider,
+  fetchSignInMethodsForEmail,
+  EmailAuthProvider,
+  linkWithCredential,
 };
 

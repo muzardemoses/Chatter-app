@@ -24,7 +24,7 @@ export const VerifyEmail = () => {
         const handleEmailVerification = async () => {
           
             if (user && user.emailVerified) {
-                await user.getIdTokenResult();
+                await user.getIdTokenResult(true);
                 navigate("/");
             }
         };
@@ -33,6 +33,7 @@ export const VerifyEmail = () => {
         return () => unsubscribe();
     }, [user, navigate]);
 
+    
     setInterval(() => {
         if (user && user.emailVerified) {
             navigate("/");

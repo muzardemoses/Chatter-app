@@ -73,6 +73,12 @@ Not yet available
 - Set up the firebase config file.
 - I had to change the way I got the config variables from the env file because it was not working. From process.env.API_KEY to import.meta.env.VITE_API_KEY
 
+**Day-7** ***June 12, 2023***
+- Continue working on the login and register page.
+
+**Day-8** ***June 13, 2023***
+- 
+
 ### Built with
 
 - Firebase
