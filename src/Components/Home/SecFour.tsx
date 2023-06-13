@@ -1,6 +1,25 @@
+import { useDispatch } from 'react-redux';
 import boyImg from '../../Images/Home/sec-four-img.jpg';
+import { auth, signOut } from '../../Config/firebase';
+import { logout } from '../../Config/userSlice';
+import { toast } from 'react-toastify';
 
 export const SecFour = () => {
+    const dispatch = useDispatch();
+
+    const SignOut = async () => {
+        if (window.confirm("Are you sure you want to log out?")) {
+            try {
+                await signOut(auth);
+                dispatch(logout);
+                localStorage.removeItem("user");
+                window.location.href = "/";
+                toast.success("Logout successful");
+            } catch (error: any) {
+                alert(error.message);
+            }
+        }
+    };
     return (
         <div className="py-24 px-20 flex gap-14" style={{ backgroundColor: "#FFEDCC80" }}>
             <img src={boyImg} alt="boy" className="rounded-full" />
@@ -12,6 +31,9 @@ export const SecFour = () => {
 
                 <button className='w-max px-6 py-3.5 bg-blue-700 text-white font-medium rounded-lg hover:bg-blue-800 transition duration-500 ease-in-out'>Join chatter</button>
             </div>
+            <button onClick={SignOut} className='w-max px-6 py-3.5 bg-blue-700 text-white font-medium rounded-lg hover:bg-blue-800 transition duration-500 ease-in-out'>Sign Out
+
+            </button>
         </div>
     )
 }
