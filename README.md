@@ -79,6 +79,9 @@ Not yet available
 **Day-8** ***June 13, 2023***
 - Implement initial dashboard design (Sidebar, Right Sticky Bar, and Dashboard Subheader).
 
+**Day-9** ***June 14, 2023***
+- Implement initial messaging page design.
+
 ### Built with
 
 - Firebase

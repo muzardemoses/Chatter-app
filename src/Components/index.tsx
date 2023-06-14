@@ -5,3 +5,4 @@ export * from './LeftBar.tsx';
 export * from './RightBar.tsx';
 export * from './SVG';
 export * from './Dashboard';
+export * from './Messaging';

@@ -1,4 +1,4 @@
-import { Home, About, PageNotFound, Login, Register, ForgetPassword, Profile, VerifyEmail, Bookmarks, Feed } from './Pages'
+import { Home, About, PageNotFound, Login, Register, ForgetPassword, Profile, VerifyEmail, Bookmarks, Feed, Messages, SelectAndMessage, ChatRoom } from './Pages'
 import { AuthLayout, DashboardLayout, DefaultLayout } from './Layouts'
 import { Route, Routes } from 'react-router-dom'
 import { ToastContainer } from "react-toastify";
@@ -100,6 +100,64 @@ function App() {
             </DashboardLayout>
           }
         />
+
+        {/* SelectAndMessage and ChatRoom are children of messages */}
+        {/* <Route
+          path="/messages"
+          element={
+            <DashboardLayout >
+              <Messages>
+                <SelectAndMessage />
+              </Messages>
+            </DashboardLayout>
+          }
+          children={
+            <>
+              <Route
+                path="/"
+                element={
+                  <DashboardLayout >
+                    <Messages>
+                      <SelectAndMessage />
+                    </Messages>
+                  </DashboardLayout>
+                } />
+
+              <Route path=":idone-:idtwo" element={
+                <DashboardLayout >
+                  <Messages>
+                    <ChatRoom />
+                  </Messages>
+                </DashboardLayout>
+              } />
+            </>
+          }
+        /> */}
+
+
+        <Route path="/messages"
+          element={
+            <DashboardLayout>
+              <Messages>
+                <SelectAndMessage />
+              </Messages>
+            </DashboardLayout>
+          }
+        />
+
+        <Route path="/messages/:idone-:idtwo"
+          element={
+            <DashboardLayout>
+              <Messages>
+                <ChatRoom />
+              </Messages>
+            </DashboardLayout>
+          }
+        />
+
+
+
+
 
 
         <Route
