@@ -5,12 +5,15 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
 import { loginUser } from './Config/userSlice';
+import { addUsers } from './Config/usersSlice';
 import {
   onAuthStateChanged,
   auth,
   createUserProfileDocument,
+  db,
 } from "./Config/firebase";
-import { getDoc } from 'firebase/firestore';
+import { collection, getDoc, getDocs } from 'firebase/firestore';
+import devAvatar from "./Images/Profile/avatar-default.png";
 
 function App() {
   const dispatch = useDispatch()
@@ -26,7 +29,20 @@ function App() {
       const user = { id: snapShot.id, ...snapShot.data() };
       dispatch(loginUser(user));
       localStorage.setItem("user", JSON.stringify(user));
+      
+      // Fetch all users from Firestore
+      const usersRef = collection(db, "users");
+      const usersSnapshot = await getDocs(usersRef);
+      const users: any[] = [];
+      usersSnapshot.forEach((doc) => {
+        users.push({
+          id: doc.id,
+          ...doc.data(),
+          photoURL: doc.data().photoURL || devAvatar,
+        });
+      });
 
+      dispatch(addUsers(users))
     } else {
       dispatch(loginUser(null));
       localStorage.removeItem("user");
@@ -145,7 +161,7 @@ function App() {
           }
         />
 
-        <Route path="/messages/:idone-:idtwo"
+        <Route path="/messages/:chatid"
           element={
             <DashboardLayout>
               <Messages>

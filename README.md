@@ -82,6 +82,9 @@ Not yet available
 **Day-9** ***June 14, 2023***
 - Implement initial messaging page design.
 
+**Day-10** ***June 15, 2023***
+- Add the functionality to the messaging page.
+
 ### Built with
 
 - Firebase
