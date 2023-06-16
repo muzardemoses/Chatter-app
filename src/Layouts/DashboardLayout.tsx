@@ -8,7 +8,10 @@ export const DashboardLayout = ({ children }: { children: ReactNode }) => {
             <div className='flex  flex-grow overflow-auto'>
                 {/* flex-grow or flex-1 */}
                 <div className='flex-grow border-r border-r-gray-300 min-h-screen flex flex-col'>
-                    <SubHeader />
+                    <div className='sticky top-0'>
+                        <SubHeader />
+                    </div>
+
                     <div className='flex-grow'>
                         {children}
                     </div>

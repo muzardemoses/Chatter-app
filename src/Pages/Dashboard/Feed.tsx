@@ -5,8 +5,8 @@ export const Feed = () => {
     
 
     return (
-        <div className=" h-[1000px] ">
-           
+        <div className=" h-[1000px] bg-yellow-100">
+           hh
         </div>
     )
 }

@@ -83,7 +83,7 @@ export const ChatRoom = () => {
 
     };
 
-      const sendMessage = async () => {
+    const sendMessage = async () => {
         if (uploadImageFile) {
             const chatId = idOne && idTwo ? (idOne < idTwo ? `${idOne}-${idTwo}` : `${idTwo}-${idOne}`) : "";
             const storageRef = ref(storage, `chatImages/${chatId}/${uploadImageFile.name}`);
@@ -138,62 +138,88 @@ export const ChatRoom = () => {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center bg-slate-300 w-full">
-            <form
-                action=""
-                className="flex flex-col items-center justify-center bg-pink-50 gap-5 p-5"
-            >
-                <input
-                    type="text"
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-300 focus:border-gray-300 block w-[400px] pl-10 p-2.5 transition duration-500 ease-in-out focus:outline-none focus:ring-2 focus:ring-opacity-50"
-                />
+        <div className="flex flex-col items-center bg-slate-300 w-full relative "
+            style={{ height: "calc(100vh - 80px)" }}
+        >
+            <div className='w-full bg-white border border-gray-300 sticky top-0 h-10'>
+                <h1>header</h1>
+            </div>
+            <div className='overflow-y-scroll w-full'
+                style={{ height: "calc(100vh - 40px)" }}>
+                <form
+                    action=""
+                    className="pt-10 flex flex-col items-center justify-center bg-pink-50 gap-5 p-5 "
+                >
 
-                <div>
+                    <input
+                        type="text"
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
+                        className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-300 focus:border-gray-300 block w-[400px] pl-10 p-2.5 transition duration-500 ease-in-out focus:outline-none focus:ring-2 focus:ring-opacity-50"
+                    />
+
+                    <div className=''>
+                        <button
+                            type="button"
+                            onClick={openImagePicker}
+                            className="inline-flex justify-center p-2 text-purple-600 rounded-full cursor-pointer hover:text-purple-900 hover:bg-purple-100 transition duration-300 ease-in-out"
+                        >
+                            Upload
+                        </button>
+                        <input
+                            type="file"
+                            ref={imageInputRef}
+                            accept="image/*"
+                            onChange={handleImageUpload}
+                            className="hidden"
+                        />
+                        {showImagePreview && (
+                            <div className="relative">
+                                <img
+                                    src={imagePreview}
+                                    alt="preview"
+                                    className="w-40 h-40 rounded-lg object-cover"
+                                />
+                                <button
+                                    type="button"
+                                    onClick={cancelImageUpload}
+                                    className="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1.5"
+                                >
+                                    X
+                                </button>
+                            </div>
+                        )}
+                    </div>
                     <button
                         type="button"
-                        onClick={openImagePicker}
-                        className="inline-flex justify-center p-2 text-purple-600 rounded-full cursor-pointer hover:text-purple-900 hover:bg-purple-100 transition duration-300 ease-in-out"
-                    >
-                        Upload
-                    </button>
-                    <input
-                        type="file"
-                        ref={imageInputRef}
-                        accept="image/*"
-                        onChange={handleImageUpload}
-                        className="hidden"
-                    />
-                    {showImagePreview && (
-                        <div className="relative">
-                            <img
-                                src={imagePreview}
-                                alt="preview"
-                                className="w-40 h-40 rounded-lg object-cover"
-                            />
-                            <button
-                                type="button"
-                                onClick={cancelImageUpload}
-                                className="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1.5"
-                            >
-                                X
-                            </button>
-                        </div>
-                    )}
-                </div>
-                <button
-                    type="button"
-                    onClick={sendMessage}
-                    className={`inline-flex justify-center p-2 text-white rounded-full cursor-pointer ${
-                        !message && !showImagePreview
+                        onClick={sendMessage}
+                        className={`inline-flex justify-center p-2 text-white rounded-full cursor-pointer ${!message && !showImagePreview
                             ? "bg-gray-300"
                             : "bg-purple-600 hover:bg-purple-900"
-                    } transition duration-300 ease-in-out`}
-                >
-                    Send
-                </button>
-            </form>
+                            } transition duration-300 ease-in-out`}
+                    >
+                        Send
+                    </button>
+
+                    <div className="flex flex-col items-center justify-center gap-5 h-96 bg-white p-1">
+                        <p className='h-16 bg-slate-500'>
+                            {chatUser?.displayName} - {chatUser?.id}
+                        </p>
+                    </div>
+                    <div className="flex flex-col items-center justify-center gap-5 py-20"
+                    >
+                        jdjjiei
+                    </div>
+                    <div className="flex flex-col items-center justify-center gap-5 h-96">
+                        jjjjjj
+                    </div> <div className="flex flex-col items-center justify-center gap-5 h-96">
+                        jjjjjj
+                    </div> <div className="flex flex-col items-center justify-center gap-5 h-96">
+                        jjjjjj
+                    </div>
+
+                </form>
+            </div>
         </div>
     );
 };

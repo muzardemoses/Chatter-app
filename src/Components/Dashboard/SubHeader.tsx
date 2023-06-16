@@ -7,7 +7,7 @@ import devAvatar from '../../Images/Profile/avatar-default.png'
 export const SubHeader = () => {
     const user = useSelector(selectUser);
     return (
-        <div className="py-5 px-6 border-b border-gray-300 w-full justify-between flex items-center">
+        <div className="bg-white h-20 px-6 border-b border-gray-300  justify-between flex items-center">
             <div>Switch</div>
             <div className='relative'>
                 <div
