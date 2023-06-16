@@ -18,6 +18,7 @@ import {
   UserCredential,
   fetchSignInMethodsForEmail,
   EmailAuthProvider,
+  updateProfile,
   linkWithCredential,
 } from "firebase/auth";
 import {
@@ -31,6 +32,7 @@ import {
   getDocs,
   updateDoc,
 } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 const apiKey = import.meta.env.VITE_FIREBASE_API_KEY;
 
@@ -53,6 +55,7 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
 const auth = getAuth(app);
+const storage = getStorage(app);
 
 const googleProvider = new GoogleAuthProvider();
 const twitterProvider = new TwitterAuthProvider();
@@ -198,6 +201,7 @@ export type {
 
 export {
   auth,
+  storage,
   analytics,
   googleProvider,
   twitterProvider,
@@ -216,6 +220,7 @@ export {
   TwitterAuthProvider,
   fetchSignInMethodsForEmail,
   EmailAuthProvider,
+  updateProfile,
   linkWithCredential,
 };
 

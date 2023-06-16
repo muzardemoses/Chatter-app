@@ -161,7 +161,7 @@ function App() {
           }
         />
 
-        <Route path="/messages/:chatid"
+        <Route path="/messages/:routeId"
           element={
             <DashboardLayout>
               <Messages>

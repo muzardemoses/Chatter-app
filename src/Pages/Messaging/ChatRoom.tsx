@@ -2,7 +2,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { selectUser } from "../../Config/userSlice";
 import { selectUsers } from '../../Config/usersSlice';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
     serverTimestamp,
     setDoc,
@@ -16,20 +16,20 @@ import {
     getDocs,
 } from "firebase/firestore";
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
+import { db, storage } from '../../Config/firebase';
 
 
 export const ChatRoom = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(true);
 
     const loggedInUser = useSelector(selectUser);
     const users = useSelector(selectUsers);
-    const [message, setMessage] = useState('')
-    const { chatid } = useParams<{ chatid: string }>()
-    const idone = chatid?.split("-")[0]
-    const idtwo = chatid?.split("-")[1]
-    const otherUserid = loggedInUser?.id === idone ? idtwo : idone
-    const chatUser = users.find((user) => user.id === otherUserid)
+    const { routeId } = useParams<{ routeId: string }>();
+    const idOne = routeId?.split("-")[0];
+    const idTwo = routeId?.split("-")[1];
+    const otherUserid = loggedInUser?.id === idOne ? idTwo : idOne;
+    const chatUser = users.find((user) => user.id === otherUserid);
 
     useEffect(() => {
         if (loggedInUser) {
@@ -38,37 +38,162 @@ export const ChatRoom = () => {
     }, [loggedInUser]);
 
     useEffect(() => {
-        if (!isLoading && loggedInUser?.id !== idone && loggedInUser?.id !== idtwo) {
+        if (!isLoading && loggedInUser?.id !== idOne && loggedInUser?.id !== idTwo) {
             navigate("/messages");
         }
-    }, [isLoading, loggedInUser, idone, idtwo, navigate]);
+    }, [isLoading, loggedInUser, idOne, idTwo, navigate]);
 
-    // console.log("loggedInUser", loggedInUser?.id)
-    // console.log("chatUser", chatUser)
-    // console.log("idone", idone)
-    // console.log("idtwo", idtwo)
-
-    const handleImageUpload = async (e) => {
-
+    const [message, setMessage] = useState("");
+    const [showImagePreview, setShowImagePreview] = useState(false);
+    const [imagePreview, setImagePreview] = useState("");
+    const [uploadImageFile, setUploadImageFile] = useState<File | null>(null);
+    const imageInputRef = useRef<HTMLInputElement>(null);
+    interface ImageData {
+        imageURL: string;
     }
+    const [imageData, setImageData] = useState<ImageData | null>({ imageURL: "" });
 
-    const sendMessage = async () => {
-    }
+    const openImagePicker = () => {
+        if (imageInputRef.current) {
+            imageInputRef.current.click();
+        }
+    };
+
+    const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files && e.target.files[0];
+        const chatId = idOne && idTwo ? (idOne < idTwo ? `${idOne}-${idTwo}` : `${idTwo}-${idOne}`) : "";
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                setImagePreview(e.target?.result as string);
+                setShowImagePreview(true);
+            };
+
+            reader.readAsDataURL(file);
+            setUploadImageFile(file);
+        }
+    };
+
+    const cancelImageUpload = () => {
+        setImagePreview("");
+        setShowImagePreview(false);
+        setUploadImageFile(null);
+        setImageData(null);
+
+    };
+
+      const sendMessage = async () => {
+        if (uploadImageFile) {
+            const chatId = idOne && idTwo ? (idOne < idTwo ? `${idOne}-${idTwo}` : `${idTwo}-${idOne}`) : "";
+            const storageRef = ref(storage, `chatImages/${chatId}/${uploadImageFile.name}`);
+            const snapShot = await uploadBytes(storageRef, uploadImageFile);
+            const downloadURL = await getDownloadURL(storageRef);
+
+            setImageData({ imageURL: downloadURL });
+        }
+        if (!message && !imageData?.imageURL) return;
+
+        const chatId = idOne && idTwo ? (idOne < idTwo ? `${idOne}-${idTwo}` : `${idTwo}-${idOne}`) : "";
+
+        const chatsRef = collection(db, "chats");
+        const chatQuery = query(chatsRef, where("chatId", "==", chatId));
+        const chatQuerySnapshot = await getDocs(chatQuery);
+
+        let chatDocRef;
+        if (chatQuerySnapshot.empty) {
+            chatDocRef = doc(chatsRef);
+            const chatData = {
+                chatId,
+                conversants: [idOne, idTwo],
+            };
+            await setDoc(chatDocRef, chatData);
+        } else {
+            chatDocRef = chatQuerySnapshot.docs[0].ref;
+        }
+
+        const messagesRef = collection(chatDocRef, "messages");
+        const senderId = loggedInUser?.id;
+        const receiverId = otherUserid;
+        const senderName = loggedInUser?.displayName;
+        const receiverName = chatUser?.displayName;
+        const timestamp = serverTimestamp();
+        const messageData = {
+            senderId,
+            receiverId,
+            senderName,
+            receiverName,
+            text: message || null,
+            imageURL: imageData?.imageURL || null,
+            timestamp,
+        };
+
+        await addDoc(messagesRef, messageData);
+
+        setMessage("");
+        setImageData(null);
+        setImagePreview("");
+        setShowImagePreview(false);
+        setUploadImageFile(null);
+    };
 
     return (
         <div className="flex flex-col items-center justify-center bg-slate-300 w-full">
-            <form action="" className="flex flex-col items-center justify-center bg-pink-50 gap-5 p-5">
-                <input type="text" value={message} onChange={(e) => setMessage(e.target.value)}
+            <form
+                action=""
+                className="flex flex-col items-center justify-center bg-pink-50 gap-5 p-5"
+            >
+                <input
+                    type="text"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
                     className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-300 focus:border-gray-300 block w-[400px] pl-10 p-2.5 transition duration-500 ease-in-out focus:outline-none focus:ring-2 focus:ring-opacity-50"
                 />
 
-                <input type="file" onChange={handleImageUpload}
-                    className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-300 focus:border-gray-300 block w-[400px] pl-10 p-2.5 transition duration-500 ease-in-out focus:outline-none focus:ring-2 focus:ring-opacity-50"
-                />
-                <button type="submit" onClick={sendMessage}
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                >Send</button>
+                <div>
+                    <button
+                        type="button"
+                        onClick={openImagePicker}
+                        className="inline-flex justify-center p-2 text-purple-600 rounded-full cursor-pointer hover:text-purple-900 hover:bg-purple-100 transition duration-300 ease-in-out"
+                    >
+                        Upload
+                    </button>
+                    <input
+                        type="file"
+                        ref={imageInputRef}
+                        accept="image/*"
+                        onChange={handleImageUpload}
+                        className="hidden"
+                    />
+                    {showImagePreview && (
+                        <div className="relative">
+                            <img
+                                src={imagePreview}
+                                alt="preview"
+                                className="w-40 h-40 rounded-lg object-cover"
+                            />
+                            <button
+                                type="button"
+                                onClick={cancelImageUpload}
+                                className="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1.5"
+                            >
+                                X
+                            </button>
+                        </div>
+                    )}
+                </div>
+                <button
+                    type="button"
+                    onClick={sendMessage}
+                    className={`inline-flex justify-center p-2 text-white rounded-full cursor-pointer ${
+                        !message && !showImagePreview
+                            ? "bg-gray-300"
+                            : "bg-purple-600 hover:bg-purple-900"
+                    } transition duration-300 ease-in-out`}
+                >
+                    Send
+                </button>
             </form>
         </div>
-    )
-}
+    );
+};
