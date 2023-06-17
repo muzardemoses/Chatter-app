@@ -85,7 +85,7 @@ Not yet available
 **Day-10** ***June 15, 2023***
 - Add the functionality to the messaging page.
 
-**Day-11** ***June 16, 2023***
+**Day-11** ***June 16, 2023 - June 19, 2023***
 - Implement feed page and posts design.
 
 ### Built with
