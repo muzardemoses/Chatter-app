@@ -29,8 +29,19 @@ export const Feed = () => {
                     </button>
                 </Link>
             </div>
-            <div className="">
-
+            <div className="flex flex-col gap-10">
+                <div className="px-12 py-5 flex justify-between w-full border border-gray-300 rounded-lg box-border">
+                    <button className="flex gap-2 items-center">
+                        For You
+                    </button>
+                    <button className="flex gap-2 items-center">
+                        Following
+                    </button>
+                    <button className="flex gap-2 items-center">
+                        Trending || Recent
+                    </button>
+                </div>
+                <div className="px-12 py-5 flex flex-col gap-8 w-full border border-gray-300 rounded-lg box-border"></div>
             </div>
         </div>
     )
