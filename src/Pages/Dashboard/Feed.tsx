@@ -1,9 +1,29 @@
 import createPencilSVG from "../../assets/Svg/Feed/create-pencil.svg";
 import { Link } from "react-router-dom";
+import {  useEffect, useState } from "react";
+import { ForYouTab, FollowingTab, RecentTab } from "../../Components";
+
 
 
 export const Feed = () => {
     //to={{ pathname: "/messages", state: { fromFeed: true } }}
+
+    const [presentTab, selectPresentTab] = useState("");
+
+    const handleTabChange = (tabName: string) => {
+        selectPresentTab(tabName);
+        localStorage.setItem("activeTab", tabName); // Store the active tab in local storage
+    };
+
+    useEffect(() => {
+        const storedTab = localStorage.getItem("activeTab");
+        if (storedTab) {
+            selectPresentTab(storedTab);
+        } else {
+            selectPresentTab("ForYou");
+            localStorage.setItem("activeTab", "ForYou"); // Set default tab and store it
+        }
+    }, []);
 
 
     return (
@@ -30,18 +50,22 @@ export const Feed = () => {
                 </Link>
             </div>
             <div className="flex flex-col gap-10">
-                <div className="px-12 py-5 flex justify-between w-full border border-gray-300 rounded-lg box-border">
-                    <button className="flex gap-2 items-center">
+                <div className="px-12 pt-5 flex justify-between w-full border border-gray-300 rounded-lg box-border">
+                    <button className={`flex gap-2 items-center pb-5 font-semibold ${presentTab === "ForYou" ? " border-b-4 border-blue-700" : "border-b-4 border-transparent"}`} onClick={() => handleTabChange("ForYou")}>
                         For You
                     </button>
-                    <button className="flex gap-2 items-center">
+                    <button className={`flex gap-2 items-center pb-5 font-semibold ${presentTab === "Following" ? " border-b-4 border-blue-700" : "border-b-4 border-transparent"}`} onClick={() => handleTabChange("Following")}>
                         Following
                     </button>
-                    <button className="flex gap-2 items-center">
+                    <button className={`flex gap-2 items-center pb-5 font-semibold ${presentTab === "Recent" ? " border-b-4 border-blue-700" : "border-b-4 border-transparent"}`} onClick={() => handleTabChange("Recent")}>
                         Trending || Recent
                     </button>
                 </div>
-                <div className="px-12 py-5 flex flex-col gap-8 w-full border border-gray-300 rounded-lg box-border"></div>
+                <div className="px-12 py-5 flex flex-col gap-8 w-full border border-gray-300 rounded-lg box-border">
+                    {presentTab === "ForYou" && <ForYouTab />}
+                    {presentTab === "Following" && <FollowingTab />}
+                    {presentTab === "Recent" && <RecentTab />}
+                </div>
             </div>
         </div>
     )
