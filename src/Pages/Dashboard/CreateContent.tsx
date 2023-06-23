@@ -150,11 +150,21 @@ export const CreateContent = () => {
             })
         );
 
-        //if title and content is empty
         if (title.trim() === "" || content.trim() === "") {
             toast.error("Title and content cannot be empty");
             return;
-        }
+          }
+          
+          if (title.trim().length < 10) {
+            toast.error("Title must be at least 10 characters long");
+            return;
+          }
+          
+          if (content.trim().length < 100) {
+            toast.error("Content must be at least 100 characters long");
+            return;
+          }
+          
 
         await setDoc(postRef, {
             id: postId,
