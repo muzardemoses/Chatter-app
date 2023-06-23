@@ -100,7 +100,7 @@ export const ForYouTab = () => {
 
     return (
         <div className='flex flex-col justify-center items-center'>
-         
+
             <ul className="flex flex-col gap-14">
                 {posts.map((post) => (
                     <li key={post.id} className="w-[700px] flex flex-col gap-3 borer border-gray-300 p-5 rounded-md shadow">
@@ -138,9 +138,141 @@ export const ForYouTab = () => {
                                 <p className="text-gray-500">
                                     {post.content}
                                 </p>
-                                {}
-                                <img 
-                                src={post.media.images[0]} alt="" className="w-full h object-cover rounded-md" />
+                                { }
+                                <div>
+                                    {
+                                        post.media.images.length + post.media.videos.length === 1 ? (
+
+                                            <div className=''>
+                                                {post.media.images.map((image: string | undefined) => (
+                                                    <img
+                                                        src={image} alt="" className="w-full max-h-[400px] object-cover rounded-md"
+                                                        
+                                                    />
+                                                ))}
+                                                {post.media.videos.map((video: string | undefined) => (
+                                                    <video
+                                                        src={video} className="w-full max-h-[400px] object-cover rounded-md"
+                                                    />
+                                                ))}
+
+                                            </div>
+                                        ) : post.media.images.length + post.media.videos.length === 2 ? (
+                                            <div className='flex gap-2'>
+                                                {post.media.images.map((image: string | undefined) => (
+                                                    <img
+                                                        src={image} alt="" className="w-full h object-cover rounded-md"
+                                                    />
+                                                ))}
+                                                {post.media.videos.map((video: string | undefined) => (
+                                                    <video src={video} className='w-full h object-cover rounded-md' />
+                                                ))}
+                                            </div>
+                                        ) : post.media.images.length + post.media.videos.length === 3 ? (
+                                            <div className='flex flex-col gap-2'>
+                                                <div>
+                                                    {post.media.images.length === 3 && (
+                                                        <div className="flex gap-2">
+                                                            {post.media.images.slice(0, 2).map((image: string | undefined, index: number) => (
+                                                                <img
+                                                                    key={index}
+                                                                    src={image}
+                                                                    alt=""
+                                                                    className="w-1/2 h object-cover rounded-md"
+                                                                />
+                                                            ))}
+
+                                                        </div>
+                                                    )}
+
+                                                    {post.media.videos.length === 3 && (
+                                                        <div className="grid grid-cols-2 gap-2">
+                                                            {post.media.videos.slice(0, 2).map((video: string | undefined, index: number) => (
+                                                                <video
+                                                                    key={index}
+                                                                    src={video}
+                                                                    className="w-1/2 h object-cover rounded-md"
+                                                                />
+                                                            ))}
+
+                                                        </div>
+                                                    )}
+
+                                                    {post.media.images.length === 2 && (
+                                                        <div className="flex gap-2">
+                                                            {post.media.images.map((image: string | undefined, index: number) => (
+                                                                <img
+                                                                    key={index}
+                                                                    src={image}
+                                                                    alt=""
+                                                                    className="w-1/2 h object-cover rounded-md"
+                                                                />
+                                                            ))}
+
+                                                        </div>
+                                                    )}
+
+                                                    {post.media.videos.length === 2 && (
+                                                        <div className="flex gap-2">
+
+                                                            {post.media.videos.map((video: string | undefined, index: number) => (
+                                                                <video
+                                                                    key={index}
+                                                                    src={video}
+                                                                    className="w-1/2 h object-cover rounded-md"
+                                                                />
+                                                            ))}
+                                                        </div>
+                                                    )}
+                                                </div>
+                                                <div className='w-full'>
+                                                    {post.media.images.length === 1 && (
+
+                                                        <img
+                                                            src={post.media.images[0]}
+                                                            alt=""
+                                                            className="w-full max-h-[400px] object-cover rounded-md"
+                                                        />
+
+                                                    )}
+
+                                                    {post.media.videos.length === 1 && (
+                                                        <video
+                                                            src={post.media.videos[0]}
+                                                            className="w-full max-h-[400px] object-cover rounded-md"
+                                                        />
+                                                    )}
+
+                                                    {post.media.images.length === 3 && (
+                                                        <img
+                                                            src={post.media.images[2]}
+                                                            alt=""
+                                                            className="w-full max-h-[400px] object-cover rounded-md"
+                                                        />
+                                                    )}
+
+                                                    {post.media.videos.length === 3 && (
+                                                        <video
+                                                            src={post.media.videos[2]}
+                                                            className="w-full max-h-[400px] object-cover rounded-md"
+                                                        />
+                                                    )}
+                                                </div>
+
+                                            </div>
+                                        ) : <div className='grid grid-flow-row grid-cols-2 gap-2'>
+                                            {post.media.images.map((image: string | undefined) => (
+                                                <img
+                                                    src={image} alt="" className="w-full h object-cover rounded-md"
+                                                />
+                                            ))}
+                                            {post.media.videos.map((video: string | undefined) => (
+                                                <video src={video} className='w-full h object-cover rounded-md' />
+                                            ))}
+                                        </div>
+                                    }
+                                </div>
+
                             </div>
                         </div>
 

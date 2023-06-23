@@ -160,7 +160,7 @@ export const CreateContent = () => {
             return;
           }
           
-          if (content.trim().length < 100) {
+          if (content.trim().length < 90) {
             toast.error("Content must be at least 100 characters long");
             return;
           }

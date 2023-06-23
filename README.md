@@ -92,10 +92,12 @@ Not yet available
 - implement initial blog post design.
 - Installed moment to format the date and time of the post.
 
+**Day-13** ***June 23, 2023***
+- Implement minimum and maximum character count for blog post title and content.
+- Implement picture and video size to fit the blog post.
+
 
 ### TO-DO List
-- [ ] Implement minimum and maximum character count for blog post title and content.
-- [x] Implement picture and video size to fit the blog post.
 - [x] Implement blog post like and comment functionality.
 - [x] Implement blog post page initial design.
 
