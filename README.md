@@ -95,6 +95,7 @@ Not yet available
 **Day-13** ***June 23, 2023***
 - Implement minimum and maximum character count for blog post title and content.
 - Implement picture and video size to fit the blog post.
+- Implement initial blog post like and comment layout.
 
 
 ### TO-DO List

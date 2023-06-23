@@ -7,6 +7,12 @@ import { collection, getDocs, doc, updateDoc } from 'firebase/firestore';
 import { db } from '../../Config/firebase';
 import readSVG from '../../assets/Svg/Feed/read.svg';
 import devAvatar from '../../Images/Profile/avatar-default.png';
+import loveBeforeSVG from '../../assets/Svg/Feed/love-before.svg';
+import loveAfterSVG from '../../assets/Svg/Feed/love-after.svg';
+import bookmarkBeforeSVG from '../../assets/Svg/Feed/bookmark-before.svg';
+import bookmarkAfterSVG from '../../assets/Svg/Feed/bookmark-after.svg';
+import commentSVG from '../../assets/Svg/Feed/comment.svg';
+
 
 export const ForYouTab = () => {
     const loggedInUser = useSelector(selectUser);
@@ -144,14 +150,16 @@ export const ForYouTab = () => {
                                         post.media.images.length + post.media.videos.length === 1 ? (
 
                                             <div className=''>
-                                                {post.media.images.map((image: string | undefined) => (
+                                                {post.media.images.map((image: string | undefined, index: number) => (
                                                     <img
+                                                        key={index}
                                                         src={image} alt="" className="w-full max-h-[400px] object-cover rounded-md"
-                                                        
+
                                                     />
                                                 ))}
-                                                {post.media.videos.map((video: string | undefined) => (
+                                                {post.media.videos.map((video: string | undefined, index: number) => (
                                                     <video
+                                                        key={index}
                                                         src={video} className="w-full max-h-[400px] object-cover rounded-md"
                                                     />
                                                 ))}
@@ -159,13 +167,16 @@ export const ForYouTab = () => {
                                             </div>
                                         ) : post.media.images.length + post.media.videos.length === 2 ? (
                                             <div className='flex gap-2'>
-                                                {post.media.images.map((image: string | undefined) => (
+                                                {post.media.images.map((image: string | undefined, index: number) => (
                                                     <img
+                                                        key={index}
                                                         src={image} alt="" className="w-full h object-cover rounded-md"
                                                     />
                                                 ))}
-                                                {post.media.videos.map((video: string | undefined) => (
-                                                    <video src={video} className='w-full h object-cover rounded-md' />
+                                                {post.media.videos.map((video: string | undefined, index: number) => (
+                                                    <video
+                                                        key={index}
+                                                        src={video} className='w-full h object-cover rounded-md' />
                                                 ))}
                                             </div>
                                         ) : post.media.images.length + post.media.videos.length === 3 ? (
@@ -261,40 +272,65 @@ export const ForYouTab = () => {
 
                                             </div>
                                         ) : <div className='grid grid-flow-row grid-cols-2 gap-2'>
-                                            {post.media.images.map((image: string | undefined) => (
+                                            {post.media.images.map((image: string | undefined, index: number) => (
                                                 <img
+                                                    key={index}
                                                     src={image} alt="" className="w-full h object-cover rounded-md"
                                                 />
                                             ))}
-                                            {post.media.videos.map((video: string | undefined) => (
-                                                <video src={video} className='w-full h object-cover rounded-md' />
+                                            {post.media.videos.map((video: string | undefined, index: number) => (
+                                                <video
+                                                    key={index}
+                                                    src={video} className='w-full h object-cover rounded-md' />
                                             ))}
                                         </div>
                                     }
                                 </div>
-
                             </div>
                         </div>
 
 
 
-                        <div className="mt-4">
-                            <button
-                                onClick={() => handleLike(post.id)}
-                                className="text-blue-500 hover:text-blue-700"
-                            >
-                                Like
-                            </button>
-                            <button
-                                onClick={() => handleUnlike(post.id)}
-                                className="text-red-500 hover:text-red-700 ml-4"
-                            >
-                                Unlike
-                            </button>
-                            <span className="ml-2 text-gray-500">
-                                Likes: {post.likes.length}
-                            </span>
+                        <div className="flex justify-between pt-4 px-3 border-t border-gray-200">
+                            <div className='flex items-center gap-1'>
+                                <button onClick={() => handleLike(post.id)} className="text-blue-500 hover:text-blue-700">
+                                    <img
+                                        src={post.likes.includes(loggedInUser?.id) ? loveAfterSVG : loveBeforeSVG}
+                                        alt="love"
+                                        className="h-6 w-6"
+                                    />
+                                </button>
+                                {post.likes.length > 0 && (
+                                    <p className="text-blue-950">
+                                        {post.likes.length}
+                                    </p>)
+                                }
+
+                            </div>
+
+                            <div className='flex items-center gap-2 cursor-pointer'>
+                                <img
+                                    src={commentSVG}
+                                    alt="comment"
+                                    className="h-5 w-5"
+                                />
+                                <button className="text-gray-500 font-semibold hover:text-gray-700">
+                                    Comment
+                                </button>
+
+                            </div>
+                            <div className='flex items-center gap-1'>
+                                <button onClick={() => handleUnlike(post.id)} className="text-red-500 hover:text-red-700 ml-4">
+                                    Unlike
+                                </button>
+                                <img
+                                    src={bookmarkBeforeSVG}
+                                    alt="bookmark"
+                                    className="h-6 w-8"
+                                />
+                            </div>
                         </div>
+
                     </li>
                 ))}
             </ul>
