@@ -88,6 +88,17 @@ Not yet available
 **Day-11** ***June 16, 2023 - June 21, 2023***
 - Implement feed page and create-content page design.
 
+**Day-12** ***June 22, 2023***
+- implement initial blog post design.
+- Installed moment to format the date and time of the post.
+
+
+### TO-DO List
+- [x] Implement minimum and maximum character count for blog post title and content.
+- [x] Implement picture and video size to fit the blog post.
+- [x] Implement blog post like and comment functionality.
+- [x] Implement blog post page initial design.
+
 ### Built with
 
 - Firebase
@@ -97,6 +108,7 @@ Not yet available
 - React-router-dom
 - React-toastify
 - Dot-env
+- Moment
 
 
 

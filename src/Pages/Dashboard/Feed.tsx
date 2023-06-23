@@ -27,8 +27,8 @@ export const Feed = () => {
 
 
     return (
-        <div className="py-6 px-28 flex flex-col gap-12">
-            <div className="flex justify-between items-center">
+        <div className="py-6 px-28 flex flex-col items-center gap-12">
+            <div className="w-[700px] flex justify-between items-center">
                 <div className="flex flex-col gap-4 w-1/2">
                     <h4 className="text-3xl text-gray-900 font-medium uppercase">
                         Feed
@@ -49,8 +49,8 @@ export const Feed = () => {
                     </button>
                 </Link>
             </div>
-            <div className="flex flex-col gap-10">
-                <div className="px-12 pt-5 flex justify-between w-full border border-gray-300 rounded-lg box-border">
+            <div className="flex flex-col gap-10 ">
+                <div className="px-12 pt-5 flex justify-between w-[700px] border border-gray-300 rounded-lg box-border">
                     <button className={`flex gap-2 items-center pb-5 font-semibold ${presentTab === "ForYou" ? " border-b-4 border-blue-700" : "border-b-4 border-transparent"}`} onClick={() => handleTabChange("ForYou")}>
                         For You
                     </button>
@@ -61,7 +61,7 @@ export const Feed = () => {
                         Trending || Recent
                     </button>
                 </div>
-                <div className="px-12 py-5 flex flex-col gap-8 w-full border border-gray-300 rounded-lg box-border">
+                <div className=" py-5 w-full borer border-gray-300 rounded-lg box-border">
                     {presentTab === "ForYou" && <ForYouTab />}
                     {presentTab === "Following" && <FollowingTab />}
                     {presentTab === "Recent" && <RecentTab />}

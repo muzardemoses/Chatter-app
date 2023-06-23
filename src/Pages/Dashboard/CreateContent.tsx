@@ -164,8 +164,8 @@ export const CreateContent = () => {
                 images: imageDownloadUrls,
                 videos: videoDownloadUrls,
             },
-            cretorId: loggedInUser?.id,
-            creatorName: loggedInUser?.displayName,
+            authorId: loggedInUser?.id,
+            authorName: loggedInUser?.displayName,
             timestamp: timestamp,
             likes: [],
             comments: [],
@@ -285,6 +285,8 @@ export const CreateContent = () => {
                         <textarea
                             rows={1}
                             maxLength={100}
+                            minLength={10}
+                            required
                             placeholder="Title"
                             value={title}
                             ref={titleRef}
@@ -292,6 +294,8 @@ export const CreateContent = () => {
                             className="w-full border-none px-4 text-[40px] font-bold focus:outline-none placeholder-gray-300 transition duration-500 ease-in-out overflow-hiden resize-none"
                         />
                         <textarea
+                            minLength={100}
+                            required
                             placeholder="Write your story..."
                             value={content}
                             onChange={(e) => setContent(e.target.value)}
