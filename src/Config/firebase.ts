@@ -74,9 +74,12 @@ export const createUserProfileDocument = async (userAuth: User, additionalData: 
     const { displayName, email, photoURL } = userAuth;
     const createdAt = new Date().toISOString()
 
-    const followers: string[] = [];
-    const following: string[] = [];
+    const followers: Array<string> = [];
+    const following: Array<string> = [];
     const userType = "writer";
+    //const bookmarkedPosts: Array<string> | undefined = [];
+
+    
 
     //Generate username from email
     if (email) {
@@ -111,6 +114,7 @@ export const createUserProfileDocument = async (userAuth: User, additionalData: 
           followers,
           following,
           userType,
+          //bookmarkedPosts,
           username: usernameToSave, // set the final value of usernameToSave
           ...additionalData,
         });
@@ -150,6 +154,7 @@ export const createUserProfileDocument = async (userAuth: User, additionalData: 
           followers,
           following,
           userType,
+          //bookmarkedPosts,
           username: usernameToSave, // set the final value of usernameToSave
           ...additionalData,
         });

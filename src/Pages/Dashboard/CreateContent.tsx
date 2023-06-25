@@ -155,13 +155,13 @@ export const CreateContent = () => {
             return;
           }
           
-          if (title.trim().length < 10) {
-            toast.error("Title must be at least 10 characters long");
+          if (title.trim().length < 6) {
+            toast.error("Title must be at least 6 characters long");
             return;
           }
           
           if (content.trim().length < 90) {
-            toast.error("Content must be at least 100 characters long");
+            toast.error("Content must be at least 90 characters long");
             return;
           }
           
@@ -295,7 +295,7 @@ export const CreateContent = () => {
                         <textarea
                             rows={1}
                             maxLength={100}
-                            minLength={10}
+                            minLength={6}
                             required
                             placeholder="Title"
                             value={title}
@@ -304,7 +304,7 @@ export const CreateContent = () => {
                             className="w-full border-none px-4 text-[40px] font-bold focus:outline-none placeholder-gray-300 transition duration-500 ease-in-out overflow-hiden resize-none"
                         />
                         <textarea
-                            minLength={100}
+                            minLength={90}
                             required
                             placeholder="Write your story..."
                             value={content}

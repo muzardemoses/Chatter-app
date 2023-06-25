@@ -1,4 +1,4 @@
-import { Home, About, PageNotFound, Login, Register, ForgetPassword, Profile, VerifyEmail, Bookmarks, Feed, CreateContent, Messages, SelectAndMessage, ChatRoom } from './Pages'
+import { Home, About, PageNotFound, Login, Register, ForgetPassword, Profile, VerifyEmail, Bookmarks, Feed, CreateContent, Content, Messages, SelectAndMessage, ChatRoom } from './Pages'
 import { AuthLayout, DashboardLayout, DefaultLayout } from './Layouts'
 import { Route, Routes } from 'react-router-dom'
 import { ToastContainer } from "react-toastify";
@@ -122,6 +122,15 @@ function App() {
           element={
             <DashboardLayout>
               <CreateContent />
+            </DashboardLayout>
+          }
+        />
+
+        <Route
+          path='/content/:postId'
+          element={
+            <DashboardLayout>
+              <Content />
             </DashboardLayout>
           }
         />

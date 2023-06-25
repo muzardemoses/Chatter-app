@@ -6,9 +6,10 @@ export interface UserState  {
         email: string,
         photoURL: string,
         createdAt: string,
-        followers: string[],
-        following: string[],
+        followers: Array<string>,
+        following: Array<string>,
         userType: string,
+       // bookmarkedPosts: [],
         username: string,
         id: string,
 }

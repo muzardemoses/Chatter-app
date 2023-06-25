@@ -3,3 +3,4 @@ export * from './Profile.tsx';
 export * from './Bookmarks.tsx';
 export * from './Feed.tsx'
 export * from './CreateContent.tsx';
+export * from './Content.tsx';

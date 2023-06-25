@@ -97,9 +97,12 @@ Not yet available
 - Implement picture and video size to fit the blog post.
 - Implement initial blog post like and comment layout.
 
+**Day-14** ***June 25, 2023***
+- Implement Content page design.
+- Implement comment functionality.
 
 ### TO-DO List
-- [x] Implement blog post like and comment functionality.
+- [x] Implement comment functionality.
 - [x] Implement blog post page initial design.
 
 ### Built with
