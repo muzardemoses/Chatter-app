@@ -101,9 +101,8 @@ Not yet available
 - Implement Content page design.
 - Implement comment functionality.
 
-### TO-DO List
-- [x] Implement comment functionality.
-- [x] Implement blog post page initial design.
+**Day-14** ***June 29, 2023***
+- Header profile drop-down
 
 ### Built with
 

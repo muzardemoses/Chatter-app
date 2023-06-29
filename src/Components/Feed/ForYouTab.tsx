@@ -157,7 +157,7 @@ export const ForYouTab = () => {
                                 </div>
                             </div>
                             <div className='flex flex-col gap-6'>
-                                <div className='flex flex-col gap-1.5'>
+                                <Link to={`/content/${post.id}`} className='flex flex-col gap-1.5'>
                                     <h3 className="text-black text-2xl font-bold">
                                         {post.title}
                                     </h3>
@@ -171,7 +171,7 @@ export const ForYouTab = () => {
                                             {readTime(post.content)}
                                         </p>
                                     </div>
-                                </div>
+                                </Link>
                                 <div className='flex flex-col gap-3'>
                                     <Link to={`/content/${post.id}`}>
                                         <p className="text-gray-500">
@@ -342,17 +342,24 @@ export const ForYouTab = () => {
 
                                 </div>
 
-                                <div className='flex items-center gap-2 cursor-pointer'>
+                                <Link to={`/content/${post.id}`} className='flex items-center gap-2 cursor-pointer'>
                                     <img
                                         src={commentSVG}
                                         alt="comment"
                                         className="h-5 w-5"
                                     />
-                                    <button className="text-gray-500 font-semibold hover:text-gray-700">
-                                        Comment
-                                    </button>
+                                    <p className=''>
 
-                                </div>
+                                    </p>
+                                    <button className="text-gray-500 font-semibold hover:text-gray-700">
+                                        {post.comments.length > 0 && (
+                                            <span className="text-gray-700 mr-1">
+                                                {post.comments.length}
+                                            </span>
+                                        )}
+                                        Comments
+                                    </button>
+                                </Link>
                                 <div className='flex items-center gap-1'>
                                     <button onClick={() => handleUnlike(post.id)} className="text-red-500 hover:text-red-700 ml-4">
                                         Unlike

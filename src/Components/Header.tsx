@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { useDispatch } from 'react-redux';
-import { logout } from '../Config/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout, selectUser } from '../Config/userSlice';
 import { auth, signOut } from '../Config/firebase';
 import { toast } from 'react-toastify';
 
 
 export const Header = () => {
+  const user = useSelector(selectUser)
   const dispatch = useDispatch();
 
   const SignOut = async () => {
@@ -24,7 +25,7 @@ export const Header = () => {
   };
 
   const [show, setShow] = useState(false);
-  
+
   return (
     <div className="fixed top-0 left-0 z-20 w-full bg-white flex justify-between items-center px-28 py-6 shadow">
       <div className="">
@@ -44,18 +45,30 @@ export const Header = () => {
           Blogs
         </Link>
       </div>
-      <div className="flex gap-6">
-        <Link to="/login">
-          <button className=" text-blue-900 font-normal text-lg box-border border border-blue-700 rounded-lg py-3 w-36 hover:bg-gray-50 transition duration-500 ease-in-out">
-            Log In
-          </button>
-        </Link>
-        <Link to="/register">
-          <button className=" text-white font-normal text-lg bg-blue-700 rounded-lg py-3 w-36 hover:bg-blue-800 transition duration-500 ease-in-out">
-            Sign Up
-          </button>
-        </Link>
+      <div>
+        {user ?
+          <div>
+            <Link to="/feed">
+              <button className=" text-white font-normal text-lg bg-blue-700 rounded-lg py-3 w-36 hover:bg-blue-800 transition duration-500 ease-in-out">
+                Feed
+              </button>
+            </Link>
+          </div> :
+          <div className="flex gap-6">
+            <Link to="/login">
+              <button className=" text-blue-900 font-normal text-lg box-border border border-blue-700 rounded-lg py-3 w-36 hover:bg-gray-50 transition duration-500 ease-in-out">
+                Log In
+              </button>
+            </Link>
+            <Link to="/register">
+              <button className=" text-white font-normal text-lg bg-blue-700 rounded-lg py-3 w-36 hover:bg-blue-800 transition duration-500 ease-in-out">
+                Sign Up
+              </button>
+            </Link>
+          </div>
+        }
       </div>
+
     </div>
   );
 }
