@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch } from 'react-redux';
-import { logout } from '../features/userSlice';
+import { logout } from '../Config/userSlice';
 import { auth, signOut } from '../Config/firebase';
 import { toast } from 'react-toastify';
 
@@ -24,6 +24,7 @@ export const Header = () => {
   };
 
   const [show, setShow] = useState(false);
+  
   return (
     <div className="fixed top-0 left-0 z-20 w-full bg-white flex justify-between items-center px-28 py-6 shadow">
       <div className="">
