@@ -103,6 +103,7 @@ Not yet available
 
 **Day-14** ***June 29, 2023***
 - Header profile drop-down
+- Created _redirects file in public
 
 ### Built with
 
