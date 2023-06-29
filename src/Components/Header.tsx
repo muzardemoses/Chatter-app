@@ -1,6 +1,29 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useDispatch } from 'react-redux';
+import { logout } from '../features/userSlice';
+import { auth, signOut } from '../Config/firebase';
+import { toast } from 'react-toastify';
+
 
 export const Header = () => {
+  const dispatch = useDispatch();
+
+  const SignOut = async () => {
+    if (window.confirm("Are you sure you want to log out?")) {
+      try {
+        await signOut(auth);
+        dispatch(logout);
+        localStorage.removeItem("user");
+        window.location.href = "/";
+        toast.success("Logout successful");
+      } catch (error: any) {
+        alert(error.message);
+      }
+    }
+  };
+
+  const [show, setShow] = useState(false);
   return (
     <div className="fixed top-0 left-0 z-20 w-full bg-white flex justify-between items-center px-28 py-6 shadow">
       <div className="">

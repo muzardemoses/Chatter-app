@@ -1,11 +1,12 @@
 import { useParams } from "react-router-dom"
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import useAutosizeTextArea from "../../Hooks/useAutoSizeTextArea";
 import moment from 'moment';
 import { useSelector } from "react-redux";
 import { selectUser } from "../../Config/userSlice";
 import { selectUsers } from '../../Config/usersSlice';
-import { collection, getDocs, doc, updateDoc, getDoc } from 'firebase/firestore';
+import { arrayUnion, getDocs, doc, updateDoc, getDoc } from 'firebase/firestore';
 import { db } from '../../Config/firebase';
 import readSVG from '../../assets/Svg/Feed/read.svg';
 import devAvatar from '../../Images/Profile/avatar-default.png';
@@ -15,12 +16,22 @@ import bookmarkBeforeSVG from '../../assets/Svg/Feed/bookmark-before.svg';
 import bookmarkAfterSVG from '../../assets/Svg/Feed/bookmark-after.svg';
 import commentSVG from '../../assets/Svg/Feed/comment.svg';
 import { toast } from 'react-toastify';
+import { Comment } from "../../Utils/types";
+
+
+
+
+
 
 export const Content = () => {
     const { postId } = useParams<{ postId: string }>();
     const loggedInUser = useSelector(selectUser);
     const users = useSelector(selectUsers);
     const [post, setPost] = useState<any>(null);
+    const [comment, setComment] = useState<string>('');
+
+    const commentRef = useRef<HTMLTextAreaElement>(null);
+    useAutosizeTextArea(commentRef.current, comment)
 
     const getAuthorProfile = (authorId: string) => {
         const author = users.find((user) => user.id === authorId);
@@ -82,12 +93,12 @@ export const Content = () => {
     if (!post) {
         return (
             <div className="py-20 flex items-center justify-center">
-                <div className="w-96 h-96 bg-gray-200">Loading...</div>
+                <div className="w-96 h-96">Loading...</div>
             </div>
         );
     }
 
-    const { authorId, title, content, timestamp, media, likes, bookmarkedBy, id } = post;
+    const { authorId, title, content, timestamp, media, likes, bookmarkedBy, id, comments } = post;
     const authorProfile = getAuthorProfile(authorId);
 
     const handleLike = async () => {
@@ -136,9 +147,40 @@ export const Content = () => {
         });
     };
 
+    const handleComment = async () => {
+        if (comment.trim() === '') {
+            return;
+        }
+
+        const postRef = doc(db, 'posts', id);
+        const newComment = {
+            readerId: loggedInUser?.id,
+            content: comment,
+            timestamp: timestamp,
+            likes: [],
+        };
+
+        await updateDoc(postRef, {
+            comments: arrayUnion(newComment),
+        });
+
+        const updatedPost = {
+            ...post,
+            comments: [
+                ...comments,
+                newComment,
+            ],
+        };
+        setPost(updatedPost);
+        setComment('');
+        toast.success('Comment added');
+    };
+
+
+
     return (
         <div className="py-20 flex items-center justify-center">
-            <div className="w-8/12 flex flex-col gap-3 borer border-gray-300 p-5 rounded-md shadow">
+            <div className="w-[800px] flex flex-col gap-3 borer border-gray-300 p-5 rounded-md shadow">
                 <div className='flex gap-3'>
                     <img
                         src={authorProfile?.photoURL || devAvatar}
@@ -321,7 +363,7 @@ export const Content = () => {
                 </div>
                 <div className="flex justify-between pt-4 px-3 border-t border-gray-200">
                     <div className='flex items-center gap-1'>
-                        <button onClick={() => handleLike(post.id)} className="text-blue-500 hover:text-blue-700">
+                        <button onClick={() => handleLike()} className="text-blue-500 hover:text-blue-700">
                             <img
                                 src={post.likes.includes(loggedInUser?.id) ? loveAfterSVG : loveBeforeSVG}
                                 alt="love"
@@ -348,10 +390,11 @@ export const Content = () => {
 
                     </div>
                     <div className='flex items-center gap-1'>
-                        <button onClick={() => handleUnlike(post.id)} className="text-red-500 hover:text-red-700 ml-4">
+                        <button onClick={() => handleUnlike()}
+                            className="text-red-500 hover:text-red-700 ml-4">
                             Unlike
                         </button>
-                        <button onClick={() => handleBookmark(post.id)}>
+                        <button onClick={() => handleBookmark()}>
                             {Array.isArray(post.bookmarkedBy) && post.bookmarkedBy.includes(loggedInUser?.id) ? (
                                 <img src={bookmarkAfterSVG} alt="bookmark" className="h-6 w-6" />
                             ) : (
@@ -359,6 +402,76 @@ export const Content = () => {
                             )}
                         </button>
                     </div>
+                </div>
+                <div className="py-10 flex flex-col gap-6 px-6">
+                    <div className="flex justify-between">
+                        <h2 className="text-gray-700 font-bold text-2xl">
+                            Comments
+                            <span className="text-gray-500 text-sm ml-2">
+                                {comments.length > 0 && (
+                                    <span className="text-gray-500 text-sm">
+                                        ({comments.length})
+                                    </span>
+                                )}
+                            </span>
+
+                        </h2>
+                        <button>
+                            {/* follow */}
+                        </button>
+                    </div>
+                    <div className="flex gap-2">
+                        <img
+                            src={loggedInUser?.photoURL}
+                            alt="profile"
+                            className="h-10 w-10 rounded-full"
+                        />
+                        <div className="w-full flex flex-col gap-6">
+                            <textarea
+                                placeholder="Write a comment..."
+                                value={comment}
+                                ref={commentRef}
+                                onChange={(e) => setComment(e.target.value)}
+                                className="w-full rounded-md px-4 py-4 resize-none overflow-hidden bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-transparent transition duration-300 ease-in-out"
+                            />
+                            <button className="w-max bg-blue-700 hover:bg-blue-800 text-white font-semibold py-2 px-4 rounded-md transition duration-300 ease-in-out"
+                                onClick={() => handleComment()}
+                            >
+                                Comment
+                            </button>
+                        </div>
+                    </div>
+                    {comments.length > 0 && (
+                        <div className="flex flex-col gap-4 pt-10">
+                            {comments.map((comment: Comment, index: number) => (
+                                <div key={index} className="flex flex-col gap-3 border-t border-gray-200 py-6">
+                                    <div className="flex gap-4 items-center">
+                                        <img
+                                            src={getAuthorProfile(comment.readerId)?.photoURL}
+                                            alt="profile"
+                                            className="h-10 w-10 rounded-full"
+                                        />
+                                        <div className="w-full flex flex-col gap-1">
+                                            <div className="flex justify-between">
+                                                <h2 className="text-gray-700 font-bold text-lg">
+                                                    {getAuthorProfile(comment.readerId)?.displayName}
+                                                </h2>
+                                                <button>
+                                                    {/* follow */}
+                                                </button>
+                                            </div>
+                                            <p className="text-gray-500 text-sm">
+                                                {formatDate(comment.timestamp.seconds * 1000)}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <p className="text-gray-500 text-sm px-3">
+                                        {comment.content}
+                                    </p>
+                                </div>
+                            ))}
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

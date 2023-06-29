@@ -6,9 +6,11 @@ export const LeftBar = () => {
     return (
         <div className="h-screen w-[268px] flex flex-col justify-between px-4 pt-8 pb-6  border-r border-gray-300">
             <div className="flex flex-col gap-10">
-                <h2 className=" uppercase font-bold text-4xl text-blue-700">
-                    Chatter
-                </h2>
+                <NavLink to="/">
+                    <h2 className=" uppercase font-bold text-4xl text-blue-700">
+                        Chatter
+                    </h2>
+                </NavLink>
                 <div className="flex flex-col gap-4">
                     {/* <h4 className="text-gray-900 text-lg font-medium">Overview</h4> */}
                     <div className="flex flex-col items-center gap-1 pl-4">
