@@ -81,8 +81,9 @@ export const ForYouTab = () => {
 
     const handleLike = async (postId: string) => {
         const postRef = doc(db, 'posts', postId);
+        const post = posts.find((post) => post.id === postId);
         await updateDoc(postRef, {
-            likes: [...posts.find((post) => post.id === postId)?.likes, loggedInUser?.id],
+          likes: [...(post?.likes || []), loggedInUser?.id],
         });
         // Refresh the posts state to reflect the updated likes
         setPosts((prevPosts) =>

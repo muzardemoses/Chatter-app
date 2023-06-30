@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux'
 import { selectUser } from '../../Config/userSlice'
 import {
@@ -14,7 +15,6 @@ import {
 import { toast } from 'react-toastify'
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import { db, storage } from '../../Config/firebase';
-import { useNavigate } from 'react-router-dom'
 import useAutosizeTextArea from '../../Hooks/useAutoSizeTextArea';
 import addSVG from '../../assets/Svg/Feed/outline-add.svg'
 import closeSVG from '../../assets/Svg/Feed/outline-close.svg'
@@ -24,6 +24,7 @@ import videoSVG from '../../assets/Svg/Feed/video-outline.svg'
 
 
 export const CreateContent = () => {
+    const navigate = useNavigate()
     const loggedInUser = useSelector(selectUser);
 
     const [showMediaOptions, setShowMediaOptions] = useState(false)
@@ -190,6 +191,7 @@ export const CreateContent = () => {
         setVideoFiles([])
         setMediaPreviewUrls([])
         toast.success("Post created successfully")
+        navigate(`/content/${postId}`)
     }
 
     return (

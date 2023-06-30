@@ -31,6 +31,12 @@ export const ChatRoom = () => {
     const otherUserid = loggedInUser?.id === idOne ? idTwo : idOne;
     const chatUser = users.find((user) => user.id === otherUserid);
 
+
+    //still under construction so go to feed
+    useEffect(() => {
+        navigate("/feed");
+    }, [navigate]);
+
     useEffect(() => {
         if (loggedInUser) {
             setIsLoading(false); // Set loading state to false once user data is available

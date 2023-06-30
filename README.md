@@ -101,9 +101,13 @@ Not yet available
 - Implement Content page design.
 - Implement comment functionality.
 
-**Day-14** ***June 29, 2023***
+**Day-** ***June 29, 2023***
 - Header profile drop-down
 - Created _redirects file in public
+
+**Day-** ***June 30, 2023***
+- Finalize Login page
+- Created drafts, teams and explore page
 
 ### Built with
 
