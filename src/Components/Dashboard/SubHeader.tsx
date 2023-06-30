@@ -98,7 +98,7 @@ export const SubHeader = () => {
                             <p className="text-gray-700 text-sm font-medium">View profile</p>
                         </NavLink>
                         <NavLink
-                            to="/settings/profile"
+                            to="/"
                             className="w-full flex gap-3 pl-4 py-3 items-center border-b-2 border-gray-50 hover:bg-gray-50 rounded-md transition duration-500 ease-in-out"
                         >
                             {/* <img

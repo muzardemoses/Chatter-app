@@ -69,6 +69,7 @@ export const Content = () => {
 
         return `${readingTime} min read`;
     };
+    
 
     useEffect(() => {
         const fetchPost = async () => {

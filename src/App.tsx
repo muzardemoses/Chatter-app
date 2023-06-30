@@ -1,4 +1,4 @@
-import { Home, About, PageNotFound, Login, Register, ForgetPassword, Profile, VerifyEmail, Bookmarks, Feed, CreateContent, Content, Messages, SelectAndMessage, ChatRoom } from './Pages'
+import { Home, About, PageNotFound, Login, Register, ForgetPassword, Profile, VerifyEmail, Bookmarks, Feed, CreateContent, Content, Messages, Drafts, Explore, Teams, SelectAndMessage, ChatRoom } from './Pages'
 import { AuthLayout, DashboardLayout, DefaultLayout } from './Layouts'
 import { Route, Routes } from 'react-router-dom'
 import { ToastContainer } from "react-toastify";
@@ -29,7 +29,7 @@ function App() {
       const user = { id: snapShot.id, ...snapShot.data() };
       dispatch(loginUser(user));
       localStorage.setItem("user", JSON.stringify(user));
-      
+
       // Fetch all users from Firestore
       const usersRef = collection(db, "users");
       const usersSnapshot = await getDocs(usersRef);
@@ -104,6 +104,33 @@ function App() {
           element={
             <DashboardLayout>
               <Bookmarks />
+            </DashboardLayout>
+          }
+        />
+
+        <Route
+          path="/drafts"
+          element={
+            <DashboardLayout>
+              <Drafts />
+            </DashboardLayout>
+          }
+        />
+
+        <Route
+          path="/explore"
+          element={
+            <DashboardLayout>
+              <Explore />
+            </DashboardLayout>
+          }
+        />
+
+        <Route
+          path="/teams"
+          element={
+            <DashboardLayout>
+              <Teams />
             </DashboardLayout>
           }
         />
