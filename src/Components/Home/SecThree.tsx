@@ -1,6 +1,6 @@
-import analytiicImg from '../../Assets/Svg/Home/carbon_analytics.svg';
-import socialImg from '../../Assets/Svg/Home/social-interact.svg';
-import contentImg from '../../Assets/Svg/Home/content-creation.svg';
+import analytiicImg from '../../assets/Svg/Home/carbon-analytics.svg';
+import socialImg from '../../assets/Svg/Home/social-interact.svg';
+import contentImg from '../../assets/Svg/Home/content-creation.svg';
 
 
 
