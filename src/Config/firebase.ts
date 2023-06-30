@@ -31,6 +31,7 @@ import {
   doc,
   getDocs,
   updateDoc,
+  serverTimestamp,
 } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
@@ -63,7 +64,9 @@ const githubProvider = new GithubAuthProvider();
 
 const db = getFirestore(app);
 
-export const createUserProfileDocument = async (userAuth: User, additionalData: any) => {
+export const createUserProfileDocument = async (userAuth: User, 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+additionalData: any) => {
   if (!userAuth) return;
 
   const userRef = doc(db, `users/${userAuth.uid}`);
@@ -77,6 +80,7 @@ export const createUserProfileDocument = async (userAuth: User, additionalData: 
     const followers: Array<string> = [];
     const following: Array<string> = [];
     const userType = "writer";
+    const lastLogin = serverTimestamp();
     //const bookmarkedPosts: Array<string> | undefined = [];
 
     
@@ -114,6 +118,7 @@ export const createUserProfileDocument = async (userAuth: User, additionalData: 
           followers,
           following,
           userType,
+          lastLogin,
           //bookmarkedPosts,
           username: usernameToSave, // set the final value of usernameToSave
           ...additionalData,
@@ -154,6 +159,7 @@ export const createUserProfileDocument = async (userAuth: User, additionalData: 
           followers,
           following,
           userType,
+          lastLogin,
           //bookmarkedPosts,
           username: usernameToSave, // set the final value of usernameToSave
           ...additionalData,

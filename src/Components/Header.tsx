@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+//import { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { logout, selectUser } from '../Config/userSlice';
 import { auth, signOut } from '../Config/firebase';
@@ -18,13 +18,14 @@ export const Header = () => {
         localStorage.removeItem("user");
         window.location.href = "/";
         toast.success("Logout successful");
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: any) {
         alert(error.message);
       }
     }
   };
 
-  const [show, setShow] = useState(false);
+  //const [show, setShow] = useState(false);
 
   return (
     <div className="fixed top-0 left-0 z-20 w-full bg-white flex justify-between items-center px-28 py-6 shadow">
@@ -53,6 +54,9 @@ export const Header = () => {
                 Feed
               </button>
             </Link>
+            <button onClick={SignOut} className="hidden text-blue-900 font-normal text-lg box-border border border-blue-700 rounded-lg py-3 w-36 hover:bg-gray-50 transition duration-500 ease-in-out">
+              Log Out
+            </button>
           </div> :
           <div className="flex gap-6">
             <Link to="/login">

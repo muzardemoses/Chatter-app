@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { NavLink, useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
 import hideImg from "../../assets/Svg/Auth/Eye.svg"
@@ -6,8 +8,8 @@ import googleSvg from "../../assets/Svg/Auth/google.svg"
 import { toast } from "react-toastify"
 import { useSelector } from "react-redux";
 import { selectUser } from "../../Config/userSlice"
-import { auth, EmailAuthProvider, fetchSignInMethodsForEmail, User, GithubAuthProvider, githubProvider, GoogleAuthProvider, googleProvider, linkWithCredential, signInWithEmailAndPassword, signInWithPopup, signInWithRedirect, UserCredential, twitterProvider, TwitterAuthProvider, db } from "../../Config/firebase"
-import { doc } from "firebase/firestore"
+import { auth, EmailAuthProvider, fetchSignInMethodsForEmail, GithubAuthProvider, githubProvider, GoogleAuthProvider, googleProvider, linkWithCredential, signInWithEmailAndPassword, signInWithPopup, signInWithRedirect, UserCredential, twitterProvider, TwitterAuthProvider, db } from "../../Config/firebase"
+import { doc, serverTimestamp, updateDoc } from "firebase/firestore"
 
 export const Login = () => {
     const navigate = useNavigate()
@@ -26,11 +28,13 @@ export const Login = () => {
         e.preventDefault()
 
         try {
-            const { user }  = await signInWithEmailAndPassword(auth, email, password)
+            const { user } = await signInWithEmailAndPassword(auth, email, password)
             const userRef = doc(db, "users", user.uid);
+            await updateDoc(userRef, {
+                lastLogin: serverTimestamp(),
+            });
             navigate("/feed")
             toast.success("Login Successful")
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
             toast.error(error.message)
         }
@@ -40,10 +44,11 @@ export const Login = () => {
         signInWithRedirect(auth, googleProvider)
             .then((result: UserCredential) => {
                 // This gives you a Google Access Token. You can use it to access the Google API.
-                const credential = GoogleAuthProvider.credentialFromResult(result);
-                const token = credential?.accessToken;
+                //const credential = GoogleAuthProvider.credentialFromResult(result);
+                //const token = credential?.accessToken;
                 // The signed-in user info.
                 const user = result.user;
+                console.log(user.providerId);
                 // IdP data available using getAdditionalUserInfo(result)
                 // ...
             }).catch((error) => {
@@ -51,10 +56,11 @@ export const Login = () => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 // The email of the user's account used.
-                const email = error.customData?.email;
+                //const email = error.customData?.email;
                 // The AuthCredential type that was used.
-                const credential = GoogleAuthProvider.credentialFromError(error);
+                //const credential = GoogleAuthProvider.credentialFromError(error);
                 // ...
+                toast.error(errorCode, errorMessage);
             });
     }
 
@@ -62,11 +68,12 @@ export const Login = () => {
         signInWithPopup(auth, githubProvider)
             .then((result: UserCredential) => {
                 // This gives you a GitHub Access Token. You can use it to access the GitHub API.
-                const credential = GithubAuthProvider.credentialFromResult(result);
-                const token = credential?.accessToken;
+                //const credential = GithubAuthProvider.credentialFromResult(result);
+                //const token = credential?.accessToken;
 
                 // The signed-in user info.
                 const user = result.user;
+                console.log(user.providerId);
                 // IdP data available using getAdditionalUserInfo(result)
                 // ...
             }).catch((error) => {
@@ -120,12 +127,13 @@ export const Login = () => {
             .then((result: UserCredential) => {
                 // This gives you a the Twitter OAuth 1.0 Access Token and Secret.
                 // You can use these server side with your app's credentials to access the Twitter API.
-                const credential = TwitterAuthProvider.credentialFromResult(result);
-                const token = credential?.accessToken;
-                const secret = credential?.secret;
+                //const credential = TwitterAuthProvider.credentialFromResult(result);
+               // const token = credential?.accessToken;
+               // const secret = credential?.secret;
 
                 // The signed-in user info.
                 const user = result.user;
+                console.log(user.providerId);
                 // IdP data available using getAdditionalUserInfo(result)
                 // ...
             }).catch((error) => {

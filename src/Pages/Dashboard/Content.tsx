@@ -1,12 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useParams } from "react-router-dom"
 import { useEffect, useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
 import useAutosizeTextArea from "../../Hooks/useAutoSizeTextArea";
 import moment from 'moment';
 import { useSelector } from "react-redux";
 import { selectUser } from "../../Config/userSlice";
 import { selectUsers } from '../../Config/usersSlice';
-import { arrayUnion, getDocs, doc, updateDoc, getDoc } from 'firebase/firestore';
+import { arrayUnion, doc, updateDoc, getDoc } from 'firebase/firestore';
 import { db } from '../../Config/firebase';
 import readSVG from '../../assets/Svg/Feed/read.svg';
 import devAvatar from '../../Images/Profile/avatar-default.png';
@@ -24,7 +24,7 @@ import { Comment } from "../../Utils/types";
 
 
 export const Content = () => {
-    const { postId } = useParams<{ postId: string }>();
+    const { postId } = useParams<{ postId: any }>();
     const loggedInUser = useSelector(selectUser);
     const users = useSelector(selectUsers);
     const [post, setPost] = useState<any>(null);

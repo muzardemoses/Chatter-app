@@ -7,7 +7,7 @@ import { onIdTokenChanged } from "firebase/auth";
 
 export const VerifyEmail = () => {
     const navigate = useNavigate()
-    const [isLoading, setIsLoading] = useState(true);
+    ///const [isLoading, setIsLoading] = useState(true);
     const [user, setUser] = useState<User | null>(null);
     const email = user?.email;
 
@@ -15,7 +15,7 @@ export const VerifyEmail = () => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             setUser(user);
-            setIsLoading(false);
+            //setIsLoading(false);
         });
         return () => unsubscribe();
     }, []);

@@ -19,6 +19,7 @@ export const SubHeader = () => {
                 localStorage.removeItem("user");
                 window.location.href = "/";
                 toast.success("Logout successful");
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             } catch (error: any) {
                 alert(error.message);
             }

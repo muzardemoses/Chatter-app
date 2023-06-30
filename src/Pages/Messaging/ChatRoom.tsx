@@ -10,8 +10,6 @@ import {
     collection,
     query,
     where,
-    orderBy,
-    onSnapshot,
     addDoc,
     getDocs,
 } from "firebase/firestore";
@@ -68,7 +66,7 @@ export const ChatRoom = () => {
     const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files && e.target.files[0];
         const chatId = idOne && idTwo ? (idOne < idTwo ? `${idOne}-${idTwo}` : `${idTwo}-${idOne}`) : "";
-
+        console.log(chatId);
         if (file) {
             const reader = new FileReader();
             reader.onload = (e) => {
@@ -94,8 +92,10 @@ export const ChatRoom = () => {
             const chatId = idOne && idTwo ? (idOne < idTwo ? `${idOne}-${idTwo}` : `${idTwo}-${idOne}`) : "";
             const storageRef = ref(storage, `chatImages/${chatId}/${uploadImageFile.name}`);
             const snapShot = await uploadBytes(storageRef, uploadImageFile);
+            //remember to remove this console.log
+            console.log(snapShot);
             const downloadURL = await getDownloadURL(storageRef);
-
+                
             setImageData({ imageURL: downloadURL });
         }
         if (!message && !imageData?.imageURL) return;

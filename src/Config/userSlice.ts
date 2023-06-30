@@ -12,6 +12,7 @@ export interface UserState  {
        // bookmarkedPosts: [],
         username: string,
         id: string,
+        lastLogin: string,
 }
 
 const initialState = {

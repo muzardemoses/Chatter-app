@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NavLink, useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
 import hideImg from "../../assets/Svg/Auth/Eye.svg"
@@ -6,7 +7,7 @@ import googleSvg from "../../assets/Svg/Auth/google.svg"
 import { toast } from "react-toastify"
 import { useSelector } from "react-redux";
 import { selectUser } from "../../Config/userSlice"
-import { auth, createUserProfileDocument, createUserWithEmailAndPassword, EmailAuthProvider, fetchSignInMethodsForEmail, GithubAuthProvider, githubProvider, GoogleAuthProvider, googleProvider, linkWithCredential, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup, signInWithRedirect, UserCredential, User, twitterProvider, TwitterAuthProvider } from "../../Config/firebase"
+import { auth, createUserProfileDocument, createUserWithEmailAndPassword, EmailAuthProvider, fetchSignInMethodsForEmail, GithubAuthProvider, githubProvider, GoogleAuthProvider, googleProvider, linkWithCredential, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup, signInWithRedirect, UserCredential, twitterProvider, TwitterAuthProvider } from "../../Config/firebase"
 
 
 export const Register = () => {
@@ -68,20 +69,22 @@ export const Register = () => {
         signInWithRedirect(auth, googleProvider)
             .then((result: UserCredential) => {
                 // This gives you a Google Access Token. You can use it to access the Google API.
-                const credential = GoogleAuthProvider.credentialFromResult(result);
-                const token = credential?.accessToken;
+               // const credential = GoogleAuthProvider.credentialFromResult(result);
+                //const token = credential?.accessToken;
                 // The signed-in user info.
                 const user = result.user;
+                console.log(user.providerId)
                 // IdP data available using getAdditionalUserInfo(result)
                 // ...
             }).catch((error) => {
                 // Handle Errors here.
-                const errorCode = error.code;
+               // const errorCode = error.code;
                 const errorMessage = error.message;
                 // The email of the user's account used.
-                const email = error.customData?.email;
+                //const email = error.customData?.email;
                 // The AuthCredential type that was used.
-                const credential = GoogleAuthProvider.credentialFromError(error);
+               // const credential = GoogleAuthProvider.credentialFromError(error);
+                toast.error(errorMessage)
                 // ...
             });
     }
@@ -90,11 +93,12 @@ export const Register = () => {
         signInWithPopup(auth, githubProvider)
             .then((result: UserCredential) => {
                 // This gives you a GitHub Access Token. You can use it to access the GitHub API.
-                const credential = GithubAuthProvider.credentialFromResult(result);
-                const token = credential?.accessToken;
+                //const credential = GithubAuthProvider.credentialFromResult(result);
+                //const token = credential?.accessToken;
 
                 // The signed-in user info.
                 const user = result.user;
+                console.log(user.providerId)
                 // IdP data available using getAdditionalUserInfo(result)
                 // ...
             }).catch((error) => {
@@ -148,12 +152,15 @@ export const Register = () => {
             .then((result: UserCredential) => {
                 // This gives you a the Twitter OAuth 1.0 Access Token and Secret.
                 // You can use these server side with your app's credentials to access the Twitter API.
-                const credential = TwitterAuthProvider.credentialFromResult(result);
-                const token = credential?.accessToken;
-                const secret = credential?.secret;
-
+                //const credential = TwitterAuthProvider.credentialFromResult(result);
+                
+               
+                //const token = credential?.accessToken; 
+                //const secret = credential?.secret;
+         
                 // The signed-in user info.
                 const user = result.user;
+                console.log(user.providerId)
                 // IdP data available using getAdditionalUserInfo(result)
                 // ...
             }).catch((error) => {
@@ -196,6 +203,7 @@ export const Register = () => {
                             }
                         })
                         .then((user) => {
+                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
                             return linkWithCredential(user, pendingCred as any);
                         })
                 }

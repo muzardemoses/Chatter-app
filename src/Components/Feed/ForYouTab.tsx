@@ -4,7 +4,7 @@ import moment from 'moment';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../Config/userSlice';
 import { selectUsers } from '../../Config/usersSlice';
-import { collection, getDocs, doc, updateDoc, getDoc } from 'firebase/firestore';
+import { collection, getDocs, doc, updateDoc} from 'firebase/firestore';
 import { db } from '../../Config/firebase';
 import readSVG from '../../assets/Svg/Feed/read.svg';
 import devAvatar from '../../Images/Profile/avatar-default.png';
@@ -24,9 +24,11 @@ export const ForYouTab = () => {
         const author = users.find((user) => user.id === authorId);
         return author;
     };
-
+ 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [posts, setPosts] = useState<any[]>([]);
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const formatDate = (timestamp: any) => {
         const now = moment();
         const messageTime = moment(timestamp);

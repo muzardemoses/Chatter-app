@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef} from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux'
 import { selectUser } from '../../Config/userSlice'
@@ -6,11 +6,6 @@ import {
     serverTimestamp,
     setDoc,
     doc,
-    collection,
-    query,
-    where,
-    addDoc,
-    getDocs,
 } from "firebase/firestore";
 import { toast } from 'react-toastify'
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
@@ -63,6 +58,7 @@ export const CreateContent = () => {
     const timestamp = serverTimestamp();
 
     const handleImageFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         if (imageFiles.length + videoFiles.length + e.target.files!.length > 4 || mediaPreviewUrls.length + e.target.files!.length > 4) {
             toast.error("You can only upload 4 media files at a time");
             return;
@@ -87,6 +83,7 @@ export const CreateContent = () => {
     };
 
     const handleVideoFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         if (imageFiles.length + videoFiles.length + e.target.files!.length > 4 || mediaPreviewUrls.length + e.target.files!.length > 4) {
             toast.error("You can only upload 4 media files at a time");
             return;

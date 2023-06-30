@@ -33,6 +33,7 @@ function App() {
       // Fetch all users from Firestore
       const usersRef = collection(db, "users");
       const usersSnapshot = await getDocs(usersRef);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const users: any[] = [];
       usersSnapshot.forEach((doc) => {
         users.push({
