@@ -110,7 +110,9 @@ Not yet available
 - Created drafts, teams and explore page
 
 ***July 3, 2023***
+- installed react-markdown-editor-lite react-markdown and remark-gfm
 - Add markdown for rich text editor in create content page for blog post
+
 
 
 ### Built with
@@ -123,6 +125,9 @@ Not yet available
 - React-toastify
 - Dot-env
 - Moment
+- React-markdown-editor-lite
+- React-markdown
+- Remark-gfm
 
 
 

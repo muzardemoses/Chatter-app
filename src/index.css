@@ -4,12 +4,22 @@ body {
   @apply transition duration-500 ease-in-out;
 }
 
+
+/* a {
+  @apply text-blue-700 hover:text-blue-700 before:text-blue-500
+  after:text-blue-500
+} */
+ 
+
+
 .middle {
   @apply before:bg-gray-900  transition duration-500 ease-in-out;
 }
 
 @tailwind components;
 @tailwind utilities;
+
+
 
 .middle {
   position: relative;
@@ -96,4 +106,8 @@ body {
 /* Form Styles */
 .form-width{
   width: 520px;
+}
+
+a {
+  color: blue;
 }

@@ -4,7 +4,7 @@ import moment from 'moment';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../Config/userSlice';
 import { selectUsers } from '../../Config/usersSlice';
-import { collection, getDocs, doc, updateDoc} from 'firebase/firestore';
+import { collection, getDocs, doc, updateDoc } from 'firebase/firestore';
 import { db } from '../../Config/firebase';
 import readSVG from '../../assets/Svg/Feed/read.svg';
 import devAvatar from '../../Images/Profile/avatar-default.png';
@@ -14,6 +14,8 @@ import bookmarkBeforeSVG from '../../assets/Svg/Feed/bookmark-before.svg';
 import bookmarkAfterSVG from '../../assets/Svg/Feed/bookmark-after.svg';
 import commentSVG from '../../assets/Svg/Feed/comment.svg';
 import { toast } from 'react-toastify';
+import ReactMarkdown from "react-markdown";
+import remarkGfm from 'remark-gfm'
 
 
 export const ForYouTab = () => {
@@ -24,7 +26,7 @@ export const ForYouTab = () => {
         const author = users.find((user) => user.id === authorId);
         return author;
     };
- 
+
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [posts, setPosts] = useState<any[]>([]);
 
@@ -85,7 +87,7 @@ export const ForYouTab = () => {
         const postRef = doc(db, 'posts', postId);
         const post = posts.find((post) => post.id === postId);
         await updateDoc(postRef, {
-          likes: [...(post?.likes || []), loggedInUser?.id],
+            likes: [...(post?.likes || []), loggedInUser?.id],
         });
         // Refresh the posts state to reflect the updated likes
         setPosts((prevPosts) =>
@@ -177,9 +179,14 @@ export const ForYouTab = () => {
                                 </Link>
                                 <div className='flex flex-col gap-3'>
                                     <Link to={`/content/${post.id}`}>
-                                        <p className="text-gray-500">
+                                        {/* <p className="text-gray-500">
                                             {post.content && post.content.slice(0, 200)}...
-                                        </p>
+                                        </p> */}
+                                        <div 
+                                        className="prose prose-lg">
+                                            <ReactMarkdown children={post.content.slice(0, 150) + '...'}
+                                             />
+                                        </div>
                                     </Link>
                                     { }
                                     <div>

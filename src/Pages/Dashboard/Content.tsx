@@ -17,6 +17,9 @@ import bookmarkAfterSVG from '../../assets/Svg/Feed/bookmark-after.svg';
 import commentSVG from '../../assets/Svg/Feed/comment.svg';
 import { toast } from 'react-toastify';
 import { Comment } from "../../Utils/types";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from 'remark-gfm'
+
 
 
 
@@ -69,7 +72,7 @@ export const Content = () => {
 
         return `${readingTime} min read`;
     };
-    
+
 
     useEffect(() => {
         const fetchPost = async () => {
@@ -79,6 +82,7 @@ export const Content = () => {
                 if (postSnapshot.exists()) {
                     const postData = postSnapshot.data();
                     setPost(postData);
+                    console.log('Post data:', post.content);
                 } else {
                     console.log('Post does not exist');
                 }
@@ -177,11 +181,20 @@ export const Content = () => {
         toast.success('Comment added');
     };
 
+    // const md = new MarkdownIt();
+
+    // const MarkdownRenderer = ({ content }: any) => {
+    //     const renderedContent = md.render(content);
+    //     return <div dangerouslySetInnerHTML={{ __html: renderedContent }} />;
+    // };
+
+   
 
 
     return (
         <div className="py-20 flex items-center justify-center">
-            <div className="w-[800px] flex flex-col gap-3 borer border-gray-300 p-5 rounded-md shadow">
+            {/* formerly 800px */}
+            <div className="w-8/12 px-20 flex flex-col gap-3 borer border-gray-300 p-5 rounded-md shadow">
                 <div className='flex gap-3'>
                     <img
                         src={authorProfile?.photoURL || devAvatar}
@@ -357,9 +370,14 @@ export const Content = () => {
                                 </div>
                             }
                         </div>
-                        <p className="text-gray-500 text-lg">
-                            {content}
-                        </p>
+                        <div 
+                        //style={{ whiteSpace: 'pre-wrap' }}
+                            className="prose prose-lg prose-a:text-blue-700 prose-a:font-bold prose-a:no-underline prose-blockquote:bg-gray-50 prose-blockquote:py-0.5 prose-th:bg-slate-100 prose-th:p-2 prose-td:p-2 prose-td:border prose-th:border border-r-gray-200 prose-img:w-10/12 prose-img:mx-auto "
+                        >
+                           <ReactMarkdown children={content} remarkPlugins={[remarkGfm]}   />
+                            {/* <Markdown children={content} /> */}
+                            {/* <MarkdownRenderer content={demo} /> */}
+                        </div>
                     </div>
                 </div>
                 <div className="flex justify-between pt-4 px-3 border-t border-gray-200">

@@ -24,16 +24,16 @@ import "react-markdown-editor-lite/lib/index.css";
 
 export const CreateContent = () => {
     const mdEditor = useRef<Editor>(null);
-    const [value, setValue] = useState("**Hello world!!!**");
-    const handleClick = () => {
-        if (mdEditor.current) {
-            alert(mdEditor.current.getMdValue());
-        }
-    };
+    //const [value, setValue] = useState("");
+    // const handleClick = () => {
+    //     if (mdEditor.current) {
+    //         alert(mdEditor.current.getMdValue());
+    //     }
+    // };
     const handleEditorChange = ({ html, text }: { html: string; text: string }) => {
-        const newValue = text.replace(/\d/g, "");
-        console.log(newValue);
-        setValue(text);
+        //const newValue = text.replace(/\d/g, "");
+        // console.log(newValue);
+        setContent(text);
     };
 
     const navigate = useNavigate()
@@ -164,6 +164,8 @@ export const CreateContent = () => {
                 return downloadUrl;
             })
         );
+        
+
 
         if (title.trim() === "" || content.trim() === "") {
             toast.error("Title and content cannot be empty");
@@ -180,11 +182,12 @@ export const CreateContent = () => {
             return;
         }
 
+        const preservedContent = content.replace(/  +/g, '&nbsp; ');
 
         await setDoc(postRef, {
             id: postId,
             title: title,
-            content: content,
+            content: preservedContent,
             media: {
                 images: imageDownloadUrls,
                 videos: videoDownloadUrls,
@@ -275,7 +278,7 @@ export const CreateContent = () => {
                             </div>
                         }
                     </div>
-                    <div className={`w-full flex flex-col gap-4 ${showMediaOptions ? "" : ""}`}>
+                    <div className={`w-full flex flex-col gap-6 ${showMediaOptions ? "" : ""}`}>
                         <div className="flex  gap-4">
                             {mediaPreviewUrls.map((url, index) => (
                                 <div key={index} className={`h-80 relative object-cover rounded-lg ${mediaPreviewUrls.length === 1 ? "w-[40%]" : mediaPreviewUrls.length === 2 ? "w-[50%]" : mediaPreviewUrls.length === 3 ? "w-full" : ""}`}>
@@ -317,41 +320,34 @@ export const CreateContent = () => {
                             value={title}
                             ref={titleRef}
                             onChange={(e) => setTitle(e.target.value)}
-                            className="w-full border-none px-4 text-[40px] font-bold focus:outline-none placeholder-gray-300 transition duration-500 ease-in-out overflow-hiden resize-none"
+                            className="w-full border-none mb-3 px-4 text-[40px] font-bold focus:outline-none placeholder-gray-300 transition duration-500 ease-in-out overflow-hiden resize-none"
                         />
-                        <div className="flex items-center gap-4">
+
+                       
+                        {/* <div className="flex items-center gap-4">
                             <button className="bg-gray-200 text-gray-500 w-8 h-8 rounded-full flex items-center justify-center"
                                 onClick={handleClick}
                             >
                                 Get Value
                             </button>
-                            <Editor 
-                              ref={mdEditor}
-                                value={value}
-                                style={{
-                                    height: "100%",
-                                    width: "100%",
-                                    border: "none",
-                                    outline: "none",
-                                    resize: "none",
-                                    overflow: "hidden",
-                                    fontSize: "1.5rem",
-                                    fontFamily: "inherit",
-                                    fontWeight: "400",
-                                    lineHeight: "1.5",
-                                    color: "#4b5563",
-                                }}
-                                onChange={handleEditorChange}
-                                renderHTML={(text) => <ReactMarkdown children={text} />}
-                            />
-                        </div>
-                        <textarea
+
+                        </div> */}
+
+                        {/* <textarea
                             minLength={90}
                             required
                             placeholder="Write your story..."
                             value={content}
                             onChange={(e) => setContent(e.target.value)}
                             className="w-full h-96 border-none px-4 text-xl font-normal focus:outline-none placeholder-gray-300 transition duration-500 ease-in-out resize-none"
+                        /> */}
+
+                        <Editor
+                            ref={mdEditor}
+                            value={content}
+                            onChange={handleEditorChange}
+                            renderHTML={(text) => <ReactMarkdown children={text} />}
+                            style={{ height: "500px" }}
                         />
                     </div>
                 </div>
