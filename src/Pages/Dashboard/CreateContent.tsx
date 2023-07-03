@@ -1,4 +1,4 @@
-import { useState, useRef} from 'react'
+import { useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux'
 import { selectUser } from '../../Config/userSlice'
@@ -16,9 +16,26 @@ import closeSVG from '../../assets/Svg/Feed/outline-close.svg'
 import imageSVG from '../../assets/Svg/Feed/image-outline.svg'
 import videoSVG from '../../assets/Svg/Feed/video-outline.svg'
 
+import Editor from "react-markdown-editor-lite";
+import ReactMarkdown from "react-markdown";
+import "react-markdown-editor-lite/lib/index.css";
+
 
 
 export const CreateContent = () => {
+    const mdEditor = useRef<Editor>(null);
+    const [value, setValue] = useState("**Hello world!!!**");
+    const handleClick = () => {
+        if (mdEditor.current) {
+            alert(mdEditor.current.getMdValue());
+        }
+    };
+    const handleEditorChange = ({ html, text }: { html: string; text: string }) => {
+        const newValue = text.replace(/\d/g, "");
+        console.log(newValue);
+        setValue(text);
+    };
+
     const navigate = useNavigate()
     const loggedInUser = useSelector(selectUser);
 
@@ -151,18 +168,18 @@ export const CreateContent = () => {
         if (title.trim() === "" || content.trim() === "") {
             toast.error("Title and content cannot be empty");
             return;
-          }
-          
-          if (title.trim().length < 6) {
+        }
+
+        if (title.trim().length < 6) {
             toast.error("Title must be at least 6 characters long");
             return;
-          }
-          
-          if (content.trim().length < 90) {
+        }
+
+        if (content.trim().length < 90) {
             toast.error("Content must be at least 90 characters long");
             return;
-          }
-          
+        }
+
 
         await setDoc(postRef, {
             id: postId,
@@ -302,6 +319,32 @@ export const CreateContent = () => {
                             onChange={(e) => setTitle(e.target.value)}
                             className="w-full border-none px-4 text-[40px] font-bold focus:outline-none placeholder-gray-300 transition duration-500 ease-in-out overflow-hiden resize-none"
                         />
+                        <div className="flex items-center gap-4">
+                            <button className="bg-gray-200 text-gray-500 w-8 h-8 rounded-full flex items-center justify-center"
+                                onClick={handleClick}
+                            >
+                                Get Value
+                            </button>
+                            <Editor 
+                              ref={mdEditor}
+                                value={value}
+                                style={{
+                                    height: "100%",
+                                    width: "100%",
+                                    border: "none",
+                                    outline: "none",
+                                    resize: "none",
+                                    overflow: "hidden",
+                                    fontSize: "1.5rem",
+                                    fontFamily: "inherit",
+                                    fontWeight: "400",
+                                    lineHeight: "1.5",
+                                    color: "#4b5563",
+                                }}
+                                onChange={handleEditorChange}
+                                renderHTML={(text) => <ReactMarkdown children={text} />}
+                            />
+                        </div>
                         <textarea
                             minLength={90}
                             required

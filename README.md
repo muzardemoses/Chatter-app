@@ -109,6 +109,10 @@ Not yet available
 - Finalize Login page
 - Created drafts, teams and explore page
 
+***July 3, 2023***
+- Add markdown for rich text editor in create content page for blog post
+
+
 ### Built with
 
 - Firebase
