@@ -30,7 +30,7 @@ export const CreateContent = () => {
     //         alert(mdEditor.current.getMdValue());
     //     }
     // };
-    const handleEditorChange = ({ html, text }: { html: string; text: string }) => {
+    const handleEditorChange = ({ text }: { html: string; text: string }) => {
         //const newValue = text.replace(/\d/g, "");
         // console.log(newValue);
         setContent(text);

@@ -184,7 +184,7 @@ export const ForYouTab = () => {
                                         </p> */}
                                         <div 
                                         className="prose prose-lg">
-                                            <ReactMarkdown children={post.content.slice(0, 150) + '...'}
+                                            <ReactMarkdown children={post.content.slice(0, 150) + '...'} remarkPlugins={[remarkGfm]}
                                              />
                                         </div>
                                     </Link>
