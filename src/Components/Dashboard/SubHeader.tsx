@@ -1,32 +1,11 @@
 import { NavLink } from 'react-router-dom'
-import { useState } from 'react';
-import { useSelector, useDispatch } from "react-redux";
-import { selectUser, logout } from '../../Config/userSlice';
-import { auth, signOut } from '../../Config/firebase';
 import notificationImg from '../../assets/Svg/Dashboard/notification.svg'
-import devAvatar from '../../Images/Profile/avatar-default.png'
-import { toast } from 'react-toastify';
+import { ProfileDropdown } from '../../ReUsable/ProfileDropdown';
 
 export const SubHeader = () => {
-    const user = useSelector(selectUser);
-    const dispatch = useDispatch();
 
-    const SignOut = async () => {
-        if (window.confirm("Are you sure you want to log out?")) {
-            try {
-                await signOut(auth);
-                dispatch(logout);
-                localStorage.removeItem("user");
-                window.location.href = "/";
-                toast.success("Logout successful");
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            } catch (error: any) {
-                alert(error.message);
-            }
-        }
-    };
 
-    const [show, setShow] = useState(false);
+
     return (
         <div className="bg-white h-20 px-6 border-b border-gray-300  justify-between flex items-center">
             <div>Switch</div>
@@ -58,65 +37,7 @@ export const SubHeader = () => {
                 <NavLink to='/notifications'>
                     <img src={notificationImg} alt="bell" className='h-6 w-6' />
                 </NavLink>
-                <div className='h-12 w-12 rounded-full bg-gray-50 border-4 cursor-pointer transition duration-500 ease-in-out flex items-center justify-center border-purple-50 hover:border-purple-100 relative'
-                    onClick={() => setShow(!show)}
-                >
-                    <img src={user?.photoURL || devAvatar} alt="avatar" className='h-10 w-10 rounded-full' />
-                    <div
-                        className="absolute w-72 bg-white border-gray-200 top-14 -right-5 rounded-lg border shadow-lg"
-                        style={{ display: show ? "block" : "none" }}
-                    >
-                        <div className="w-full flex gap-3 pl-4 py-3 border-b-2 border-gray-50">
-                            <div className="relative w-max h-max">
-                                <img
-                                    alt="avatar"
-                                    src={user?.photoURL || devAvatar}
-                                    className="h-10 w-10 rounded-full"
-                                />
-                                <p
-                                    className="h-3 w-3 absolute bg-green-500 rounded-full border-white border-2 bottom-0 right-0"
-                                ></p>
-                            </div>
-
-                            <div>
-                                <p className="font-semibold text-sm text-gray-700">
-                                    {user?.displayName}
-                                </p>
-                                <p className="text-gray-600 text-xs">
-                                    {user?.email}
-                                </p>
-                            </div>
-                        </div>
-                        <NavLink
-                            to="/"
-                            className="w-full flex gap-3 pl-4 py-3 items-center hover:bg-gray-50 rounded-md transition duration-500 ease-in-out"
-                        >
-                            {/* <img
-                                src="../assets/dashboardIcons/user.svg"
-                                className="h-4 w-4"
-                                alt=""
-                            /> */}
-                            <p className="text-gray-700 text-sm font-medium">View profile</p>
-                        </NavLink>
-                        <NavLink
-                            to="/"
-                            className="w-full flex gap-3 pl-4 py-3 items-center border-b-2 border-gray-50 hover:bg-gray-50 rounded-md transition duration-500 ease-in-out"
-                        >
-                            {/* <img
-                                src="../assets/dashboardIcons/settings.svg"
-                                className="h-4 w-4"
-                                alt=""
-                            /> */}
-                            <p className="text-gray-700 text-sm font-medium">Settings</p>
-                        </NavLink>
-                        <button
-                            className="w-full flex gap-3 pl-4 py-3 items-center border-b-2 border-gray-50 hover:bg-gray-50 rounded-md transition duration-500 ease-in-out"
-                            onClick={SignOut}
-                        >
-                            Log Out
-                        </button>
-                    </div>
-                </div>
+                <ProfileDropdown />
             </div>
         </div>
     )

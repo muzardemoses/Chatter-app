@@ -113,6 +113,9 @@ Not yet available
 - installed react-markdown-editor-lite react-markdown and remark-gfm
 - Add markdown for rich text editor in create content page for blog post
 
+***July 4, 2023***
+- Update bookmark page to display bookmarked posts
+
 
 
 ### Built with
@@ -128,6 +131,7 @@ Not yet available
 - React-markdown-editor-lite
 - React-markdown
 - Remark-gfm
+- Headlessui
 
 
 
