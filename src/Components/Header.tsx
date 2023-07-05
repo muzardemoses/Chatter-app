@@ -94,8 +94,13 @@ export const Header = () => {
           </div>
         }
       </div>
-      <div className="header-links hidden lg:block z-20">
-        <div className="bg-white lg:flex flex-col gap-14 h-screen px-10 py-5 pr-20 sm:pr-14 sm:px-6">
+      <div className="header-links hidden lg:block z-20"
+      onClick={handleMenu} 
+      >
+        <div className="bg-white lg:flex flex-col gap-14 h-screen px-10 py-5 pr-20 sm:pr-14 sm:px-6"
+        // just find a way to close the menu when you click outside the menu
+        onClick={(e) => e.stopPropagation()}
+        >
           <ul className="flex flex-col gap-5 pt-6 text-base font-semibold text-black">
             <li className="border-b border-gray-700 pb-3">
               <Link to="/" className="link-item">
