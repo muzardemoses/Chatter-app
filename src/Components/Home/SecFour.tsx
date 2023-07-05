@@ -6,7 +6,7 @@ export const SecFour = () => {
 
    
     return (
-        <div className="py-24 px-20 flex gap-14" style={{ backgroundColor: "#FFEDCC80" }}>
+        <div className="py-24 px-20 flex gap-14 xl:px-14" style={{ backgroundColor: "#FFEDCC80" }}>
             <img src={boyImg} alt="boy" className="rounded-full" />
             <div className='flex flex-col gap-6'>
                 <div className='flex flex-col gap-12'>

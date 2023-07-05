@@ -60,34 +60,8 @@ body {
   font-family: "DM Sans", sans-serif;
 }
 
-/* Home Section One Styles */
-.sec-one-h1-width {
-  width: 984px;
-}
 
-.sec-one-p-width {
-  width: 740px;
-}
 
-.sec-one-con-height {
-  height: 765px;
-}
-
-/* Home Section Two Styles */
-.sec-two-child-img{
-    height: 404px;
-    width: 40%;
-}
-
-.sec-two-child-div{
-    width: 53.5%;
-}
-
-/* Home Section Three Styles */
-.sec-three-divs{
-    height: 324px;
-    width: 306px;;
-}
 
 
 /* Auth Layout Styles */
