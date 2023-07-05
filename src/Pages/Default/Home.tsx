@@ -2,7 +2,7 @@ import { SecOne, SecTwo, SecThree, SecFour, SecFive } from "../../Components/Hom
 
 export const Home = () => {
     return (
-        <div className="pt-1.5">
+        <div className="pt-1.5 lg:pt-0">
             <SecOne />
             <SecTwo />
             <SecThree />

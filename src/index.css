@@ -13,13 +13,51 @@ body {
 
 
 .middle {
-  @apply before:bg-gray-900  transition duration-500 ease-in-out;
+  @apply before:bg-blue-700  transition duration-500 ease-in-out;
 }
 
 @tailwind components;
 @tailwind utilities;
 
+.hamburger {
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+  transition: all 0.25s;
+  position: relative;
+}
 
+.harburger-top,
+.harburger-middle,
+.harburger-bottom {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 2px;
+  transform: translate(0px);
+  transition: all 0.5s;
+}
+.harburger-middle {
+  transform: translateY(7px);
+}
+.harburger-bottom {
+  transform: translateY(14px);
+}
+
+.open {
+  transform: rotate(90deg);
+  transform: translateY(0px);
+}
+.open .harburger-top {
+  transform: rotate(45deg) translateY(6px) translate(6px);
+}
+.open .harburger-middle {
+  display: none;
+}
+.open .harburger-bottom {
+  transform: rotate(-45deg) translateY(6px) translate(-6px);
+}
 
 .middle {
   position: relative;
@@ -74,6 +112,26 @@ body {
   width: 520px;
 }
 
-a {
-  color: blue;
+@media screen and (max-width: 1023px) {
+  .header-links {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-left: 40%;
+    margin-top: 94.5px;
+  }
+
+  .header-links.open {
+    transform: translateX(0);
+  }
+}
+
+body.is-side-menu-open {
+  overflow: hidden;
 }

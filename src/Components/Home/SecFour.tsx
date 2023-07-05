@@ -6,10 +6,10 @@ export const SecFour = () => {
 
    
     return (
-        <div className="py-24 px-20 flex gap-14 xl:px-14" style={{ backgroundColor: "#FFEDCC80" }}>
-            <img src={boyImg} alt="boy" className="rounded-full" />
-            <div className='flex flex-col gap-6'>
-                <div className='flex flex-col gap-12'>
+        <div className="py-24 px-20 flex gap-14 xl:px-14 lg:px-10 lg:py-20 lg:gap-7 lg:justify-between" style={{ backgroundColor: "#FFEDCC80" }}>
+            <img src={boyImg} alt="boy" className="rounded-full lg:w-60 lg:h-60" />
+            <div className='flex flex-col gap-6 lg:gap-3 lg:w-[60%]'>
+                <div className='flex flex-col gap-12 lg:gap-6'>
                     <p className='text-lg font-normal'>"Chatter has become an integral part of my online experience. As a user of this incredible blogging platform, I have discovered a vibrant community of individuals who are passionate about sharing their ideas and engaging in thoughtful discussions.”</p>
                     <h5 className='text-2xl font-semibold'>Adebobola Muhydeen,<span className='text-lg font-medium'> Software developer at Apple</span> </h5>
                 </div>

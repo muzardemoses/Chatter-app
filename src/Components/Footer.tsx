@@ -1,10 +1,10 @@
 export const Footer = () => {
     return (
-        <div className="pt-12 pb-40 pl-32 pr-44 flex justify-between 2xl:pl-20 2xl:pr-32 2xl:pb-20 xl:pl-14 xl:pr-20" style={{ backgroundColor: "#FFEDCC80" }}>
+        <div className="pt-12 pb-40 pl-32 pr-44 flex justify-between 2xl:pl-20 2xl:pr-32 2xl:pb-20 xl:pl-14 xl:pr-20 lg:pl-10 lg:pr-12" style={{ backgroundColor: "#FFEDCC80" }}>
             <div>
-                <h2 className="mt-3 uppercase font-bold text-5xl text-blue-700">Chatter</h2>
+                <h2 className="mt-3 uppercase font-bold text-5xl text-blue-700 lg:text-[40px]">Chatter</h2>
             </div>
-            <div className="flex gap-52 2xl:gap-36 xl:gap-20">
+            <div className="flex gap-52 2xl:gap-36 xl:gap-20 lg:gap-9">
                 <div className="flex flex-col gap-7">
                     <h3 className="text-2xl font-medium">Explore</h3>
                     <div className="flex flex-col gap-4">

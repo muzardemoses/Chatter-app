@@ -116,6 +116,9 @@ Not yet available
 ***July 4, 2023***
 - Update bookmark page to display bookmarked posts
 
+***July 5, 2023***
+- Make landing page responsive
+
 
 
 ### Built with
