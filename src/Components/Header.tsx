@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from 'react-redux';
 import { selectUser } from '../Config/userSlice';
 
@@ -24,9 +24,20 @@ export const Header = () => {
     });
     setMenuOpen((prev) => !prev);
 
-    // Toggle body classes separately
-    document.body.classList.toggle("is-side-menu-open");
   };
+
+  const preventScroll = () => {
+    if (menuOpen) {
+      document.body.classList.add("is-side-menu-open");
+    } else {
+      document.body.classList.remove("is-side-menu-open");
+    }
+  };
+
+  useEffect(() => {
+    preventScroll();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [menuOpen]);
 
   return (
     <div className="fixed top-0 left-0 z-20 w-full bg-white flex justify-between items-center px-28 py-6 shadow-md 2xl:px-12 xl:px-9" >
