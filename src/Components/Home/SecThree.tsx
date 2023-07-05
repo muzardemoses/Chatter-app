@@ -6,7 +6,7 @@ import contentImg from '../../assets/Svg/Home/content-creation.svg';
 
 export const SecThree = () => {
     return (
-        <div className="px-52 flex flex-col gap-14 mb-28">
+        <div className="px-52 flex flex-col gap-14 mb-28 2xl:px-36">
             <div className="flex flex-col justify-center items-center gap-6">
                 <h4 className="text-black text-5xl font-bold">Why you should join chatter</h4>
                 <p className="text-black text-lg font-normal">Our goal is to make writers and readers see our platform as their next heaven for blogging, ensuring ease in interactions, connecting with like-minded peers, have access to favorite content based on interests and able to communicate your great ideas with people</p>
