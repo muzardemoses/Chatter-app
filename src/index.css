@@ -135,3 +135,15 @@ body {
 body.is-side-menu-open {
   overflow: hidden;
 }
+
+@media screen and (max-width: 767px) {
+  .header-links {
+    margin-top: 84.5px;
+  }
+}
+
+@media screen and (max-width: 639px) {
+  .header-links {
+    padding-left: 30%;
+  }
+}

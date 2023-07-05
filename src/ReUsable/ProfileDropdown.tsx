@@ -39,8 +39,8 @@ export const ProfileDropdown = () => {
         <div className="text-right">
             <Menu as="div" className="relative inline-block text-left">
                 <div>
-                    <Menu.Button className="h-12 w-12 rounded-full bg-gray-50 border-4 cursor-pointer transition duration-500 ease-in-out flex items-center justify-center border-purple-50 hover:border-purple-100">
-                        <img src={user?.photoURL || devAvatar} alt="avatar" className='h-10 w-10 rounded-full' />
+                    <Menu.Button className="h-12 w-12 rounded-full bg-gray-50 border-4 cursor-pointer transition duration-500 ease-in-out flex items-center justify-center border-purple-50 hover:border-purple-100  lg:h-10 lg:w-10">
+                        <img src={user?.photoURL || devAvatar} alt="avatar" className='h-10 w-10 rounded-full lg:h-8 lg:w-8' />
                     </Menu.Button>
                 </div>
                 <Transition
