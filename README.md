@@ -171,9 +171,7 @@ const handleClick = () => {
 
 ### Continued development
 
-I will continue to develope my css skills especially in  positioning areas and media queries to make my websites more responsive.
-
-I will also learn more on React
+I will continue to work on this project to make it better and add more features to it.
 
 
 
