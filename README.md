@@ -119,6 +119,9 @@ Not yet available
 ***July 5, 2023***
 - Make landing page responsive
 
+***July 8, 2023***
+- Make Auth-Layout and it's pages responsive
+
 
 
 ### Built with

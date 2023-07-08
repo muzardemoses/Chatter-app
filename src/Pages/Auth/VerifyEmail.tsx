@@ -42,12 +42,12 @@ export const VerifyEmail = () => {
 
     return (
         <div className="flex flex-col justify-center items-center h-full gap-12">
-            <img src={emailImg} alt="email" className="w-40 h-40" />
+            <img src={emailImg} alt="email" className="w-40 h-40 sm:w-36 sm:h-36" />
             <div className=" flex flex-col items-center gap-4">
-                <h3 className="text-5xl font-bold">
+                <h3 className="text-5xl font-bold sm:text-3xl">
                     Check your email
                 </h3>
-                <p className="text-lg font-medium leading-normal text-center">
+                <p className="text-lg font-medium leading-normal text-center sm:text-base">
                     We have sent a verification link to {email}
                 </p>
             </div>
