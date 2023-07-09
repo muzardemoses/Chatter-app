@@ -5,7 +5,7 @@ export const DraftsSVG = () => {
     return (
         <div>
             <img src={location.pathname === "/drafts" ? draftBlue : draftGray}
-                alt="drafts" className='h-5 w-5' />
+                alt="drafts" className='h-5 w-5 sm:h-4 sm:w-4' />
         </div>
     )
 }
