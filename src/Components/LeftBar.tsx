@@ -1,7 +1,7 @@
 import { NavLink, useLocation } from "react-router-dom"
 import { FeedSVG, BookmarksSVG, ExploreSVG, TeamsSVG, DraftsSVG, MessagesSVG, MoreGridSVG } from ".";
-import { useDispatch, useSelector } from 'react-redux';
-import { selectToggle, toggleMenu } from '../Config/rightBarToggleSlice';
+import { useDispatch, } from 'react-redux';
+import { toggleMenu } from '../Config/rightBarToggleSlice';
 
 export const LeftBar = () => {
     const location = useLocation();
