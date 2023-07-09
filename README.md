@@ -124,6 +124,7 @@ Not yet available
 
 ***July 9, 2023***
 - Make Dashboard-Layout and it's pages responsive
+- Add toggle effect to left sidebar at screen size 639px and below
 
 
 

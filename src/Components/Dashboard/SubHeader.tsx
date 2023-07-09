@@ -1,13 +1,42 @@
 import { NavLink } from 'react-router-dom'
 import notificationImg from '../../assets/Svg/Dashboard/notification.svg'
 import { ProfileDropdown } from '../../ReUsable/ProfileDropdown';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectToggle, toggleMenu } from '../../Config/rightBarToggleSlice';
 
 export const SubHeader = () => {
 
+    const dispatch = useDispatch();
+    const state = useSelector(selectToggle);
+    console.log(state)
 
+    const handleMenu = () => {
+        const barLinks = document.querySelector(".bar-links");
+        barLinks?.classList.toggle("open");
+
+        const barItems = document.querySelectorAll(".bar-item");
+        barItems.forEach((item) => {
+            item.addEventListener("click", () => {
+                barLinks?.classList.remove("open");
+                dispatch(toggleMenu())
+            });
+        });
+        dispatch(toggleMenu())
+
+    }
 
     return (
-        <div className="bg-white h-20 px-6 border-b border-gray-300  justify-between flex items-center md:px-3">
+        <div className="bg-white h-20 px-6 border-b border-gray-300  justify-between flex items-center md:px-3 sm:px-2">
+            <button
+                id="menu-btn"
+                onClick={handleMenu}
+                className={`hamburger  ${state ? "open" : ""
+                    } hidden sm:block focus:outline-none z-30 `}
+            >
+                <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
+                </svg>
+            </button>
             <div>Switch</div>
             <div className='relative'>
                 <div
@@ -30,10 +59,10 @@ export const SubHeader = () => {
                 <input
                     type="text"
                     placeholder="Search Chatter"
-                    className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-300 focus:border-gray-300 block w-[400px] pl-10 p-2.5 transition duration-500 ease-in-out focus:outline-none focus:ring-2 focus:ring-opacity-50 md:w-[300px] "
+                    className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-300 focus:border-gray-300 block w-[400px] pl-10 p-2.5 transition duration-500 ease-in-out focus:outline-none focus:ring-2 focus:ring-opacity-50 md:w-[300px] sm:w-[185px]"
                 />
             </div>
-            <div className='flex gap-3.5 items-center'>
+            <div className='flex gap-3.5 items-center sm:gap-1'>
                 <NavLink to='/notifications'>
                     <img src={notificationImg} alt="bell" className='h-6 w-6' />
                 </NavLink>

@@ -194,31 +194,31 @@ export const Content = () => {
     return (
         <div className="py-20 flex items-center justify-center md:py-5">
             {/* formerly 800px */}
-            <div className="w-[850px] px-12 flex flex-col gap-5 border border-gray-300 p-5 rounded-md shadow 2xl:w-[650px] 2xl:px-10 xl:w-[600px] lg:p-4 lg:px-6 md:w-full md:border-none md:shadow-none">
+            <div className="w-[850px] px-12 flex flex-col gap-5 border border-gray-300 p-5 rounded-md shadow 2xl:w-[650px] 2xl:px-10 xl:w-[600px] lg:w-[650px] lg:p-4 lg:px-6 md:w-full md:border-none md:shadow-none md:gap-3 sm:px-3">
                 <div className='flex gap-3'>
                     <img
                         src={authorProfile?.photoURL || devAvatar}
-                        alt="" className="w-16 h-16 rounded-full"
+                        alt="" className="w-16 h-16 rounded-full md:w-12 md:h-12"
                     />
-                    <div className='flex flex-col gap-1'>
-                        <p className="text-gray-900 text-xl font-semibold">
+                    <div className='flex flex-col gap-1 md:gap-0.5'>
+                        <p className="text-gray-900 text-xl font-semibold md:text-base">
                             {authorProfile?.displayName}
                         </p>
-                        <p className="text-gray-500">
+                        <p className="text-gray-500 md:text-sm">
                             {formatDate(post.timestamp.seconds * 1000)}
                         </p>
                     </div>
                 </div>
-                <div className='flex flex-col gap-6'>
-                    <div className='flex flex-col gap-1.5'>
-                        <h3 className="text-black text-2xl font-bold">
+                <div className='flex flex-col gap-6 md:gap-4'>
+                    <div className='flex flex-col gap-1.5 md:gap-0.5'>
+                        <h3 className="text-black text-2xl font-bold md:text-[22px]">
                             {title}
                         </h3>
-                        <div className='flex gap-2'>
+                        <div className='flex gap-2 md:gap-1.5'>
                             <img
                                 src={readSVG}
                                 alt="edit"
-                                className="h-6 w-6"
+                                className="h-6 w-6 md:h-5 md:w-5"
                             />
                             <p className="text-gray-500 text-sm">
                                 {readTime(content)}
@@ -226,7 +226,6 @@ export const Content = () => {
                         </div>
                     </div>
                     <div className='flex flex-col gap-3 '>
-
 
                         { }
                         <div className="py-3 px-2">
@@ -372,7 +371,7 @@ export const Content = () => {
                         </div>
                         <div 
                         //style={{ whiteSpace: 'pre-wrap' }}
-                            className="prose prose-lg prose-a:text-blue-700 prose-a:font-bold prose-a:no-underline prose-blockquote:bg-gray-50 prose-blockquote:py-0.5 prose-th:bg-slate-100 prose-th:p-2 prose-td:p-2 prose-td:border prose-th:border border-r-gray-200 prose-img:w-10/12 prose-img:mx-auto "
+                            className="prose prose-lg prose-a:text-blue-700 prose-a:font-bold prose-a:no-underline prose-blockquote:bg-gray-50 prose-blockquote:py-0.5 prose-th:bg-slate-100 prose-th:p-2 prose-td:p-2 prose-td:border prose-th:border border-r-gray-200 prose-img:w-10/12 prose-img:mx-auto xl:prose-lg md:prose-base"
                         >
                            <ReactMarkdown children={content} remarkPlugins={[remarkGfm]}   />
                             {/* <Markdown children={content} /> */}
@@ -422,9 +421,9 @@ export const Content = () => {
                         </button>
                     </div>
                 </div>
-                <div className="py-10 flex flex-col gap-6 px-6">
+                <div className="py-10 flex flex-col gap-6 px-6 md:gap-4 md:px-2">
                     <div className="flex justify-between">
-                        <h2 className="text-gray-700 font-bold text-2xl">
+                        <h2 className="text-gray-700 font-bold text-2xl md:text-[22px]">
                             Comments
                             <span className="text-gray-500 text-sm ml-2">
                                 {comments.length > 0 && (
@@ -443,17 +442,17 @@ export const Content = () => {
                         <img
                             src={loggedInUser?.photoURL}
                             alt="profile"
-                            className="h-10 w-10 rounded-full"
+                            className="h-10 w-10 rounded-full md:h-8 md:w-8"
                         />
-                        <div className="w-full flex flex-col gap-6">
+                        <div className="w-full flex flex-col gap-6 md:gap-3">
                             <textarea
                                 placeholder="Write a comment..."
                                 value={comment}
                                 ref={commentRef}
                                 onChange={(e) => setComment(e.target.value)}
-                                className="w-full rounded-md px-4 py-4 resize-none overflow-hidden bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-transparent transition duration-300 ease-in-out"
+                                className="w-full rounded-md px-4 py-4 resize-none overflow-hidden bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-transparent transition duration-300 ease-in-out md:px-2 md:py-2"
                             />
-                            <button className="w-max bg-blue-700 hover:bg-blue-800 text-white font-semibold py-2 px-4 rounded-md transition duration-300 ease-in-out"
+                            <button className="w-max bg-blue-700 hover:bg-blue-800 text-white font-semibold py-2 px-4 rounded-md transition duration-300 ease-in-out md:px-3 md:py-2 md:text-sm"
                                 onClick={() => handleComment()}
                             >
                                 Comment
@@ -461,30 +460,30 @@ export const Content = () => {
                         </div>
                     </div>
                     {comments.length > 0 && (
-                        <div className="flex flex-col gap-4 pt-10">
+                        <div className="flex flex-col gap-4 pt-10 md:pt-6 md:gap-2">
                             {comments.map((comment: Comment, index: number) => (
-                                <div key={index} className="flex flex-col gap-3 border-t border-gray-200 py-6">
-                                    <div className="flex gap-4 items-center">
+                                <div key={index} className="flex flex-col gap-3 border-t border-gray-200 py-6 md:py-3">
+                                    <div className="flex gap-4 items-center md:gap-2">
                                         <img
                                             src={getAuthorProfile(comment.readerId)?.photoURL}
                                             alt="profile"
-                                            className="h-10 w-10 rounded-full"
+                                            className="h-10 w-10 rounded-full md:h-9 md:w-9"
                                         />
-                                        <div className="w-full flex flex-col gap-1">
+                                        <div className="w-full flex flex-col gap-1 md:gap-0.5">
                                             <div className="flex justify-between">
-                                                <h2 className="text-gray-700 font-bold text-lg">
+                                                <h2 className="text-gray-700 font-bold text-lg md:text-base">
                                                     {getAuthorProfile(comment.readerId)?.displayName}
                                                 </h2>
                                                 <button>
                                                     {/* follow */}
                                                 </button>
                                             </div>
-                                            <p className="text-gray-500 text-sm">
+                                            <p className="text-gray-500 text-sm md:text-xs">
                                                 {formatDate(comment.timestamp.seconds * 1000)}
                                             </p>
                                         </div>
                                     </div>
-                                    <p className="text-gray-500 text-sm px-3">
+                                    <p className="text-gray-500 text-sm px-3 md:px-2">
                                         {comment.content}
                                     </p>
                                 </div>
