@@ -192,9 +192,9 @@ export const Content = () => {
 
 
     return (
-        <div className="py-20 flex items-center justify-center">
+        <div className="py-20 flex items-center justify-center md:py-5">
             {/* formerly 800px */}
-            <div className="w-8/12 px-20 flex flex-col gap-3 borer border-gray-300 p-5 rounded-md shadow">
+            <div className="w-[850px] px-12 flex flex-col gap-5 border border-gray-300 p-5 rounded-md shadow 2xl:w-[650px] 2xl:px-10 xl:w-[600px] lg:p-4 lg:px-6 md:w-full md:border-none md:shadow-none">
                 <div className='flex gap-3'>
                     <img
                         src={authorProfile?.photoURL || devAvatar}

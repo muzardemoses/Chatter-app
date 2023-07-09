@@ -1,6 +1,6 @@
 export const RightBar = () => {
     return (
-        <div className="py-8 px-6 w-80 sticky top-10 flex flex-col gap-16">
+        <div className="py-8 px-6 w-80 sticky top-10 flex flex-col gap-16 xl:px-4 xl:w-72 lg:hidden">
             <div className="px-3 py-5 bg-gray-100 rounded-lg flex flex-col gap-5">
                 <h4 className="text-gray-900 text-2xl font-semibold">
                     Trending

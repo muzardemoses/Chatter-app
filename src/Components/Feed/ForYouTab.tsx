@@ -140,13 +140,13 @@ export const ForYouTab = () => {
 
 
     return (
-        <div className='flex flex-col justify-center items-center'>
+        <div className='flex flex-col justify-center'>
 
-            <ul className="flex flex-col gap-14">
+            <ul className="flex flex-col gap-14 w-full">
                 {posts
                     .sort((a, b) => b.timestamp - a.timestamp) // Sort posts in descending order based on timestamp
                     .map((post) => (
-                        <li key={post.id} className="w-[700px] flex flex-col gap-3 borer border-gray-300 p-5 rounded-md shadow">
+                        <li key={post.id} className="flex flex-col gap-5 border border-gray-300 p-5 rounded-md shadow">
                             <div className='flex gap-3'>
                                 <img
                                     src={getAuthorProfile(post.authorId)?.photoURL || devAvatar}
@@ -189,7 +189,7 @@ export const ForYouTab = () => {
                                         </div>
                                     </Link>
                                     { }
-                                    <div>
+                                    <div className=''>
                                         {
                                             post.media.images.length + post.media.videos.length === 1 ? (
 

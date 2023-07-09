@@ -1,6 +1,6 @@
 export const Drafts = () => {
     return (
-        <div>
+        <div className="">
             
         </div>
     )

@@ -7,7 +7,7 @@ export const SubHeader = () => {
 
 
     return (
-        <div className="bg-white h-20 px-6 border-b border-gray-300  justify-between flex items-center">
+        <div className="bg-white h-20 px-6 border-b border-gray-300  justify-between flex items-center md:px-3">
             <div>Switch</div>
             <div className='relative'>
                 <div
@@ -30,7 +30,7 @@ export const SubHeader = () => {
                 <input
                     type="text"
                     placeholder="Search Chatter"
-                    className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-300 focus:border-gray-300 block w-[400px] pl-10 p-2.5 transition duration-500 ease-in-out focus:outline-none focus:ring-2 focus:ring-opacity-50"
+                    className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-300 focus:border-gray-300 block w-[400px] pl-10 p-2.5 transition duration-500 ease-in-out focus:outline-none focus:ring-2 focus:ring-opacity-50 md:w-[300px] "
                 />
             </div>
             <div className='flex gap-3.5 items-center'>

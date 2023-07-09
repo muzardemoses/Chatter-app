@@ -122,9 +122,15 @@ Not yet available
 ***July 8, 2023***
 - Make Auth-Layout and it's pages responsive
 
+***July 9, 2023***
+- Make Dashboard-Layout and it's pages responsive
 
 
-### Built with
+
+### TO-DO AFTER PROJECT SUBMISSION
+- Right sticky bar should be put in a button under screen size 1024px and will be used to open the right sticky bar.
+
+### Built wth
 
 - Firebase
 - React Typescript
