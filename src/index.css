@@ -4,13 +4,10 @@ body {
   @apply transition duration-500 ease-in-out;
 }
 
-
 /* a {
   @apply text-blue-700 hover:text-blue-700 before:text-blue-500
   after:text-blue-500
 } */
- 
-
 
 .middle {
   @apply before:bg-blue-700  transition duration-500 ease-in-out;
@@ -98,18 +95,19 @@ body {
   font-family: "DM Sans", sans-serif;
 }
 
-
-
-
-
-
-
-
-
-
 /* Form Styles */
-.form-width{
+.form-width {
   width: 520px;
+}
+
+@media screen and (max-width: 1534px) {
+  .editor-container {
+    flex-direction: column;
+  }
+
+  .sec-md {
+    border-bottom: 2px solid #eaeaea;
+  }
 }
 
 @media screen and (max-width: 1023px) {

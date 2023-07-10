@@ -212,34 +212,34 @@ export const CreateContent = () => {
     }
 
     return (
-        <div className="min-h-screen p-8">
-            <div className="w[900px] min-h-screen pt-9 px-8 border border-gray-300 rounded-lg flex flex-col gap-10 xl:px-4">
+        <div className="min-h-screen p-8 md:p-5 sm:pt-5 sm:p-2">
+            <div className="w[900px] min-h-screen py-9 px-8 border border-gray-300 rounded-lg flex flex-col gap-10 2xl:gap-7 xl:px-4 md:gap-6">
                 <button
                     onClick={createPost}
-                    className="self-end bg-blue-700 text-white w-36 py-4 rounded-lg text-base font-medium xl:py-3">
+                    className="self-end bg-blue-700 text-white w-36 py-4 rounded-lg text-base font-medium xl:py-3 md:w-28 md:py-2">
                     Publish
                 </button>
-                <div className="w-full flex gap-9 z-0 xl:gap-4">
-                    <div className='mt-9 h-max w-24 flex flex-col items-center gap-7'>
+                <div className="w-full flex gap-9 z-0 2xl:flex-col 2xl:gap-4">
+                    <div className='mt-9 h-max w-24 flex flex-col items-center gap-7 2xl:flex-row 2xl:w-max 2xl:h-16 2xl:mt-6 md:gap-5 md:mt-4 sm:h-14'>
                         <button className='p-2 border border-gray-300 rounded-full'
                             onClick={() => setShowMediaOptions(!showMediaOptions)}
                         >
                             <img src={showMediaOptions ? closeSVG : addSVG}
                                 alt={showMediaOptions ? "close" : "add"}
-                                className={`w-9 h-9 transform transition-transform duration-500 ${showMediaOptions ? "rotate-0" : "rotate-90"}`}
+                                className={`w-9 h-9 transform transition-transform duration-500 md:w-8 md:h-8 sm:w-8 sm:h-8 ${showMediaOptions ? "rotate-0" : "rotate-90"}`}
                             />
                         </button>
                         {showMediaOptions &&
-                            <div className='flex flex-col items-center h-full gap-7'>
+                            <div className='flex flex-col items-center h-full gap-7 2xl:flex-row md:gap-5'>
                                 {/* <p className='h-full border-l border-gray-200'></p> */}
                                 <label htmlFor="image-input">
                                     <button
                                         onClick={openImagePicker}
-                                        className='p-4 border border-blue-600 rounded-full h-max w-max'>
+                                        className='p-4 border border-blue-600 rounded-full h-max w-max md:p-3'>
                                         <img
                                             src={imageSVG}
                                             alt="image"
-                                            className="w-6 h-6"
+                                            className="w-6 h-6 md:w-5 md:h-5"
                                         />
                                     </button>
                                 </label>
@@ -255,11 +255,11 @@ export const CreateContent = () => {
                                 <label htmlFor="video-input">
                                     <button
                                         onClick={openVideoPicker}
-                                        className='p-4 border border-blue-600 rounded-full h-max w-max'>
+                                        className='p-4 border border-blue-600 rounded-full h-max w-max md:p-3'>
                                         <img
                                             src={videoSVG}
                                             alt="video"
-                                            className="w-6 h-6"
+                                            className="w-6 h-6 md:w-5 md:h-5"
                                         />
                                     </button>
                                 </label>
@@ -272,14 +272,11 @@ export const CreateContent = () => {
                                     id="video-input"
                                     multiple
                                 />
-
-
-
                             </div>
                         }
                     </div>
                     <div className={`w-full flex flex-col gap-6 h-max ${showMediaOptions ? "" : ""}`}>
-                        <div className={`w-full h-max p-4 flex flex-shrink xl:p-2 ${mediaPreviewUrls.length === 1 ? "p-8 bg-slate-50 flex flex-shrink xl:p-5" : mediaPreviewUrls.length > 1 ? " gap-4 bg-slate-50" : mediaPreviewUrls.length === 2 ? "flex flex-shrink" : mediaPreviewUrls.length === 3 ? "flex flex-shrink" :
+                        <div className={`w-full h-max p-4 flex flex-shrink 2xl:p-2 sm:p-1 ${mediaPreviewUrls.length === 1 ? "p-8 bg-slate-50 flex flex-shrink xl:p-5" : mediaPreviewUrls.length > 1 ? " gap-4 bg-slate-50 sm:gap-1" : mediaPreviewUrls.length === 2 ? "flex flex-shrink" : mediaPreviewUrls.length === 3 ? "flex flex-shrink" :
                             mediaPreviewUrls.length === 4 ? " grid grid-cols-2 grid-flow-row" :
                                 ""}`}
                             style={{
@@ -352,7 +349,7 @@ export const CreateContent = () => {
                         value={title}
                         ref={titleRef}
                         onChange={(e) => setTitle(e.target.value)}
-                        className="w-full border-none mb-3 px-4 text-[40px] font-bold focus:outline-none placeholder-gray-300 transition duration-500 ease-in-out overflow-hiden resize-none"
+                        className="w-full border-none mb-3 px-4 text-[40px] font-bold focus:outline-none placeholder-gray-300 transition duration-500 ease-in-out overflow-hiden resize-none xl:text-4xl xl:px-2 md:text-[30px] md:mb-2 sm:text-[25px] sm:mb-1"
                     />
                 </div>
                 <div>
@@ -361,7 +358,9 @@ export const CreateContent = () => {
                         value={content}
                         onChange={handleEditorChange}
                         renderHTML={(text) => <ReactMarkdown children={text} />}
-                        style={{ height: "500px" }}
+                        style={{ minHeight: "700px" }}
+                        //hide preview by default
+                        loggerMaxSize={0}
                     />
                 </div>
             </div>
