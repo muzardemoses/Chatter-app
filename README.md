@@ -126,7 +126,8 @@ Not yet available
 - Make Dashboard-Layout and it's pages responsive
 - Add toggle effect to left sidebar at screen size 639px and below
 
-
+***July 10, 2023***
+- Finalize the responsiveness of the dashboard layout and it's pages
 
 ### TO-DO AFTER PROJECT SUBMISSION
 - Right sticky bar should be put in a button under screen size 1024px and will be used to open the right sticky bar.

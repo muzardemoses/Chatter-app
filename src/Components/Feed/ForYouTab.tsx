@@ -146,46 +146,46 @@ export const ForYouTab = () => {
                 {posts
                     .sort((a, b) => b.timestamp - a.timestamp) // Sort posts in descending order based on timestamp
                     .map((post) => (
-                        <li key={post.id} className="flex flex-col gap-5 border border-gray-300 p-5 rounded-md shadow">
+                        <li key={post.id} className="flex flex-col gap-5 border border-gray-300 p-5 rounded-md shadow md:p-4 sm:p-3">
                             <div className='flex gap-3'>
                                 <img
                                     src={getAuthorProfile(post.authorId)?.photoURL || devAvatar}
-                                    alt="" className="w-16 h-16 rounded-full"
+                                    alt="" className="w-16 h-16 rounded-full md:w-14 md:h-14 sm:w-12 sm:h-12"
                                 />
-                                <div className='flex flex-col gap-1'>
-                                    <p className="text-gray-900 text-xl font-semibold">
+                                <div className='flex flex-col gap-1 md:gap-0.5'>
+                                    <p className="text-gray-900 text-xl font-semibold sm:text-lg">
                                         {getAuthorProfile(post.authorId)?.displayName}
                                     </p>
-                                    <p className="text-gray-500">
+                                    <p className="text-gray-500 sm:text-sm">
                                         {formatDate(post.timestamp.seconds * 1000)}
                                     </p>
                                 </div>
                             </div>
-                            <div className='flex flex-col gap-6'>
-                                <Link to={`/content/${post.id}`} className='flex flex-col gap-1.5'>
-                                    <h3 className="text-black text-2xl font-bold">
+                            <div className='flex flex-col gap-6 md:gap-5'>
+                                <Link to={`/content/${post.id}`} className='flex flex-col gap-1.5 md:gap-1 sm:gap-0.5'>
+                                    <h3 className="text-black text-2xl font-bold md:text-[21px] sm:text-[20px]">
                                         {post.title}
                                     </h3>
                                     <div className='flex gap-2'>
                                         <img
                                             src={readSVG}
                                             alt="edit"
-                                            className="h-6 w-6"
+                                            className="h-6 w-6 sm:h-5 sm:w-5"
                                         />
-                                        <p className="text-gray-500 text-sm">
+                                        <p className="text-gray-500 text-sm sm:text-[13px]">
                                             {readTime(post.content)}
                                         </p>
                                     </div>
                                 </Link>
-                                <div className='flex flex-col gap-3'>
+                                <div className='flex flex-col gap-3 md:gap-2'>
                                     <Link to={`/content/${post.id}`}>
                                         {/* <p className="text-gray-500">
                                             {post.content && post.content.slice(0, 200)}...
                                         </p> */}
-                                        <div 
-                                        className="prose prose-lg">
+                                        <div
+                                            className="prose prose-lg xl:prose-lg md:prose-base">
                                             <ReactMarkdown children={post.content.slice(0, 150) + '...'} remarkPlugins={[remarkGfm]}
-                                             />
+                                            />
                                         </div>
                                     </Link>
                                     { }
@@ -335,13 +335,13 @@ export const ForYouTab = () => {
 
 
 
-                            <div className="flex justify-between pt-4 px-3 border-t border-gray-200">
+                            <div className="flex justify-between pt-4 px-3 border-t border-gray-200 md:px-2">
                                 <div className='flex items-center gap-1'>
                                     <button onClick={() => handleLike(post.id)} className="text-blue-500 hover:text-blue-700">
                                         <img
                                             src={post.likes.includes(loggedInUser?.id) ? loveAfterSVG : loveBeforeSVG}
                                             alt="love"
-                                            className="h-6 w-6"
+                                            className={`h-6 w-6  ${post.likes.includes(loggedInUser?.id) ? 'sm:h-6 sm:w-6' : 'sm:h-5 sm:w-5'} `}
                                         />
                                     </button>
                                     {post.likes.length > 0 && (
@@ -352,16 +352,16 @@ export const ForYouTab = () => {
 
                                 </div>
 
-                                <Link to={`/content/${post.id}`} className='flex items-center gap-2 cursor-pointer'>
+                                <Link to={`/content/${post.id}`} className='flex items-center gap-2 cursor-pointer sm:gap-1'>
                                     <img
                                         src={commentSVG}
                                         alt="comment"
-                                        className="h-5 w-5"
+                                        className="h-5 w-5 sm:h-4 sm:w-4"
                                     />
                                     <p className=''>
 
                                     </p>
-                                    <button className="text-gray-500 font-semibold hover:text-gray-700">
+                                    <button className="text-gray-500 font-semibold hover:text-gray-700 sm:text-[15px]">
                                         {post.comments.length > 0 && (
                                             <span className="text-gray-700 mr-1">
                                                 {post.comments.length}
@@ -371,14 +371,14 @@ export const ForYouTab = () => {
                                     </button>
                                 </Link>
                                 <div className='flex items-center gap-1'>
-                                    <button onClick={() => handleUnlike(post.id)} className="text-red-500 hover:text-red-700 ml-4">
+                                    <button onClick={() => handleUnlike(post.id)} className="text-red-500 hover:text-red-700 sm:text-[15px]">
                                         Unlike
                                     </button>
                                     <button onClick={() => handleBookmark(post.id)}>
                                         {Array.isArray(post.bookmarkedBy) && post.bookmarkedBy.includes(loggedInUser?.id) ? (
-                                            <img src={bookmarkAfterSVG} alt="bookmark" className="h-6 w-6" />
+                                            <img src={bookmarkAfterSVG} alt="bookmark" className="h-6 w-6 sm:h-5 sm:w-5" />
                                         ) : (
-                                            <img src={bookmarkBeforeSVG} alt="bookmark" className="h-6 w-6" />
+                                            <img src={bookmarkBeforeSVG} alt="bookmark" className="h-6 w-6 sm:h-5 sm:w-5" />
                                         )}
                                     </button>
                                 </div>
