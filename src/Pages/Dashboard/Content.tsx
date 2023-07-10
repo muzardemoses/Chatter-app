@@ -37,7 +37,7 @@ export const Content = () => {
     useAutosizeTextArea(commentRef.current, comment)
 
     const getAuthorProfile = (authorId: string) => {
-        const author = users.find((user) => user.id === authorId);
+        const author = users.find((user: { id: string; }) => user.id === authorId);
         return author;
     };
 

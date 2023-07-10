@@ -128,6 +128,7 @@ Not yet available
 
 ***July 10, 2023***
 - Finalize the responsiveness of the dashboard layout and it's pages
+- Implement the bookmark page design and functionality
 
 ### TO-DO AFTER PROJECT SUBMISSION
 - Right sticky bar should be put in a button under screen size 1024px and will be used to open the right sticky bar.
