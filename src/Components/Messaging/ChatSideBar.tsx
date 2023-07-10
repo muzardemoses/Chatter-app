@@ -2,7 +2,7 @@ import newSVG from "../../assets/Svg/Messaging/new-indicator.svg"
 
 export const ChatSideBar = () => {
     return (
-        <div className="border-r bg-white border-gray-200 w-80 flex flex-col h-full">
+        <div className="border-r bg-white border-gray-200 w80 flex flex-col h-full">
             <div className="flex justify-between items-center p-5 border-b border-gray-200">
                 <h5 className="text-lg font-semibold text-gray-900">Messages</h5>
                 <button
