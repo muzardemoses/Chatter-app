@@ -26,7 +26,7 @@ export const SubHeader = () => {
     }
 
     return (
-        <div className="bg-white h-20 px-6 border-b border-gray-300  justify-between flex items-center md:px-3 sm:px-2">
+        <div className="bg-white z-40 h-20 px-6 border-b border-gray-300  justify-between flex items-center md:px-3 sm:px-2">
             <button
                 id="menu-btn"
                 onClick={handleMenu}
@@ -63,7 +63,7 @@ export const SubHeader = () => {
                 />
             </div>
             <div className='flex gap-3.5 items-center sm:gap-1'>
-                <NavLink to='/notifications'>
+                <NavLink to='/notifications' className='bar-item'>
                     <img src={notificationImg} alt="bell" className='h-6 w-6' />
                 </NavLink>
                 <ProfileDropdown />

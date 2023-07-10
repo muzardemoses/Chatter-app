@@ -1,4 +1,4 @@
-import { Home, About, PageNotFound, Login, Register, ForgetPassword, Profile, VerifyEmail, Bookmarks, Feed, CreateContent, Content, Messages, Drafts, Explore, Teams, SelectAndMessage, ChatRoom } from './Pages'
+import { Home, About, PageNotFound, Login, Register, ForgetPassword, Profile, VerifyEmail, Bookmarks, Notifications, Feed, CreateContent, Content, Messages, Drafts, Explore, Teams, SelectAndMessage, ChatRoom } from './Pages'
 import { AuthLayout, DashboardLayout, DefaultLayout } from './Layouts'
 import { Route, Routes } from 'react-router-dom'
 import { ToastContainer } from "react-toastify";
@@ -100,6 +100,16 @@ function App() {
             </AuthLayout>
           }
         />
+
+        <Route
+          path="/notifications"
+          element={
+            <DashboardLayout>
+              <Notifications />
+            </DashboardLayout>
+          }
+        />
+
         <Route
           path="/bookmarks"
           element={

@@ -164,7 +164,7 @@ export const CreateContent = () => {
                 return downloadUrl;
             })
         );
-        
+
 
 
         if (title.trim() === "" || content.trim() === "") {
@@ -212,14 +212,14 @@ export const CreateContent = () => {
     }
 
     return (
-        <div className="h-full p-8">
-            <div className="w-full h-full pt-9 pl-16 pr-36 border border-gray-300 rounded-lg flex flex-col gap-10">
+        <div className="min-h-screen p-8">
+            <div className="w[900px] min-h-screen pt-9 px-8 border border-gray-300 rounded-lg flex flex-col gap-10 xl:px-4">
                 <button
                     onClick={createPost}
-                    className="self-end bg-blue-700 text-white w-36 py-4 rounded-lg text-base font-medium">
+                    className="self-end bg-blue-700 text-white w-36 py-4 rounded-lg text-base font-medium xl:py-3">
                     Publish
                 </button>
-                <div className="w-full flex gap-9">
+                <div className="w-full flex gap-9 z-0 xl:gap-4">
                     <div className='mt-9 h-max w-24 flex flex-col items-center gap-7'>
                         <button className='p-2 border border-gray-300 rounded-full'
                             onClick={() => setShowMediaOptions(!showMediaOptions)}
@@ -278,17 +278,29 @@ export const CreateContent = () => {
                             </div>
                         }
                     </div>
-                    <div className={`w-full flex flex-col gap-6 ${showMediaOptions ? "" : ""}`}>
-                        <div className="flex  gap-4">
+                    <div className={`w-full flex flex-col gap-6 h-max ${showMediaOptions ? "" : ""}`}>
+                        <div className={`w-full h-max p-4 flex flex-shrink xl:p-2 ${mediaPreviewUrls.length === 1 ? "p-8 bg-slate-50 flex flex-shrink xl:p-5" : mediaPreviewUrls.length > 1 ? " gap-4 bg-slate-50" : mediaPreviewUrls.length === 2 ? "flex flex-shrink" : mediaPreviewUrls.length === 3 ? "flex flex-shrink" :
+                            mediaPreviewUrls.length === 4 ? " grid grid-cols-2 grid-flow-row" :
+                                ""}`}
+                            style={{
+                                display: mediaPreviewUrls.length > 2 ?
+                                    "grid" : "flex", gridTemplateColumns: mediaPreviewUrls.length > 2 ? "repeat(2, minmax(0, 1fr))" : "", gridAutoFlow: mediaPreviewUrls.length > 2 ? "row" : ""
+                            }}
+                        >
                             {mediaPreviewUrls.map((url, index) => (
-                                <div key={index} className={`h-80 relative object-cover rounded-lg ${mediaPreviewUrls.length === 1 ? "w-[40%]" : mediaPreviewUrls.length === 2 ? "w-[50%]" : mediaPreviewUrls.length === 3 ? "w-full" : ""}`}>
+                                <div key={index}
+                                    className={`relative object-cover rounded-lg
+                                     ${mediaPreviewUrls.length === 1 ? "" : mediaPreviewUrls.length === 2 ? "max-w-[65%]" : mediaPreviewUrls.length === 3 ? "" : ""}
+                                    `}
+                                >
 
                                     <div className='relative'>
                                         {url.includes("image") && (
                                             <img
                                                 src={url}
                                                 alt={`Preview ${index}`}
-                                                className=' h-80 object-cover rounded-lg'
+                                                // className={`max-h-[500px] object-cover rounded-lg ${mediaPreviewUrls.length === 1 ? "w-[95%]" : mediaPreviewUrls.length === 2 ? "w-[50%]" : mediaPreviewUrls.length === 3 ? "w-[33%]" : ""}`}
+                                                className='w-full max-h-[500px] object-cover rounded-lg object-top shadow-md'
                                             />
                                         )}
                                     </div>
@@ -296,14 +308,14 @@ export const CreateContent = () => {
                                         {url.includes("video") && (
                                             <video
                                                 src={url}
-                                                className="h-80 object-cover rounded-lg w-96"
-                                                controls
+                                                className="w-full object-cover rounded-lg object-top shadow-md"
+                                            //controls
                                             />
                                         )}
                                     </div>
                                     <button
                                         onClick={() => cancelMediaFile(index)}
-                                        className="absolute top-0 right-0 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center text-white hiddn"
+                                        className="absolute top-0 right-0 w-8 h-8 bg-red-800 rounded-lg flex items-center justify-center text-white shadow-md hover:bg-red-900 transition duration-500 ease-in-out"
                                     >
                                         X
                                     </button>
@@ -311,19 +323,6 @@ export const CreateContent = () => {
                             ))}
                         </div>
 
-                        <textarea
-                            rows={1}
-                            maxLength={100}
-                            minLength={6}
-                            required
-                            placeholder="Title"
-                            value={title}
-                            ref={titleRef}
-                            onChange={(e) => setTitle(e.target.value)}
-                            className="w-full border-none mb-3 px-4 text-[40px] font-bold focus:outline-none placeholder-gray-300 transition duration-500 ease-in-out overflow-hiden resize-none"
-                        />
-
-                       
                         {/* <div className="flex items-center gap-4">
                             <button className="bg-gray-200 text-gray-500 w-8 h-8 rounded-full flex items-center justify-center"
                                 onClick={handleClick}
@@ -341,15 +340,29 @@ export const CreateContent = () => {
                             onChange={(e) => setContent(e.target.value)}
                             className="w-full h-96 border-none px-4 text-xl font-normal focus:outline-none placeholder-gray-300 transition duration-500 ease-in-out resize-none"
                         /> */}
-
-                        <Editor
-                            ref={mdEditor}
-                            value={content}
-                            onChange={handleEditorChange}
-                            renderHTML={(text) => <ReactMarkdown children={text} />}
-                            style={{ height: "500px" }}
-                        />
                     </div>
+                </div>
+                <div className=''>
+                    <textarea
+                        rows={1}
+                        maxLength={100}
+                        minLength={6}
+                        required
+                        placeholder="Title"
+                        value={title}
+                        ref={titleRef}
+                        onChange={(e) => setTitle(e.target.value)}
+                        className="w-full border-none mb-3 px-4 text-[40px] font-bold focus:outline-none placeholder-gray-300 transition duration-500 ease-in-out overflow-hiden resize-none"
+                    />
+                </div>
+                <div>
+                    <Editor
+                        ref={mdEditor}
+                        value={content}
+                        onChange={handleEditorChange}
+                        renderHTML={(text) => <ReactMarkdown children={text} />}
+                        style={{ height: "500px" }}
+                    />
                 </div>
             </div>
         </div>
