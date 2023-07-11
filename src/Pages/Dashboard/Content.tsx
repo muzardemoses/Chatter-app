@@ -180,21 +180,13 @@ export const Content = () => {
         setComment('');
         toast.success('Comment added');
     };
-
-    // const md = new MarkdownIt();
-
-    // const MarkdownRenderer = ({ content }: any) => {
-    //     const renderedContent = md.render(content);
-    //     return <div dangerouslySetInnerHTML={{ __html: renderedContent }} />;
-    // };
-
    
 
 
     return (
-        <div className="py-20 flex items-center justify-center md:py-5">
+        <div className="py-20 px-12 flex items-center justify-center xl:px-6 md:px-2 md:py-5">
             {/* formerly 800px */}
-            <div className="w-[850px] px-12 flex flex-col gap-5 border border-gray-300 p-5 rounded-md shadow 2xl:w-[650px] 2xl:px-10 xl:w-[600px] lg:w-[650px] lg:p-4 lg:px-6 md:w-full md:border-none md:shadow-none md:gap-3 sm:px-3">
+            <div className="max-w-[850px] w-full px-12 flex flex-col gap-5 border border-gray-300 p-5 rounded-md shadow 2xl:px-10 xl:px-6 xl:w[600px] lg:w[650px] lg:p-4 lg:px-6 md:w-full md:border-none md:shadow-none md:gap-3 sm:px-3">
                 <div className='flex gap-3'>
                     <img
                         src={authorProfile?.photoURL || devAvatar}

@@ -142,14 +142,31 @@ export const Bookmarks = () => {
 
 
     return (
-        <div className='flex flex-col justify-center p-4'>
+        <div className='flex flex-col justify-center p-8 gap-16'>
+            <h2 className='text-2xl font-semibold text-gray-900'>
+                Bookmarks ({bookmarks.length})
+            </h2>
             {loading ? (
                 <p className="text-gray-900 text-xl font-semibold">Loading...</p>
             ) : (
                 <ul className="flex flex-col gap-14 w-full">
                     {bookmarks.length === 0 ?
-                        (<div className='flex justify-center items-center h-[400px]'>
-                            <p className='text-gray-500'>No posts yet</p>
+                        (<div className='flex justify-center flex-col items-center h-[400px] gap-5'>
+                            <h4 className='text-3xl font-semibold text-gray-900'>
+                                No bookmarks yet
+                                <span className='ml-2 text-2xl font-semibold text-gray-900'>
+                                    📚
+                                </span>
+                            </h4>
+                            <p className='text-gray-500 text-center'>
+                                When you bookmark a post, it will appear here.
+                                <br />
+                                <span >
+                                    Check out posts <Link to='/' className='text-blue-500 hover:underline'>
+                                        here
+                                    </Link>.
+                                </span>
+                            </p>
                         </div>
                         ) : (
                             bookmarks.sort((a, b) => b.timestamp - a.timestamp) // Sort posts in descending order based on timestamp

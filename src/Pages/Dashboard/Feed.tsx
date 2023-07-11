@@ -28,8 +28,8 @@ export const Feed = () => {
 
     return (
         <div className="py-6 flex items-center">
-            <div className="flex flex-col items-center gap-12 w-full md:px-5 sm:px-3">
-                <div className="w-[850px] flex justify-between items-center 2xl:w-[650px] xl:w-[600px] lg:w-[650px] md:w-full">
+            <div className="px-12 flex flex-col items-center gap-12 w-full xl:px-6 md:px-5 sm:px-3">
+                <div className="max-w-[850px] w-full flex justify-between items-center 2xl:w[650px] xl:w[600px] lg:w[650px] md:w-full">
                     <div className="flex flex-col gap-4 w-1/2">
                         <h4 className="text-3xl text-gray-900 font-medium uppercase md:text-2xl">
                             Feed
@@ -50,7 +50,7 @@ export const Feed = () => {
                         </button>
                     </Link>
                 </div>
-                <div className="flex flex-col gap-10 items-center w-[850px] 2xl:w-[650px] xl:w-[600px] lg:w-[650px] md:w-full">
+                <div className="flex flex-col gap-10 items-center max-w-[850px] w-full 2xl:w[650px] xl:w[600px] lg:w[650px] md:w-full">
                     <div className="px-10 pt-5 flex justify-between w10/12 w-full border border-gray-300 rounded-lg box-border md:pt-3.5 md:px-4 sm:pt-2 sm:px-3 sm:text-sm">
                         <button className={`flex gap-2 items-center pb-5 font-semibold border-b-4 md:pb-3.5 sm:pb-2 ${presentTab === "ForYou" ? " border-blue-700" : " border-transparent"}`} onClick={() => handleTabChange("ForYou")}>
                             For You

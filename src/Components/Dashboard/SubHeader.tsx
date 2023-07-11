@@ -27,17 +27,19 @@ export const SubHeader = () => {
 
     return (
         <div className="bg-white z-40 h-20 px-6 border-b border-gray-300  justify-between flex items-center md:px-3 sm:px-2">
-            <button
-                id="menu-btn"
-                onClick={handleMenu}
-                className={`hamburger  ${state ? "open" : ""
-                    } hidden sm:block focus:outline-none z-30 `}
-            >
-                <svg fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
-                </svg>
-            </button>
-            <div>Switch</div>
+            <div className="flex items-center gap-3 sm:gap-1">
+                <button
+                    id="menu-btn"
+                    onClick={handleMenu}
+                    className={`hamburger  ${state ? "open" : ""
+                        } hidden sm:block focus:outline-none z-30 `}
+                >
+                    <svg fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
+                    </svg>
+                </button>
+                <div>Switch</div>
+            </div>
             <div className='relative'>
                 <div
                     className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
