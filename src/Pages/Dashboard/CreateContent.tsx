@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux'
 import { selectUser } from '../../Config/userSlice'
@@ -41,6 +41,8 @@ export const CreateContent = () => {
     const loggedInUser = useSelector(selectUser);
 
     const [showMediaOptions, setShowMediaOptions] = useState(false)
+
+
 
     const [title, setTitle] = useState("")
     const [content, setContent] = useState("")
@@ -142,6 +144,25 @@ export const CreateContent = () => {
         }
     };
 
+    useEffect(() => {
+        // Retrieve the saved title and content from localStorage
+        const savedTitle = localStorage.getItem('title');
+        const savedContent = localStorage.getItem('content');
+    
+        // If the saved title and content exist, update the state with the saved values
+        if (savedTitle) {
+            setTitle(savedTitle);
+        }
+        if (savedContent) {
+            setContent(savedContent);
+        }
+    }, []); // Run this effect only once on component mount
+
+    useEffect(() => {
+        // Save the current title and content to localStorage whenever they change
+        localStorage.setItem('title', title);
+        localStorage.setItem('content', content);
+    }, [title, content]);
 
     const createPost = async () => {
         setLoading(true);
@@ -222,8 +243,8 @@ export const CreateContent = () => {
             <div className="w[900px] min-h-screen py-9 px-8 border border-gray-300 rounded-lg flex flex-col gap-10 2xl:gap-7 xl:px-4 md:gap-6">
                 <button
                     onClick={createPost}
-                    className={`self-end bg-blue-700 text-white w-36 py-4 rounded-lg text-base font-medium xl:py-3 md:w-28 md:py-2 ${loading || title.trim() === ""  && "opacity-50"}`}
-                    disabled={loading || title.trim() === "" || content.trim() === ""}
+                    className={`self-end bg-blue-700 text-white w-36 py-4 rounded-lg text-base font-medium xl:py-3 md:w-28 md:py-2 ${loading && "opacity-50"}`}
+                    disabled={loading}
                 >
                     {loading ? 'Publishing...' : 'Publish'}
                 </button>

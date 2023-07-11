@@ -14,6 +14,7 @@ export const store = configureStore({
     serialize : true,
   }, 
 
+  //devTools: false,
 
 })
 
