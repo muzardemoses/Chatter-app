@@ -33,6 +33,9 @@ export const Content = () => {
     const [post, setPost] = useState<any>(null);
     const [comment, setComment] = useState<string>('');
 
+    const [loading, setLoading] = useState(false);
+
+
     const commentRef = useRef<HTMLTextAreaElement>(null);
     useAutosizeTextArea(commentRef.current, comment)
 
@@ -157,6 +160,8 @@ export const Content = () => {
             return;
         }
 
+        setLoading(true);
+
         const postRef = doc(db, 'posts', id);
         const newComment = {
             readerId: loggedInUser?.id,
@@ -171,16 +176,15 @@ export const Content = () => {
 
         const updatedPost = {
             ...post,
-            comments: [
-                ...comments,
-                newComment,
-            ],
+            comments: [...comments, newComment],
         };
         setPost(updatedPost);
         setComment('');
         toast.success('Comment added');
+
+        setLoading(false);
     };
-   
+
 
 
     return (
@@ -361,11 +365,11 @@ export const Content = () => {
                                 </div>
                             }
                         </div>
-                        <div 
-                        //style={{ whiteSpace: 'pre-wrap' }}
+                        <div
+                            //style={{ whiteSpace: 'pre-wrap' }}
                             className="prose prose-lg prose-a:text-blue-700 prose-a:font-bold prose-a:no-underline prose-blockquote:bg-gray-50 prose-blockquote:py-0.5 prose-th:bg-slate-100 prose-th:p-2 prose-td:p-2 prose-td:border prose-th:border border-r-gray-200 prose-img:w-10/12 prose-img:mx-auto xl:prose-lg md:prose-base"
                         >
-                           <ReactMarkdown children={content} remarkPlugins={[remarkGfm]}   />
+                            <ReactMarkdown children={content} remarkPlugins={[remarkGfm]} />
                             {/* <Markdown children={content} /> */}
                             {/* <MarkdownRenderer content={demo} /> */}
                         </div>
@@ -444,10 +448,12 @@ export const Content = () => {
                                 onChange={(e) => setComment(e.target.value)}
                                 className="w-full rounded-md px-4 py-4 resize-none overflow-hidden bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-transparent transition duration-300 ease-in-out md:px-2 md:py-2"
                             />
-                            <button className="w-max bg-blue-700 hover:bg-blue-800 text-white font-semibold py-2 px-4 rounded-md transition duration-300 ease-in-out md:px-3 md:py-2 md:text-sm"
+                            <button
+                                className={`w-max bg-blue-700 hover:bg-blue-800 text-white font-semibold py-2 px-4 rounded-md transition duration-300 ease-in-out md:px-3 md:py-2 md:text-sm ${loading || comment.trim() === '' && 'opacity-50'}`}
+                                disabled={loading || comment.trim() === ''}
                                 onClick={() => handleComment()}
                             >
-                                Comment
+                                {loading ? 'Commenting...' : 'Comment'}
                             </button>
                         </div>
                     </div>

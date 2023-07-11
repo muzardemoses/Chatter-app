@@ -131,6 +131,9 @@ Not yet available
 - Implement the bookmark page design and functionality
 
 ***July 11, 2023***
+- Add loading state to post and comment section
+- Add loading state to bookmark page
+- Add save functionality to create content page(supposed to be draft functionality but I will implement that later)
 
 ### TO-DO AFTER PROJECT SUBMISSION
 - Right sticky bar should be put in a button under screen size 1024px and will be used to open the right sticky bar.

@@ -23,6 +23,7 @@ import "react-markdown-editor-lite/lib/index.css";
 
 
 export const CreateContent = () => {
+    const [loading, setLoading] = useState(false)
     const mdEditor = useRef<Editor>(null);
     //const [value, setValue] = useState("");
     // const handleClick = () => {
@@ -143,6 +144,7 @@ export const CreateContent = () => {
 
 
     const createPost = async () => {
+        setLoading(true);
         const postRef = doc(db, "posts", postId);
 
         // Upload media files and get their download URLs
@@ -169,16 +171,19 @@ export const CreateContent = () => {
 
         if (title.trim() === "" || content.trim() === "") {
             toast.error("Title and content cannot be empty");
+            setLoading(false);
             return;
         }
 
         if (title.trim().length < 6) {
             toast.error("Title must be at least 6 characters long");
+            setLoading(false);
             return;
         }
 
         if (content.trim().length < 90) {
             toast.error("Content must be at least 90 characters long");
+            setLoading(false);
             return;
         }
 
@@ -209,6 +214,7 @@ export const CreateContent = () => {
         setMediaPreviewUrls([])
         toast.success("Post created successfully")
         navigate(`/content/${postId}`)
+        setLoading(false)
     }
 
     return (
@@ -216,8 +222,10 @@ export const CreateContent = () => {
             <div className="w[900px] min-h-screen py-9 px-8 border border-gray-300 rounded-lg flex flex-col gap-10 2xl:gap-7 xl:px-4 md:gap-6">
                 <button
                     onClick={createPost}
-                    className="self-end bg-blue-700 text-white w-36 py-4 rounded-lg text-base font-medium xl:py-3 md:w-28 md:py-2">
-                    Publish
+                    className={`self-end bg-blue-700 text-white w-36 py-4 rounded-lg text-base font-medium xl:py-3 md:w-28 md:py-2 ${loading || title.trim() === ""  && "opacity-50"}`}
+                    disabled={loading || title.trim() === "" || content.trim() === ""}
+                >
+                    {loading ? 'Publishing...' : 'Publish'}
                 </button>
                 <div className="w-full flex gap-9 z-0 2xl:flex-col 2xl:gap-4">
                     <div className='mt-9 h-max w-24 flex flex-col items-center gap-7 2xl:flex-row 2xl:w-max 2xl:h-16 2xl:mt-6 md:gap-5 md:mt-4 sm:h-14'>

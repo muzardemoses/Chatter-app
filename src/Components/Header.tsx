@@ -61,7 +61,7 @@ export const Header = () => {
       <div>
 
         {user ?
-          <div className="flex gap-3 items-center">
+          <div className="flex gap-3 items-center z-30">
             <ProfileDropdown />
             {/* <Link to="/feed">
               <button className=" text-white font-normal text-lg bg-blue-700 rounded-lg py-3 w-36 hover:bg-blue-800 transition duration-500 ease-in-out">
@@ -110,18 +110,20 @@ export const Header = () => {
           // just find a way to close the menu when you click outside the menu
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="hidden md:flex gap-4 w-full mt-6">
-            <Link to="/login">
-              <button className=" text-blue-900 font-normal text-sm box-border border border-blue-700 rounded-lg py-3 w-24 hover:bg-gray-50 transition duration-500 ease-in-out">
-                Log In
-              </button>
-            </Link>
-            <Link to="/register">
-              <button className=" text-white font-normal text-sm bg-blue-700 rounded-lg py-3 w-24 hover:bg-blue-800 transition duration-500 ease-in-out">
-                Sign Up
-              </button>
-            </Link>
-          </div>
+          {user ? <> </> :
+            <div className="hidden md:flex gap-4 w-full mt-6">
+              <Link to="/login">
+                <button className=" text-blue-900 font-normal text-sm box-border border border-blue-700 rounded-lg py-3 w-24 hover:bg-gray-50 transition duration-500 ease-in-out">
+                  Log In
+                </button>
+              </Link>
+              <Link to="/register">
+                <button className=" text-white font-normal text-sm bg-blue-700 rounded-lg py-3 w-24 hover:bg-blue-800 transition duration-500 ease-in-out">
+                  Sign Up
+                </button>
+              </Link>
+            </div>
+          }
           <ul className="flex flex-col gap-5 pt-6 text-base font-semibold text-black">
             <li className="border-b border-gray-700 pb-3">
               <Link to="/" className="link-item">

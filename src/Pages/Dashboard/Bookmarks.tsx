@@ -162,7 +162,7 @@ export const Bookmarks = () => {
                                 When you bookmark a post, it will appear here.
                                 <br />
                                 <span >
-                                    Check out posts <Link to='/' className='text-blue-500 hover:underline'>
+                                    Check out posts <Link to='/feed' className='text-blue-500 hover:underline'>
                                         here
                                     </Link>.
                                 </span>
