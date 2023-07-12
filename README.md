@@ -1,6 +1,5 @@
 # Chatter-app
 
-
 ## Table of contents
 
 - [Overview](#overview)
@@ -14,17 +13,13 @@
 - [Author](#author)
 - [Acknowledgments](#acknowledgments)
 
-
-## Overview  
+## Overview
 
 Chatter is a multi-functional platform that empowers authors and readers to create and access text-based content. With features like user registration, content creation with Markdown support, personalized content discovery, social interactions, and detailed analytics, Chatter aims to provide a compelling alternative to traditional blogging platforms. Built with React, TypeScript, Firebase, and Tailwind CSS, Chatter combines modern web technologies to offer a seamless and engaging experience for content creators and readers alike.
-
- 
 
 ### The challenge
 
 In the age of visual content, Chatter aims to provide a haven for text-based content enthusiasts. Our goal is to create a multi-functional platform that competes with established blogging platforms. We strive to offer a seamless user experience with features like user registration, content creation with Markdown support, personalized content discovery, social interactions, and detailed analytics. By leveraging React, TypeScript, Firebase, and Tailwind CSS, we aim to deliver a modern and engaging platform for authors and readers alike.
-
 
 ### Screenshot
 
@@ -38,106 +33,132 @@ Not yet available
 
 ### My process
 
-**Day-1** ***June 6, 2023***
- - I started by creating the project by running the command npm create vite app-name --template react-ts
+**Day-1** **_June 6, 2023_**
 
- - I created a env file and added it to the gitignore file so that my api keys will not be exposed.
+- I started by creating the project by running the command npm create vite app-name --template react-ts
 
- - I run npm install --save-dev @types/node in order to use process.env in my project.
+- I created a env file and added it to the gitignore file so that my api keys will not be exposed.
 
- - I then created a repository on github and pushed the project to github.
+- I run npm install --save-dev @types/node in order to use process.env in my project.
 
- - I then installed the necessary dependencies for the project such as react-router-dom, firebase, redux, react-redux, @reduxjs/toolkit, react-toastify, tailwindcss, dot-env, and many more.
-   
- - I then created the necessary folders and files for the project such as the components folder, pages folder, and the redux folder.
+- I then created a repository on github and pushed the project to github.
 
- - Lastly, I created the header component.
+- I then installed the necessary dependencies for the project such as react-router-dom, firebase, redux, react-redux, @reduxjs/toolkit, react-toastify, tailwindcss, dot-env, and many more.
+- I then created the necessary folders and files for the project such as the components folder, pages folder, and the redux folder.
 
-**Day-2** ***June 7, 2023***
- - I created and build the home page.
+- Lastly, I created the header component.
 
-**Day-3** ***June 8, 2023***
+**Day-2** **_June 7, 2023_**
+
+- I created and build the home page.
+
+**Day-3** **_June 8, 2023_**
+
 - I created the Footer component.
 - I created the Login page and the Register page.
 
-**Day-4** ***June 9, 2023***
+**Day-4** **_June 9, 2023_**
+
 - Pending...
 - Working on how the sign in and sign up page will work.
 
-**Day-5** ***June 10, 2023***
+**Day-5** **_June 10, 2023_**
+
 - Same as day-4
 - Updated the login and register page user interface by adding google, twitter and github sign in buttons.
 
-**Day-6** ***June 11, 2023***
+**Day-6** **_June 11, 2023_**
+
 - Add the functionality to the login and register page.
 - Set up the firebase config file.
 - I had to change the way I got the config variables from the env file because it was not working. From process.env.API_KEY to import.meta.env.VITE_API_KEY
 
-**Day-7** ***June 12, 2023***
+**Day-7** **_June 12, 2023_**
+
 - Continue working on the login and register page.
 
-**Day-8** ***June 13, 2023***
+**Day-8** **_June 13, 2023_**
+
 - Implement initial dashboard design (Sidebar, Right Sticky Bar, and Dashboard Subheader).
 
-**Day-9** ***June 14, 2023***
+**Day-9** **_June 14, 2023_**
+
 - Implement initial messaging page design.
 
-**Day-10** ***June 15, 2023***
+**Day-10** **_June 15, 2023_**
+
 - Add the functionality to the messaging page.
 
-**Day-11** ***June 16, 2023 - June 21, 2023***
+**Day-11** **_June 16, 2023 - June 21, 2023_**
+
 - Implement feed page and create-content page design.
 
-**Day-12** ***June 22, 2023***
+**Day-12** **_June 22, 2023_**
+
 - implement initial blog post design.
 - Installed moment to format the date and time of the post.
 
-**Day-13** ***June 23, 2023***
+**Day-13** **_June 23, 2023_**
+
 - Implement minimum and maximum character count for blog post title and content.
 - Implement picture and video size to fit the blog post.
 - Implement initial blog post like and comment layout.
 
-**Day-14** ***June 25, 2023***
+**Day-14** **_June 25, 2023_**
+
 - Implement Content page design.
 - Implement comment functionality.
 
-**Day-** ***June 29, 2023***
-- Header profile drop-down
-- Created _redirects file in public
+**Day-** **_June 29, 2023_**
 
-**Day-** ***June 30, 2023***
+- Header profile drop-down
+- Created \_redirects file in public
+
+**Day-** **_June 30, 2023_**
+
 - Finalize Login page
 - Created drafts, teams and explore page
 
-***July 3, 2023***
+**_July 3, 2023_**
+
 - installed react-markdown-editor-lite react-markdown and remark-gfm
 - Add markdown for rich text editor in create content page for blog post
 
-***July 4, 2023***
+**_July 4, 2023_**
+
 - Update bookmark page to display bookmarked posts
 
-***July 5, 2023***
+**_July 5, 2023_**
+
 - Make landing page responsive
 
-***July 8, 2023***
+**_July 8, 2023_**
+
 - Make Auth-Layout and it's pages responsive
 
-***July 9, 2023***
+**_July 9, 2023_**
+
 - Make Dashboard-Layout and it's pages responsive
 - Add toggle effect to left sidebar at screen size 639px and below
 
-***July 10, 2023***
+**_July 10, 2023_**
+
 - Finalize the responsiveness of the dashboard layout and it's pages
 - Implement the bookmark page design and functionality
 
-***July 11, 2023***
+**_July 11, 2023_**
+
 - Add loading state to post and comment section
 - Add loading state to bookmark page
 - Add auto-save functionality to create content page(supposed to be draft functionality but I will implement that later)
-- Add Analytics to posts
+- Implement analytics functionality fo posts
 - Add SEO to all pages
 
+**_July 12, 2023_**
+- Implement analytics design 
+
 ### TO-DO AFTER PROJECT SUBMISSION
+
 - Right sticky bar should be put in a button under screen size 1024px and will be used to open the right sticky bar.
 
 ### Built wth
@@ -155,11 +176,7 @@ Not yet available
 - Remark-gfm
 - Headlessui
 
-
-
 ### What I learned
-
-
 
 <!-- ```html
 <h1>Some HTML code I'm proud of 🎉</h1>
@@ -191,8 +208,6 @@ const handleClick = () => {
 
 I will continue to work on this project to make it better and add more features to it.
 
-
-
 ## Author
 
 - GitHub - [@MuzardeMoses](https://github.com/muzardeMoses)
@@ -203,7 +218,6 @@ I will continue to work on this project to make it better and add more features 
 - Facebook - [Adebayo MuzardeMoses Olaoluwa ](https://facebook.com/ademuzardemoses)
 - YouTube - [MuzardeMoses](https://www.youtube.com/channel/@muzardemoses)
 - Website - [MuzardeMoses](https://mosesadebayo.me/)
-
 
 ## Acknowledgments
 

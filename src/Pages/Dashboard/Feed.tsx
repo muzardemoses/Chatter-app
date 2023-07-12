@@ -62,7 +62,7 @@ export const Feed = () => {
                             Trending || Recent
                         </button>
                     </div>
-                    <div className="py-5 borer border-gray-300 rounded-lg box-border">
+                    <div className="py-5 borer border-gray-300 rounded-lg box-border w-full">
                         {presentTab === "ForYou" && <ForYouTab />}
                         {presentTab === "Following" && <FollowingTab />}
                         {presentTab === "Recent" && <RecentTab />}
