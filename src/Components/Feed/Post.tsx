@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { doc, updateDoc } from "firebase/firestore";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
@@ -13,7 +15,6 @@ import loveAfterSVG from '../../assets/Svg/Feed/love-after.svg';
 import bookmarkBeforeSVG from '../../assets/Svg/Feed/bookmark-before.svg';
 import bookmarkAfterSVG from '../../assets/Svg/Feed/bookmark-after.svg';
 import commentSVG from '../../assets/Svg/Feed/comment.svg';
-import { toast } from 'react-toastify';
 import ReactMarkdown from "react-markdown";
 import remarkGfm from 'remark-gfm'
 
@@ -25,7 +26,7 @@ export const Post = ({ post, posts, setPosts }: { post: any, posts: any[], setPo
 
     const users = useSelector(selectUsers);
     const postRef = useRef<HTMLDivElement>(null);
-    //const [hasViewed, setHasViewed] = useState<boolean>(false);
+    const [hasViewedP, setHasViewedP] = useState<boolean>(false);
 
     const postId = post.id;
 
@@ -33,10 +34,6 @@ export const Post = ({ post, posts, setPosts }: { post: any, posts: any[], setPo
         const author = users.find((user) => user.id === authorId);
         return author;
     };
-
-    const bookmark = () => {
-        handleBookmark(postId, posts, setPosts, loggedInUser)
-    }
 
     useEffect(() => {
         const observerOptions = {
@@ -48,7 +45,7 @@ export const Post = ({ post, posts, setPosts }: { post: any, posts: any[], setPo
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
-                    //setHasViewed(true);
+                    setHasViewedP(true);
                     observer.unobserve(entry.target);
                     updatePostViews(post.id);
                 }
@@ -71,7 +68,7 @@ export const Post = ({ post, posts, setPosts }: { post: any, posts: any[], setPo
             const postRef = doc(db, 'posts', postId);
             const hasViewed = post.analytics.viewers.includes(loggedInUser?.id);
             const updatedAnalytics = {
-                views: post.analytics.views + 1,
+                views: hasViewedP ? post.analytics.views : post.analytics.views + 1,
                 viewers: hasViewed
                     ? [...post.analytics.viewers]
                     : [...post.analytics.viewers, loggedInUser?.id],
@@ -81,10 +78,21 @@ export const Post = ({ post, posts, setPosts }: { post: any, posts: any[], setPo
             await updateDoc(postRef, {
                 analytics: updatedAnalytics,
             });
-            console.log('Post views updated' + post.analytics.views);
-            console.log(loggedInUser.id);
+
+            // setPosts(
+            //     posts.map((post) => {
+            //         if (post.id === postId) {
+            //             return {
+            //                 ...post,
+            //                 analytics: updatedAnalytics,
+            //             };
+            //         }
+            //         return post;
+            //     })
+            // );
+            // console.log('Post views updated' + post.analytics.views);
         } catch (error) {
-            console.log(loggedInUser?.id);
+            //console.log(loggedInUser?.id);
             console.log('Error updating post views:', error);
         }
     };
@@ -319,16 +327,14 @@ export const Post = ({ post, posts, setPosts }: { post: any, posts: any[], setPo
                         className="text-red-500 hover:text-red-700 sm:text-[15px]">
                         Unlike
                     </button>
-                    <button
-                        // onClick={() => handleBookmark(postId, posts, setPosts, loggedInUser)}
-                        onClick={() => bookmark()}
-                    >
+                    <button onClick={() => handleBookmark(postId, loggedInUser, setPosts, posts,)}>
                         {Array.isArray(post.bookmarkedBy) && post.bookmarkedBy.includes(loggedInUser?.id) ? (
                             <img src={bookmarkAfterSVG} alt="bookmark" className="h-6 w-6 sm:h-5 sm:w-5" />
                         ) : (
                             <img src={bookmarkBeforeSVG} alt="bookmark" className="h-6 w-6 sm:h-5 sm:w-5" />
                         )}
                     </button>
+                    {post.analytics.views}
                 </div>
             </div>
         </div>
