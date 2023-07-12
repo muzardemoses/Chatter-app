@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useParams } from "react-router-dom"
 import { useEffect, useState, useRef } from 'react';
-import useAutosizeTextArea from "../../Hooks/useAutoSizeTextArea";
-import moment from 'moment';
+import { useAutosizeTextArea, formatByInitialTime, readTime } from '../../Hooks';
 import { useSelector } from "react-redux";
 import { selectUser } from "../../Config/userSlice";
 import { selectUsers } from '../../Config/usersSlice';
@@ -28,7 +27,9 @@ import remarkGfm from 'remark-gfm'
 
 export const Content = () => {
     const { postId } = useParams<{ postId: any }>();
-    const loggedInUser = useSelector(selectUser);
+    const reduxUser = useSelector(selectUser);
+    const storageUser = JSON.parse(localStorage.getItem("user") || "{}");
+    const loggedInUser = reduxUser || storageUser;
     const users = useSelector(selectUsers);
     const [post, setPost] = useState<any>(null);
     const [comment, setComment] = useState<string>('');
@@ -44,48 +45,32 @@ export const Content = () => {
         return author;
     };
 
-    const formatDate = (timestamp: any) => {
-        const now = moment();
-        const messageTime = moment(timestamp);
-        const diffInDays = now.diff(messageTime, "days");
-
-        // If the message is from today, show just the time
-        if (diffInDays === 0) {
-            return messageTime.format("h:mm A");
-        }
-
-        // If the message is from within the last 7 days, show the day of the week and time
-        if (diffInDays < 7) {
-            return messageTime.format("ddd h:mm A");
-        }
-
-        // Otherwise, show the full date and time
-        return messageTime.format("MMM D, YYYY h:mm A");
-    };
-
-    const readTime = (content: string) => {
-        // Average reading speed in words per minute
-        const wordsPerMinute = 200;
-
-        // Calculate the number of words in the content
-        const wordCount = content.split(' ').length;
-
-        // Calculate the reading time in minutes
-        const readingTime = Math.ceil(wordCount / wordsPerMinute);
-
-        return `${readingTime} min read`;
-    };
-
 
     useEffect(() => {
         const fetchPost = async () => {
             try {
                 const postRef = doc(db, 'posts', postId);
                 const postSnapshot = await getDoc(postRef);
+
                 if (postSnapshot.exists()) {
                     const postData = postSnapshot.data();
                     setPost(postData);
-                    console.log('Post data:', post.content);
+
+                    const hasVisited = postData.analytics.visitors.includes(loggedInUser?.id);
+                    const updatedAnalytics = {
+                        views: postData.analytics.views + 1,
+                        visits: postData.analytics.visits + 1,
+                        visitors: hasVisited
+                            ? [...postData.analytics.visitors]
+                            : [...postData.analytics.visitors, loggedInUser?.id],
+                        viewers: postData.analytics.viewers, // Include 'viewers' in the update
+                    };
+
+                    await updateDoc(postRef, {
+                        analytics: updatedAnalytics,
+                    });
+
+                    //console.log('Post data:', post.content);
                 } else {
                     console.log('Post does not exist');
                 }
@@ -95,7 +80,10 @@ export const Content = () => {
         };
 
         fetchPost();
-    }, [postId]);
+    }, [postId, loggedInUser?.id]);
+
+
+
 
 
     if (!post) {
@@ -201,7 +189,7 @@ export const Content = () => {
                             {authorProfile?.displayName}
                         </p>
                         <p className="text-gray-500 md:text-sm">
-                            {formatDate(post.timestamp.seconds * 1000)}
+                            {formatByInitialTime(post.timestamp.seconds * 1000)}
                         </p>
                     </div>
                 </div>
@@ -477,7 +465,7 @@ export const Content = () => {
                                                 </button>
                                             </div>
                                             <p className="text-gray-500 text-sm md:text-xs">
-                                                {formatDate(comment.timestamp.seconds * 1000)}
+                                                {formatByInitialTime(post.timestamp.seconds * 1000)}
                                             </p>
                                         </div>
                                     </div>

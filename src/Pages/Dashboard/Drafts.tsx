@@ -1,6 +1,19 @@
 import { Link } from "react-router-dom"
+import { logEvent } from "firebase/analytics";
+import { analytics } from "../../Config/firebase";
 
 export const Drafts = () => {
+
+
+  
+    logEvent(analytics, 'screen_view', {
+        firebase_screen: 'Drafts',
+        firebase_screen_class: 'Drafts',
+    });
+   //console log the event
+    console.log('Analytics event sent to Drafts screen_view' + logEvent);
+    
+
     return (
         <div className="flex flex-col gap-4 items-center h-screen pt-16">
             <div className='flex justify-center flex-col items-center h-[400px] gap-5'>

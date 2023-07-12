@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import moment from 'moment';
 import { useSelector } from 'react-redux';
+import { formatByInitialTime, readTime } from '../../Hooks';
 import { selectUser } from '../../Config/userSlice';
 import { selectUsers } from '../../Config/usersSlice';
 import { collection, getDocs, doc, updateDoc } from 'firebase/firestore';
@@ -29,42 +29,10 @@ export const ForYouTab = () => {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [posts, setPosts] = useState<any[]>([]);
+    // const postRef = useRef<HTMLDivElement>(null);
+    // const [hasViewed, setHasViewed] = useState<boolean>(false);
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const formatDate = (timestamp: any) => {
-        const now = moment();
-        const messageTime = moment(timestamp);
-        const diffInDays = now.diff(messageTime, "days");
-
-        // If the message is from today, show just the time
-        if (diffInDays === 0) {
-            return messageTime.format("h:mm A");
-        }
-
-        // If the message is from within the last 7 days, show the day of the week and time
-        if (diffInDays < 7) {
-            return messageTime.format("ddd h:mm A");
-        }
-
-        // Otherwise, show the full date and time
-        return messageTime.format("MMM D, YYYY h:mm A");
-    };
-
-    const readTime = (content: string) => {
-        // Average reading speed in words per minute
-        const wordsPerMinute = 200;
-
-        // Calculate the number of words in the content
-        const wordCount = content.split(' ').length;
-
-        // Calculate the reading time in minutes
-        const readingTime = Math.ceil(wordCount / wordsPerMinute);
-
-        return `${readingTime} min read`;
-    };
-
-
-
+  
 
 
     useEffect(() => {
@@ -80,6 +48,7 @@ export const ForYouTab = () => {
 
         fetchPosts();
     }, []);
+
 
 
 
@@ -133,7 +102,6 @@ export const ForYouTab = () => {
         await updateDoc(postRef, {
             bookmarkedBy: post.bookmarkedBy,
         });
-
     };
 
 
@@ -157,7 +125,7 @@ export const ForYouTab = () => {
                                         {getAuthorProfile(post.authorId)?.displayName}
                                     </p>
                                     <p className="text-gray-500 sm:text-sm">
-                                        {formatDate(post.timestamp.seconds * 1000)}
+                                        {formatByInitialTime(post.timestamp.seconds * 1000)}
                                     </p>
                                 </div>
                             </div>
@@ -332,8 +300,6 @@ export const ForYouTab = () => {
                                     </div>
                                 </div>
                             </div>
-
-
 
                             <div className="flex justify-between pt-4 px-3 border-t border-gray-200 md:px-2">
                                 <div className='flex items-center gap-1'>

@@ -134,6 +134,7 @@ Not yet available
 - Add loading state to post and comment section
 - Add loading state to bookmark page
 - Add auto-save functionality to create content page(supposed to be draft functionality but I will implement that later)
+- Add Analytics to posts
 - Add SEO to all pages
 
 ### TO-DO AFTER PROJECT SUBMISSION
@@ -157,6 +158,8 @@ Not yet available
 
 
 ### What I learned
+
+
 
 <!-- ```html
 <h1>Some HTML code I'm proud of 🎉</h1>

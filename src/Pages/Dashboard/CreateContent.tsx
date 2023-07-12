@@ -10,7 +10,7 @@ import {
 import { toast } from 'react-toastify'
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import { db, storage } from '../../Config/firebase';
-import useAutosizeTextArea from '../../Hooks/useAutoSizeTextArea';
+import { useAutosizeTextArea } from '../../Hooks';
 import addSVG from '../../assets/Svg/Feed/outline-add.svg'
 import closeSVG from '../../assets/Svg/Feed/outline-close.svg'
 import imageSVG from '../../assets/Svg/Feed/image-outline.svg'
@@ -148,7 +148,7 @@ export const CreateContent = () => {
         // Retrieve the saved title and content from localStorage
         const savedTitle = localStorage.getItem('title');
         const savedContent = localStorage.getItem('content');
-    
+
         // If the saved title and content exist, update the state with the saved values
         if (savedTitle) {
             setTitle(savedTitle);
@@ -224,7 +224,12 @@ export const CreateContent = () => {
             likes: [],
             comments: [],
             shares: [],
-            views: [],
+            analytics: {
+                views: 0,
+                visits: 0,
+                viewers: [],
+                visitors: [],
+            },
             isDeleted: false,
             bookmarkedBy: [],
         });
