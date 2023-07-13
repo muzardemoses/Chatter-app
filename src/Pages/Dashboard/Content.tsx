@@ -18,6 +18,7 @@ import { toast } from 'react-toastify';
 import { Comment } from "../../Utils/types";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from 'remark-gfm'
+import { Helmet } from "react-helmet-async";
 
 
 
@@ -177,6 +178,10 @@ export const Content = () => {
 
     return (
         <div className="py-20 px-12 flex items-center justify-center xl:px-6 md:px-2 md:py-5">
+             <Helmet>
+                <title>{title}</title>
+                <meta name="description" content={content.slice(0, 150) + '...'} />
+            </Helmet>
             {/* formerly 800px */}
             <div className="max-w-[850px] w-full px-12 flex flex-col gap-5 border border-gray-300 p-5 rounded-md shadow 2xl:px-10 xl:px-6 xl:w[600px] lg:w[650px] lg:p-4 lg:px-6 md:w-full md:border-none md:shadow-none md:gap-3 sm:px-3">
                 <div className='flex gap-3'>

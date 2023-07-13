@@ -157,6 +157,11 @@ Not yet available
 **_July 12, 2023_**
 - Implement analytics design 
 
+**_July 13, 2023_**
+- Install react-ga and react-helmet-async
+- Add google analytics to the project
+- Add Meta tags to all pages
+ 
 ### TO-DO AFTER PROJECT SUBMISSION
 
 - Right sticky bar should be put in a button under screen size 1024px and will be used to open the right sticky bar.

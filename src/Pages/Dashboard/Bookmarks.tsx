@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import { selectUser } from '../../Config/userSlice';
 import { collection, getDocs, } from 'firebase/firestore';
 import { db } from '../../Config/firebase';
+import { Helmet } from "react-helmet-async";
 
 
 export const Bookmarks = () => {
@@ -49,6 +50,10 @@ export const Bookmarks = () => {
 
     return (
         <div className='flex flex-col justify-center p-8 gap-16'>
+            <Helmet>
+                <title>Bookmarks | Chattar App</title>
+                <meta name="description" content="Chattar App Bookmarks" />
+            </Helmet>
             <h2 className='text-2xl font-semibold text-gray-900'>
                 Bookmarks ({bookmarks.length})
             </h2>
