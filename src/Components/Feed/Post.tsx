@@ -15,6 +15,7 @@ import loveAfterSVG from '../../assets/Svg/Feed/love-after.svg';
 import bookmarkBeforeSVG from '../../assets/Svg/Feed/bookmark-before.svg';
 import bookmarkAfterSVG from '../../assets/Svg/Feed/bookmark-after.svg';
 import commentSVG from '../../assets/Svg/Feed/comment.svg';
+import analyticsSVG from '../../assets/Svg/Feed/analytics.svg';
 import ReactMarkdown from "react-markdown";
 import remarkGfm from 'remark-gfm'
 
@@ -286,7 +287,7 @@ export const Post = ({ post, posts, setPosts }: { post: any, posts: any[], setPo
                 </div>
             </div>
 
-            <div className="flex justify-between pt-4 px-3 border-t border-gray-200 md:px-2">
+            <div className="flex justify-between pt-4 px-3 border-t border-gray-200 md:px-2 sm:px-0">
                 <div className='flex items-center gap-1'>
                     <button onClick={() => handleLikePost(post, loggedInUser, setPosts)}
                         className="text-blue-500 hover:text-blue-700">
@@ -322,11 +323,11 @@ export const Post = ({ post, posts, setPosts }: { post: any, posts: any[], setPo
                         Comments
                     </button>
                 </Link>
-                <div className='flex items-center gap-1'>
-                    <button onClick={() => handleUnlikePost(post, loggedInUser, setPosts)}
+                <div className='flex items-center gap-2'>
+                    {/* <button onClick={() => handleUnlikePost(post, loggedInUser, setPosts)}
                         className="text-red-500 hover:text-red-700 sm:text-[15px]">
                         Unlike
-                    </button>
+                    </button> */}
                     <button onClick={() => handleBookmark(postId, loggedInUser, setPosts, posts,)}>
                         {Array.isArray(post.bookmarkedBy) && post.bookmarkedBy.includes(loggedInUser?.id) ? (
                             <img src={bookmarkAfterSVG} alt="bookmark" className="h-6 w-6 sm:h-5 sm:w-5" />
@@ -334,7 +335,12 @@ export const Post = ({ post, posts, setPosts }: { post: any, posts: any[], setPo
                             <img src={bookmarkBeforeSVG} alt="bookmark" className="h-6 w-6 sm:h-5 sm:w-5" />
                         )}
                     </button>
-                    {post.analytics.views}
+                    <button className="flex items-center gap-1 borer border-gray-300 rounded-md px-2 py-1 hover:bg-gray-100 sm:gap-1 sm:px-1 sm:py-0">
+                        <img src={analyticsSVG} alt="analytics" className="h-5 w-5 sm:h-4 sm:w-4" />
+                        <p className="text-gray-500 font-semibold hover:text-gray-700 sm:text-[15px]">
+                            {post.analytics.views}
+                        </p>
+                    </button>
                 </div>
             </div>
         </div>

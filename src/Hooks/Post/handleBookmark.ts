@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../Config/firebase";
-import { toast } from "react-toastify";
+//import { toast } from "react-toastify";
 
 
 export const handleBookmark = async (postId: any, loggedInUser: any, setPosts: any, posts: any) => {
@@ -10,10 +10,10 @@ export const handleBookmark = async (postId: any, loggedInUser: any, setPosts: a
 
     if (post.bookmarkedBy && post.bookmarkedBy.includes(loggedInUser?.id)) {
         post.bookmarkedBy = post.bookmarkedBy.filter((id: string) => id !== loggedInUser?.id);
-        toast.info('Post removed from bookmarks');
+        //toast.info('Post removed from bookmarks');
     } else {
         post.bookmarkedBy.push(loggedInUser?.id);
-        toast.success('Post added to bookmarks');
+        //toast.success('Post added to bookmarks');
     }
 
     const updatedPosts = [...posts];
