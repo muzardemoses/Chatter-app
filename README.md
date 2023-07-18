@@ -162,6 +162,10 @@ Not yet available
 - Add google analytics to the project
 - Add Meta tags to all pages
 
+**_July 18, 2023_**
+- Implement the profile page design (profile, edit-profile e.t.c)
+
+
 ### TO-DO AFTER PROJECT SUBMISSION
 
 - Right sticky bar should be put in a button under screen size 1024px and will be used to open the right sticky bar.

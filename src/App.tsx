@@ -231,7 +231,7 @@ function App() {
 
 
         <Route
-          path="/profile"
+          path="/:username"
           element={
             <DashboardLayout>
               <Profile />

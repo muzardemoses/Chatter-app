@@ -80,7 +80,7 @@ export const ProfileDropdown = () => {
                             <Menu.Item>
                                 {({ active }) => (
                                     <NavLink
-                                        to="/feed"
+                                        to={`/${user?.username}`}
                                     >
                                         <button
                                             className={`${active ? 'bg-violet-500 text-white' : 'text-gray-900'
