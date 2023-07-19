@@ -76,7 +76,7 @@ export const Profile = () => {
                                     </div>
                                 </div>
                                 <div className="mt-16">
-                                    <ActionButtons routeUser={routeUser} loggedInUser={loggedInUser} />
+                                    <ActionButtons />
                                 </div>
                             </div>
                         </div>
