@@ -4,6 +4,7 @@ export * from './Footer.tsx';
 export * from './LeftBar.tsx';
 export * from './RightBar.tsx';
 export * from './SVG';
+export * from './Profile';
 export * from './Dashboard';
-export * from './Messaging/index.tsx';
+export * from './Messaging';
 export * from './Feed';

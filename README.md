@@ -165,6 +165,9 @@ Not yet available
 **_July 18, 2023_**
 - Implement the profile page design (profile, edit-profile e.t.c)
 
+**_July 19, 2023_**
+- Implement action buttons in profile which are follow, unfollow and edit Profile.
+
 
 ### TO-DO AFTER PROJECT SUBMISSION
 
