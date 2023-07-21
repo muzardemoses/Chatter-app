@@ -93,7 +93,7 @@ function App() {
       const loggedInUser = users.find(
         (user) => user.id === auth.currentUser?.uid
       );
-      dispatch(updateUserProfile(loggedInUser));
+      dispatch(loginUser(loggedInUser));
       localStorage.setItem("user", JSON.stringify(loggedInUser));
     });
     return () => unsubscribe();
