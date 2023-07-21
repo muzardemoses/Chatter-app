@@ -5,7 +5,10 @@ import { Route, Routes } from 'react-router-dom'
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
-import { loginUser, updateUserProfile } from './Config/userSlice';
+import {
+  loginUser,
+  //updateUserProfile
+} from './Config/userSlice';
 import { addUsers } from './Config/usersSlice';
 import {
   onAuthStateChanged,
