@@ -56,9 +56,11 @@ function App() {
     }
   });
 
+  //TODO: update user profile in real time
+
   // Fetch all users from Firestore and update in real time
   useEffect(() => {
-    if (!auth.currentUser) return;
+    //if (!auth.currentUser) return;
     const usersRef = collection(db, "users");
     const unsubscribe = onSnapshot(usersRef, (usersSnapshot) => {
 
@@ -80,7 +82,7 @@ function App() {
 
   //update user profile in real time
   useEffect(() => {
-    if (!auth.currentUser) return;
+    //if (!auth.currentUser) return;
     const userRef = collection(db, "users");
     const unsubscribe = onSnapshot(userRef, (userSnapshot) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
