@@ -15,8 +15,9 @@ export const FollowingTab = () => {
 
     const users = useSelector(selectUsers);
     const reduxUser = useSelector(selectUser);
-    const storageUser = JSON.parse(localStorage.getItem("user") || "{}");
-    const loggedInUser = reduxUser || storageUser;
+    //const storageUser = JSON.parse(localStorage.getItem("user") || "{}");
+    const loggedInUser = reduxUser 
+    //|| storageUser;
 
     const getAuthorProfile = (authorId: string) => {
         return users.find((user) => user.id === authorId);
@@ -41,7 +42,7 @@ export const FollowingTab = () => {
 
     const getFollowingPosts = posts.filter((post) => {
         const authorProfile = getAuthorProfile(post.authorId);
-        return loggedInUser.following.includes(authorProfile?.id);
+        return loggedInUser?.following.includes(authorProfile!.id);
     });
 
     if (loading) {

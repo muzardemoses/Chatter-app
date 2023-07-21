@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useParams, NavLink } from "react-router-dom"
 import { useSelector } from "react-redux";
-import { selectUser } from "../../Config/userSlice";
+//import { selectUser } from "../../Config/userSlice";
 import { selectUsers } from "../../Config/usersSlice";
 import { ActionButtons } from "../../Components";
 import devAvatar from '../../Images/Profile/avatar-default.png';
@@ -12,11 +12,11 @@ export const Profile = () => {
     const [loading, setLoading] = useState(true);
     const { username } = useParams<{ username: string }>()
 
-    const reduxUser = useSelector(selectUser);
-    const storageUser = JSON.parse(localStorage.getItem("user") || "{}");
+    //const reduxUser = useSelector(selectUser);
+    //const storageUser = JSON.parse(localStorage.getItem("user") || "{}");
 
     const users = useSelector(selectUsers);
-    const loggedInUser = reduxUser || storageUser;
+    ///const loggedInUser = reduxUser || storageUser;
     const routeUser = users.find((user) => user.username === username);
 
     useEffect(() => {
@@ -84,8 +84,8 @@ export const Profile = () => {
                     </div>
                 </div>
             )}
-            {routeUser?.displayName}<br />
-            {loggedInUser?.displayName}
+            {/* {routeUser?.displayName}<br />
+            {loggedInUser?.displayName} */}
             <div className="flex flex-col gap-10 px-16 w-full">
                 <ul className="flex flex-row gap-8">
                     {users.map((user: any) => (

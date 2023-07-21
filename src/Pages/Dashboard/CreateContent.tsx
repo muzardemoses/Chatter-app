@@ -40,8 +40,13 @@ export const CreateContent = () => {
     const navigate = useNavigate()
     const loggedInUser = useSelector(selectUser);
 
-    const [showMediaOptions, setShowMediaOptions] = useState(false)
+    useEffect(() => {
+        if (!loggedInUser) {
+            navigate('/login');
+        }
+    }, [loggedInUser]);
 
+    const [showMediaOptions, setShowMediaOptions] = useState(false)
 
 
     const [title, setTitle] = useState("")

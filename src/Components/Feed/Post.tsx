@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { doc, updateDoc } from "firebase/firestore";
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import {
     formatByInitialTime,
@@ -27,9 +27,17 @@ import remarkGfm from 'remark-gfm'
 
 
 export const Post = ({ post, posts, setPosts }: { post: any, posts: any[], setPosts: any }) => {
+    const navigate = useNavigate();
     const reduxUser = useSelector(selectUser);
-    const storageUser = JSON.parse(localStorage.getItem("user") || "{}");
-    const loggedInUser = reduxUser || storageUser;
+    // const [storageUser, setStorageUser] = useState<any>(null);
+
+    // useEffect(() => {
+    //     if (localStorage.getItem("user") !== undefined && localStorage.getItem("user") !== null) {
+    //         setStorageUser(JSON.parse(localStorage.getItem("user") || '{}'))
+    //     }
+    // }, [])
+
+    const loggedInUser = reduxUser
 
     const users = useSelector(selectUsers);
     const postRef = useRef<HTMLDivElement>(null);
@@ -76,9 +84,11 @@ export const Post = ({ post, posts, setPosts }: { post: any, posts: any[], setPo
             const hasViewed = post.analytics.viewers.includes(loggedInUser?.id);
             const updatedAnalytics = {
                 views: hasViewedP ? post.analytics.views : post.analytics.views + 1,
-                viewers: hasViewed
-                    ? [...post.analytics.viewers]
-                    : [...post.analytics.viewers, loggedInUser?.id],
+                viewers: loggedInUser?.id
+                    ? hasViewed
+                        ? [...post.analytics.viewers]
+                        : [...post.analytics.viewers, loggedInUser?.id]
+                    : [...post.analytics.viewers], // If no user is logged in, keep the viewers array unchanged
                 visits: post.analytics.visits,
                 visitors: post.analytics.visitors,
             };
@@ -295,7 +305,15 @@ export const Post = ({ post, posts, setPosts }: { post: any, posts: any[], setPo
 
             <div className="flex justify-between pt-4 px-3 border-t border-gray-200 md:px-2 sm:px-0">
                 <div className='flex items-center gap-1'>
-                    <button onClick={() => handleLikePost(post, loggedInUser, setPosts)}
+                    <button
+                        onClick={() => {
+                            if (loggedInUser) {
+                                handleLikePost(post, loggedInUser, setPosts);
+                            } else {
+                                // Redirect the user to the login page
+                                navigate('/login');
+                            }
+                        }}
                         className="text-blue-500 hover:text-blue-700">
                         <img
                             src={post.likes.includes(loggedInUser?.id) ? loveAfterSVG : loveBeforeSVG}
@@ -334,7 +352,14 @@ export const Post = ({ post, posts, setPosts }: { post: any, posts: any[], setPo
                         className="text-red-500 hover:text-red-700 sm:text-[15px]">
                         Unlike
                     </button> */}
-                    <button onClick={() => handleBookmark(postId, loggedInUser, setPosts, posts,)}>
+                    <button onClick={() => {
+                        if (loggedInUser) {
+                            handleBookmark(postId, loggedInUser, setPosts, posts,)
+                        } else {
+                            // Redirect the user to the login page
+                            navigate('/login');
+                        }
+                    }}>
                         {Array.isArray(post.bookmarkedBy) && post.bookmarkedBy.includes(loggedInUser?.id) ? (
                             <img src={bookmarkAfterSVG} alt="bookmark" className="h-6 w-6 sm:h-5 sm:w-5" />
                         ) : (

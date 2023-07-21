@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Post } from '../../Components';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../Config/userSlice';
@@ -10,9 +10,11 @@ import { Helmet } from "react-helmet-async";
 
 
 export const Bookmarks = () => {
+    const navigate = useNavigate()
     const reduxUser = useSelector(selectUser);
-    const storageUser = JSON.parse(localStorage.getItem("user") || "{}");
-    const loggedInUser = reduxUser || storageUser;
+   // const storageUser = JSON.parse(localStorage.getItem("user") || "{}");
+    const loggedInUser = reduxUser
+    // || storageUser;
 
 
     const [posts, setPosts] = useState<any[]>([]);
@@ -43,7 +45,11 @@ export const Bookmarks = () => {
 
 
 
-
+    useEffect(() => {
+        if (!loggedInUser) {
+            navigate('/login');
+        }
+    }, [loggedInUser]);
 
 
 

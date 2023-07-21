@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from "react"
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom"
 import { handleFollow } from "../../Hooks";
 import { selectUsers } from "../../Config/usersSlice";
@@ -14,7 +14,15 @@ import bullseyeSVG from "../../assets/Svg/Profile/bullseye.svg";
 export const ActionButtons = () => {
     const users = useSelector(selectUsers);
     const reduxUser = useSelector(selectUser);
-    const storageUser = JSON.parse(localStorage.getItem("user") || "{}");
+    // const [storageUser, setStorageUser] = useState<any>(null);
+
+    // useEffect(() => {
+    //     if (localStorage.getItem("user") !== undefined) {
+    //         setStorageUser(JSON.parse(localStorage.getItem("user") || '{}'))
+    //     }
+    // }, [])
+
+
 
     const [loggedInUser, setLoggedInUser] = useState<any>(null);
     const [routeUser, setRouteUser] = useState<any>(null);
@@ -23,10 +31,10 @@ export const ActionButtons = () => {
     useEffect(() => {
         if (reduxUser) {
             setLoggedInUser(reduxUser)
-        } else if (storageUser) {
-            setLoggedInUser(storageUser)
+            // } else if (storageUser) {
+            //     setLoggedInUser(storageUser)
         }
-    }, [reduxUser, storageUser])
+    }, [reduxUser])
 
     const { username } = useParams<{ username: string }>()
 
@@ -47,6 +55,13 @@ export const ActionButtons = () => {
         }
     }, [routeUser, loggedInUser])
 
+    //if routeUser is null, then loading is true
+    useEffect(() => {
+        if (routeUser) {
+            setLoading(false)
+        }
+    }, [routeUser])
+
 
     const routeId = loggedInUser?.id + '-' + routeUser?.id;
 
@@ -54,12 +69,12 @@ export const ActionButtons = () => {
     return (
         <div>
             {loading ? (
-                <div className="pt-64">
+                <div className="">
                     <button className="self-end bg-blue-700 text-white w-36 py-3 rounded-lg text-base font-medium xl:py-3 md:w-28 md:py-2">
                         Loading...
                     </button>
                 </div>
-            ) : (
+            ) : routeUser && loggedInUser ? (
                 <div>
                     {routeUser?.id === loggedInUser?.id ? (
                         <div>
@@ -101,6 +116,15 @@ export const ActionButtons = () => {
                             )}
                         </div>
                     )}
+                </div>
+            ) : (
+                <div>
+                    <button
+                        className="self-end bg-blue-700 text-white w-36 py-3 rounded-lg text-base font-medium xl:py-3 md:w-28 md:py-2"
+                        onClick={() => window.location.href = "/login"}
+                    >
+                        Login to follow
+                    </button>
                 </div>
             )}
         </div>

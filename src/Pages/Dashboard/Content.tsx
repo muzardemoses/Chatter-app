@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { useEffect, useState, useRef } from 'react';
 import { useAutosizeTextArea, formatByInitialTime, readTime } from '../../Hooks';
 import { useSelector } from "react-redux";
@@ -27,10 +27,12 @@ import { Helmet } from "react-helmet-async";
 
 
 export const Content = () => {
+    const navigate = useNavigate();
     const { postId } = useParams<{ postId: any }>();
     const reduxUser = useSelector(selectUser);
-    const storageUser = JSON.parse(localStorage.getItem("user") || "{}");
-    const loggedInUser = reduxUser || storageUser;
+    //const storageUser = JSON.parse(localStorage.getItem("user") || "{}");
+    const loggedInUser = reduxUser
+    // || storageUser;
     const users = useSelector(selectUsers);
     const [post, setPost] = useState<any>(null);
     const [comment, setComment] = useState<string>('');
@@ -61,9 +63,11 @@ export const Content = () => {
                     const updatedAnalytics = {
                         views: postData.analytics.views + 1,
                         visits: postData.analytics.visits + 1,
-                        visitors: hasVisited
-                            ? [...postData.analytics.visitors]
-                            : [...postData.analytics.visitors, loggedInUser?.id],
+                        visitors: loggedInUser?.id ?
+                            hasVisited
+                                ? [...postData.analytics.visitors]
+                                : [...postData.analytics.visitors, loggedInUser?.id]
+                            : [...postData.analytics.visitors],
                         viewers: postData.analytics.viewers, // Include 'viewers' in the update
                     };
 
@@ -112,18 +116,18 @@ export const Content = () => {
 
     };
 
-    const handleUnlike = async () => {
-        const postRef = doc(db, 'posts', id);
-        await updateDoc(postRef, {
-            likes: likes.filter((like: string) => like !== loggedInUser?.id),
-        });
+    // const handleUnlike = async () => {
+    //     const postRef = doc(db, 'posts', id);
+    //     await updateDoc(postRef, {
+    //         likes: likes.filter((like: string) => like !== loggedInUser?.id),
+    //     });
 
-        const updatedPost = {
-            ...post,
-            likes: likes.filter((like: string) => like !== loggedInUser?.id),
-        };
-        setPost(updatedPost);
-    };
+    //     const updatedPost = {
+    //         ...post,
+    //         likes: likes.filter((like: string) => like !== loggedInUser?.id),
+    //     };
+    //     setPost(updatedPost);
+    // };
 
 
     const handleBookmark = async () => {
@@ -370,7 +374,7 @@ export const Content = () => {
                 </div>
                 <div className="flex justify-between pt-4 px-3 border-t border-gray-200">
                     <div className='flex items-center gap-1'>
-                        <button onClick={() => handleLike()} className="text-blue-500 hover:text-blue-700">
+                        <button onClick={() => { loggedInUser ? handleLike() : navigate('/login') }} className="text-blue-500 hover:text-blue-700">
                             <img
                                 src={post.likes.includes(loggedInUser?.id) ? loveAfterSVG : loveBeforeSVG}
                                 alt="love"
@@ -397,11 +401,13 @@ export const Content = () => {
 
                     </div>
                     <div className='flex items-center gap-1'>
-                        <button onClick={() => handleUnlike()}
+                        {/* <button onClick={() => handleUnlike()}
                             className="text-red-500 hover:text-red-700 ml-4">
                             Unlike
-                        </button>
-                        <button onClick={() => handleBookmark()}>
+                        </button> */}
+                        <button onClick={() =>
+                            loggedInUser ? handleBookmark() : navigate('/login')
+                        }>
                             {Array.isArray(post.bookmarkedBy) && post.bookmarkedBy.includes(loggedInUser?.id) ? (
                                 <img src={bookmarkAfterSVG} alt="bookmark" className="h-6 w-6" />
                             ) : (
@@ -440,6 +446,7 @@ export const Content = () => {
                                 ref={commentRef}
                                 onChange={(e) => setComment(e.target.value)}
                                 className="w-full rounded-md px-4 py-4 resize-none overflow-hidden bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-transparent transition duration-300 ease-in-out md:px-2 md:py-2"
+                                disabled={!loggedInUser}
                             />
                             <button
                                 className={`w-max bg-blue-700 hover:bg-blue-800 text-white font-semibold py-2 px-4 rounded-md transition duration-300 ease-in-out md:px-3 md:py-2 md:text-sm ${loading || comment.trim() === '' && 'opacity-50'}`}
