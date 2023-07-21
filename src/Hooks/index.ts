@@ -1,4 +1,4 @@
-export * from "./handleFollow";
+export * from "./Profile";
 export * from "./useAutoSizeTextArea";
 export * from "./formatByInitialTime";
 export * from "./readTime";

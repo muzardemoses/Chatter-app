@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from "react"
-import { useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom"
 import { handleFollow } from "../../Hooks";
 import { selectUsers } from "../../Config/usersSlice";
@@ -16,18 +16,34 @@ export const ActionButtons = () => {
     const reduxUser = useSelector(selectUser);
     const storageUser = JSON.parse(localStorage.getItem("user") || "{}");
 
+    const [loggedInUser, setLoggedInUser] = useState<any>(null);
+    const [routeUser, setRouteUser] = useState<any>(null);
+    //const loggedInUser = reduxUser || storageUser;
 
-    const loggedInUser = reduxUser || storageUser;
+    useEffect(() => {
+        if (reduxUser) {
+            setLoggedInUser(reduxUser)
+        } else if (storageUser) {
+            setLoggedInUser(storageUser)
+        }
+    }, [reduxUser, storageUser])
+
     const { username } = useParams<{ username: string }>()
 
-    const routeUser = users.find((user) => user.username === username);
+    //const routeUser = users.find((user) => user.username === username);
+    useEffect(() => {
+        if (users) {
+            setRouteUser(users.find((user: any) => user.username === username))
+        }
+    }, [users, username])
+
     const [loading, setLoading] = useState(true)
 
 
     useEffect(() => {
         if (routeUser && loggedInUser) {
             setLoading(false)
-            console.log(routeUser.id, loggedInUser.id)
+            //console.log(routeUser.id, loggedInUser.id)
         }
     }, [routeUser, loggedInUser])
 
@@ -35,7 +51,6 @@ export const ActionButtons = () => {
     const routeId = loggedInUser?.id + '-' + routeUser?.id;
 
     const [buttonHover, setButtonHover] = useState(false);
-
     return (
         <div>
             {loading ? (
@@ -63,7 +78,7 @@ export const ActionButtons = () => {
                             </Link>
                             {routeUser?.followers.includes(loggedInUser?.id) ? (
                                 <button
-                                    onClick={() => handleFollow(loggedInUser?.id, routeUser?.id)}
+                                    onClick={() => handleFollow(loggedInUser, routeUser)}
                                     onMouseEnter={() => setButtonHover(true)}
                                     onMouseLeave={() => setButtonHover(false)}
                                     className={`flex items-center gap-2 justify-center  text-white w-28 h-11 rounded-lg text-base font-medium shadow  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-100 focus:ring-offset-violet-100   disabled:cursor-not-allowed transition duration-500 ease-in-out ${buttonHover ? "bg-red-500 hover:bg-red-600" : "bg-blue-700 hover:bg-blue-800"}`}
@@ -77,7 +92,7 @@ export const ActionButtons = () => {
                                 </button>
                             ) : (
                                 <button
-                                    onClick={() => handleFollow(loggedInUser?.id, routeUser?.id)}
+                                    onClick={() => handleFollow(loggedInUser, routeUser)}
                                     className="flex items-center gap-3 justify-center bg-blue-700 text-white px-4 h-11 rounded-lg text-base font-medium shadow hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-100 focus:ring-offset-violet-100   disabled:cursor-not-allowed transition duration-500 ease-in-out"
                                 >
                                     <img src={bullseyeSVG} alt="bullseye" className="h-4 w-4" />

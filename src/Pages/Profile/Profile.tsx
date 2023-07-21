@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from "react";
 import { useParams, NavLink } from "react-router-dom"
 import { useSelector } from "react-redux";
@@ -85,6 +86,20 @@ export const Profile = () => {
             )}
             {routeUser?.displayName}<br />
             {loggedInUser?.displayName}
+            <div className="flex flex-col gap-10 px-16 w-full">
+                <ul className="flex flex-row gap-8">
+                    {users.map((user: any) => (
+                        <li key={user.id}>
+                            <NavLink
+                                to={`/${user.username}`}
+                                className="text-gray-600 text-base font-semibold"
+                            >
+                                {user.username}
+                            </NavLink>
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </div>
     )
 }

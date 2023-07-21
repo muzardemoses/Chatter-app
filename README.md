@@ -168,6 +168,9 @@ Not yet available
 **_July 19, 2023_**
 - Implement action buttons in profile which are follow, unfollow and edit Profile.
 
+**_July 20 - 21, 2023_**
+- Finalize the handleFollow functionality
+- Finalize action buttons in profile
 
 ### TO-DO AFTER PROJECT SUBMISSION
 

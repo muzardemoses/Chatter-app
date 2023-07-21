@@ -178,7 +178,7 @@ export const Content = () => {
 
     return (
         <div className="py-20 px-12 flex items-center justify-center xl:px-6 md:px-2 md:py-5">
-             <Helmet>
+            <Helmet>
                 <title>{title}</title>
                 <meta name="description" content={content.slice(0, 150) + '...'} />
             </Helmet>
