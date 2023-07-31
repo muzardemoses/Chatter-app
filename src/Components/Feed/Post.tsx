@@ -117,14 +117,18 @@ export const Post = ({ post, posts, setPosts }: { post: any, posts: any[], setPo
     return (
         <div ref={postRef} className="flex flex-col gap-5 border border-gray-300 p-5 rounded-md shadow md:p-4 sm:p-3">
             <div className='flex gap-3'>
-                <img
-                    src={getAuthorProfile(post.authorId)?.photoURL || devAvatar}
-                    alt="" className="w-16 h-16 rounded-full md:w-14 md:h-14 sm:w-12 sm:h-12"
-                />
+                <Link to={`/${getAuthorProfile(post.authorId)?.username}`}
+                >                <img
+                        src={getAuthorProfile(post.authorId)?.photoURL || devAvatar}
+                        alt="" className="w-16 h-16 rounded-full md:w-14 md:h-14 sm:w-12 sm:h-12"
+                    />
+                </Link>
                 <div className='flex flex-col gap-1 md:gap-0.5'>
-                    <p className="text-gray-900 text-xl font-semibold sm:text-lg">
-                        {getAuthorProfile(post.authorId)?.displayName}
-                    </p>
+                    <Link to={`/${getAuthorProfile(post.authorId)?.username}`}>
+                        <p className="text-gray-900 text-xl font-semibold sm:text-lg">
+                            {getAuthorProfile(post.authorId)?.displayName}
+                        </p>
+                    </Link>
                     <p className="text-gray-500 sm:text-sm">
                         {formatByInitialTime(post.timestamp.seconds * 1000)}
                     </p>

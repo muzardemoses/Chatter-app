@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useNavigate, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import { useEffect, useState, useRef } from 'react';
 import { useAutosizeTextArea, formatByInitialTime, readTime } from '../../Hooks';
 import { useSelector } from "react-redux";
@@ -189,14 +189,18 @@ export const Content = () => {
             {/* formerly 800px */}
             <div className="max-w-[850px] w-full px-12 flex flex-col gap-5 border border-gray-300 p-5 rounded-md shadow 2xl:px-10 xl:px-6 xl:w[600px] lg:w[650px] lg:p-4 lg:px-6 md:w-full md:border-none md:shadow-none md:gap-3 sm:px-3">
                 <div className='flex gap-3'>
-                    <img
-                        src={authorProfile?.photoURL || devAvatar}
-                        alt="" className="w-16 h-16 rounded-full md:w-12 md:h-12"
-                    />
+                    <Link to={`/${authorProfile?.username}`}>
+                        <img
+                            src={authorProfile?.photoURL || devAvatar}
+                            alt="" className="w-16 h-16 rounded-full md:w-12 md:h-12"
+                        />
+                    </Link>
                     <div className='flex flex-col gap-1 md:gap-0.5'>
-                        <p className="text-gray-900 text-xl font-semibold md:text-base">
-                            {authorProfile?.displayName}
-                        </p>
+                        <Link to={`/${authorProfile?.username}`}>
+                            <p className="text-gray-900 text-xl font-semibold md:text-base">
+                                {authorProfile?.displayName}
+                            </p>
+                        </Link>
                         <p className="text-gray-500 md:text-sm">
                             {formatByInitialTime(post.timestamp.seconds * 1000)}
                         </p>
