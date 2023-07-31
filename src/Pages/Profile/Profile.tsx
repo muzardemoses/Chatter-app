@@ -4,7 +4,7 @@ import { useParams, NavLink } from "react-router-dom"
 import { useSelector } from "react-redux";
 //import { selectUser } from "../../Config/userSlice";
 import { selectUsers } from "../../Config/usersSlice";
-import { ActionButtons } from "../../Components";
+import { ActionButtons, SocialProfile } from "../../Components";
 import devAvatar from '../../Images/Profile/avatar-default.png';
 
 
@@ -80,16 +80,14 @@ export const Profile = () => {
                                     <ActionButtons />
                                 </div>
                             </div>
-                            <div>
-                                
-                            </div>
+                            <SocialProfile routeUser={routeUser} />
                         </div>
                     </div>
                 </div>
             )}
             {/* {routeUser?.displayName}<br />
             {loggedInUser?.displayName} */}
-            <div className="flex flex-col gap-10 px-16 w-full">
+            {/* <div className="flex flex-col gap-10 px-16 w-full">
                 <ul className="flex flex-row gap-8">
                     {users.map((user: any) => (
                         <li key={user.id}>
@@ -102,7 +100,7 @@ export const Profile = () => {
                         </li>
                     ))}
                 </ul>
-            </div>
+            </div> */}
         </div>
     )
 }

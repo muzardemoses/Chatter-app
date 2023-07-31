@@ -174,6 +174,9 @@ Not yet available
 
  //TODO: update user profile in real time
 
+**_July 31, 2023_**
+- Finalize the profile page design
+
 ### TO-DO AFTER PROJECT SUBMISSION
 
 - Right sticky bar should be put in a button under screen size 1024px and will be used to open the right sticky bar.
