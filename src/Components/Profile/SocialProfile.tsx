@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import webSVG from "../../assets/Svg/Profile/web.svg"
 import locationSVG from "../../assets/Svg/Profile/location.svg"
 import facebookSVG from "../../assets/Svg/Profile/facebook.svg"
