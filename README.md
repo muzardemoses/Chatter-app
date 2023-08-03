@@ -180,6 +180,12 @@ Not yet available
 **_August 1, 2023_**
 - Implement followings and followers page layout design.
 
+**_August 2, 2023_**
+- Implement followings and followers page functionality
+
+**_August 3, 2023_**
+- Implement initial edit profile page design
+
 ### TO-DO AFTER PROJECT SUBMISSION
 
 - Right sticky bar should be put in a button under screen size 1024px and will be used to open the right sticky bar.
@@ -226,6 +232,8 @@ const handleClick = () => {
 	setIsMenuOpen((prev) => !prev);
 };
 ``` -->
+
+``Somehow I need to take note of state that are mull initially e.g loggedInUser, I need to add ? to it even if I am not notified by typescript or eslint because it has code a lot of bugs and headache for me by showing in the console that `react-dom.development.js:12056 Uncaught TypeError: Cannot read properties of null (reading 'id')`.``
 
 ### Continued development
 
