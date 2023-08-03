@@ -10,6 +10,8 @@ import devAvatar from '../../Images/Profile/avatar-default.png';
 
 export const Profile = () => {
     const [loading, setLoading] = useState(true);
+    const [userNotFound, setUserNotFound] = useState(false);
+
     const { username } = useParams<{ username: string }>()
 
     //const reduxUser = useSelector(selectUser);
@@ -22,8 +24,24 @@ export const Profile = () => {
     useEffect(() => {
         if (routeUser) {
             setLoading(false);
+            setUserNotFound(false);
         }
     }, [routeUser])
+
+    useEffect(() => {
+        setLoading(true);
+        if (users.find ((user: any) => user.username === username)) {
+            setUserNotFound(false);
+            setLoading(false);
+        } else {
+            setUserNotFound(true);
+            setLoading(false);
+        }
+    }, [users, username])
+        
+
+
+    
 
     return (
         <div className="relative">
@@ -34,6 +52,12 @@ export const Profile = () => {
                 <div className="pt-64">
                     <p className="text-center">
                         Loading...
+                    </p>
+                </div>
+            ) : userNotFound ? (
+                <div className="pt-64">
+                    <p className="text-center">
+                        User not found or invalid username
                     </p>
                 </div>
             ) : (
@@ -85,22 +109,6 @@ export const Profile = () => {
                     </div>
                 </div>
             )}
-            {/* {routeUser?.displayName}<br />
-            {loggedInUser?.displayName} */}
-            {/* <div className="flex flex-col gap-10 px-16 w-full">
-                <ul className="flex flex-row gap-8">
-                    {users.map((user: any) => (
-                        <li key={user.id}>
-                            <NavLink
-                                to={`/${user.username}`}
-                                className="text-gray-600 text-base font-semibold"
-                            >
-                                {user.username}
-                            </NavLink>
-                        </li>
-                    ))}
-                </ul>
-            </div> */}
         </div>
     )
 }

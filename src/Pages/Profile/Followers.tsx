@@ -7,7 +7,7 @@ import { selectUser } from "../../Config/userSlice";
 import { handleFollow } from "../../Hooks";
 import defaultAvatar from "../../Images/Profile/avatar-default.png";
 import directHitSVG from "../../assets/Svg/Profile/direct-hit.svg";
-import bullseyeSVG from "../../assets/Svg/Profile/bullseye.svg";
+import bullseyeSVG from "../../assets/Svg/Profile/bullseye-blue.svg";
 import { useEffect, useState } from "react";
 
 
@@ -108,13 +108,13 @@ export const Followers = () => {
                                                     ) : (
                                                         <div>
                                                             <button
-                                                                className="flex items-center gap-3 justify-center bg-blue-700 text-white w-28 h-11 rounded-lg text-base font-medium shadow hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-100 focus:ring-offset-violet-100disabled:cursor-not-allowed transition duration-500 ease-in-out"
+                                                                className="flex items-center gap-3 justify-center text-blue-900 bg-white w-28 h-11  rounded-lg border border-gray-300 text-base font-[600] shadow hover:text-blue-950 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-100 focus:ring-offset-violet-100disabled:cursor-not-allowed transition duration-500 ease-in-out"
                                                                 onClick={() => handleFollow(loggedInUser, user)}
                                                             >
                                                                 <img
                                                                     src={bullseyeSVG}
                                                                     alt="bullseye"
-                                                                    className="h-4 w-4"
+                                                                    className="h-[18px] w-[18px]"
                                                                 />
                                                                 Follow
                                                             </button>

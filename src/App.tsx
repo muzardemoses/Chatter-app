@@ -1,7 +1,7 @@
 import { useEffect } from "react";
-import { Home, About, PageNotFound, Login, Register, ForgetPassword, Profile, VerifyEmail, Bookmarks, Notifications, Feed, CreateContent, Content, Messages, Drafts, Explore, Teams, SelectAndMessage, ChatRoom, FollowersAndFollowing, Followers, Following } from './Pages'
+import { Home, About, PageNotFound, Login, Register, ForgetPassword, Profile, VerifyEmail, Bookmarks, Notifications, Feed, CreateContent, Content, Messages, Drafts, Explore, Teams, SelectAndMessage, ChatRoom, FollowersAndFollowing, Followers, Following, Account, EditProfile } from './Pages'
 import { AuthLayout, DashboardLayout, DefaultLayout } from './Layouts'
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
@@ -316,6 +316,32 @@ function App() {
               <FollowersAndFollowing>
                 <Following />
               </FollowersAndFollowing>
+            </DashboardLayout>
+          }
+        />
+
+        <Route
+          path="/settings"
+          //redirect to account settings
+          element={<Navigate to="/settings/account" />}
+        />
+
+        <Route
+          path="/settings/account"
+          element={
+            <DashboardLayout>
+              {/* <Settings> */}
+                <Account />
+              {/* </Settings> */}
+            </DashboardLayout>
+          }
+        />
+
+        <Route
+          path="/settings/profile"
+          element={
+            <DashboardLayout>
+              <EditProfile />
             </DashboardLayout>
           }
         />
