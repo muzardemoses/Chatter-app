@@ -67,7 +67,7 @@ export const Profile = () => {
                         //style="position: sticky; top: 0"
                         >
                             <div className="flex flex-row justify-between w-full">
-                                <div className="flex gap-8 relative">
+                                <div className="flex gap-8 ">
                                     <img
                                         src={routeUser?.photoURL || devAvatar}
                                         alt="avatar"

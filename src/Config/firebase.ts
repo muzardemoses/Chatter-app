@@ -19,6 +19,8 @@ import {
   fetchSignInMethodsForEmail,
   EmailAuthProvider,
   updateProfile,
+  updateEmail,
+  updatePassword,
   linkWithCredential,
 } from "firebase/auth";
 import {
@@ -232,6 +234,8 @@ export {
   fetchSignInMethodsForEmail,
   EmailAuthProvider,
   updateProfile,
+  updateEmail,
+  updatePassword,
   linkWithCredential,
 };
 

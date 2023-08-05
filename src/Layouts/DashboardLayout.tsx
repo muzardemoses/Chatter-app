@@ -19,7 +19,7 @@ export const DashboardLayout = ({ children }: { children: ReactNode }) => {
                         {children}
                     </div>
                 </div>
-                <div className='z-50 sticky top-10'>
+                <div className='z-40 sticky top-10'>
                     <RightBar />
                 </div>
             </div>
