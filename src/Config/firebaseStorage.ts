@@ -15,4 +15,5 @@ export const uploadImage = async (file: any, currentUser: any) => {
 
   //setLoading(false);
   toast.success("Image uploaded successfully");
+  console.log(snapShot.metadata.fullPath);
 };

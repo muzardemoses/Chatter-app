@@ -89,7 +89,7 @@ export const EditProfile = () => {
             //save to redux not yet implemented
             setModal(false);
             alert("Profile picture updated successfully");
-            console.log(currentUser.photoURL)
+           // console.log(currentUser.photoURL)
             setLoading(false);
         }
     }
