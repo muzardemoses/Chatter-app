@@ -186,6 +186,13 @@ Not yet available
 **_August 3, 2023_**
 - Implement initial edit profile page design
 
+**_August 5 - 6, 2023_**
+- Implement edit profile page functionality
+- Finalize edit profile page design
+
+  Cancel updates
+
+
 ### TO-DO AFTER PROJECT SUBMISSION
 
 - Right sticky bar should be put in a button under screen size 1024px and will be used to open the right sticky bar.

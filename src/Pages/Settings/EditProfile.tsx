@@ -6,6 +6,7 @@ import { auth, db, updateProfile } from "../../Config/firebase";
 import { uploadImage } from "../../Config/firebaseStorage";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../Config/userSlice";
+import { MoreProfile } from "../../Components";
 import devAvatar from "../../Images/Profile/avatar-default.png";
 import downloadCloudSVG from "../../assets/Svg/Profile/download-cloud.svg";
 import closeSVG from "../../assets/Svg/Profile/close.svg";
@@ -116,6 +117,11 @@ export const EditProfile = () => {
         }
     }
 
+    const cancelUpdate = () => {
+        setFirstName(user?.displayName?.split(" ")[0] || "");
+        setLastName(user?.displayName?.split(" ")[1] || "");
+    }
+
 
     return (
         <div className="relative">
@@ -222,6 +228,7 @@ export const EditProfile = () => {
                                 <button
                                     className="px-4 h-10 self-end bg-blue-700 text-white rounded-lg text-base font-medium shadow hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-100 focus:ring-offset-violet-100   disabled:cursor-not-allowed transition duration-500 ease-in-out"
                                     type="button"
+                                    onClick={() => cancelUpdate()}
                                 >
                                     Cancel
                                 </button>
@@ -278,7 +285,7 @@ export const EditProfile = () => {
                                     </div>
                                     <div className="flex justify-end gap-5">
                                         <button
-                                            className="px-4 h-10 flex items-center gap-3 justify-center text-blue-900 bg-white rounded-lg border border-gray-300 text-base font-[600] shadow hover:text-blue-950 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-100 focus:ring-offset-violet-100disabled:cursor-not-allowed transition duration-500 ease-in-out"
+                                            className="px-4 h-10 flex items-center gap-3 justify-center text-black bg-white rounded-lg border border-gray-300 text-base font-[600] shadow focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-100 focus:ring-offset-violet-100disabled:cursor-not-allowed transition duration-500 ease-in-out"
                                             onClick={() => setModal(false)}
                                         >
                                             Cancel upload
@@ -297,6 +304,8 @@ export const EditProfile = () => {
                             </div>
                         )}
                     </div>
+                    <p className="bg-gray-200 h-px"></p>
+                    <MoreProfile />
                 </div >
             </div >
         </div >

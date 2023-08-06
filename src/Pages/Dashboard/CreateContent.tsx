@@ -44,7 +44,7 @@ export const CreateContent = () => {
         if (!loggedInUser) {
             navigate('/login');
         }
-    }, [loggedInUser]);
+    }, [loggedInUser, navigate]);
 
     const [showMediaOptions, setShowMediaOptions] = useState(false)
 

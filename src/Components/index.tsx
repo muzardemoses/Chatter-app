@@ -5,6 +5,7 @@ export * from './LeftBar.tsx';
 export * from './RightBar.tsx';
 export * from './SVG';
 export * from './Profile';
+export * from './Settings';
 export * from './Dashboard';
 export * from './Messaging';
 export * from './Feed';

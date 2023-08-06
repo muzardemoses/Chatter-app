@@ -1,18 +1,29 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { RootState } from "./store"
 
-export interface UserState  {
-        displayName: string,
-        email: string,
-        photoURL: string,
-        createdAt: string,
-        followers: Array<string>,
-        following: Array<string>,
-        userType: string,
-       // bookmarkedPosts: [],
-        username: string,
-        id: string,
-        lastLogin: string,
+export interface UserState {
+    displayName: string,
+    email: string,
+    photoURL: string,
+    createdAt: string,
+    followers: Array<string>,
+    following: Array<string>,
+    userType: string,
+    // bookmarkedPosts: [],
+    username: string,
+    bio: string,
+    location: string,
+    website: string,
+    socials: {
+        facebook: string,
+        twitter: string,
+        instagram: string,
+        linkedin: string,
+        github: string,
+        youtube: string,
+    }
+    id: string,
+    lastLogin: string,
 }
 
 const initialState = {
