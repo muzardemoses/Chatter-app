@@ -1,87 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://muzarde-chatter-app.netlify.app/</loc>
+    <loc>https://chatter.mosesadebayo.me/</loc>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://muzarde-chatter-app.netlify.app/feed</loc>
+    <loc>https://chatter.mosesadebayo.me/feed</loc>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://muzarde-chatter-app.netlify.app/drafts</loc>
+    <loc>https://chatter.mosesadebayo.me/drafts</loc>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
     <url>
-        <loc>https://muzarde-chatter-app.netlify.app/about</loc>
+        <loc>https://chatter.mosesadebayo.me/about</loc>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
-        <loc>https://muzarde-chatter-app.netlify.app/explore</loc>
+        <loc>https://chatter.mosesadebayo.me/explore</loc>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
-        <loc>https://muzarde-chatter-app.netlify.app/login</loc>
+        <loc>https://chatter.mosesadebayo.me/login</loc>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
-        <loc>https://muzarde-chatter-app.netlify.app/register</loc>
+        <loc>https://chatter.mosesadebayo.me/register</loc>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
-        <loc>https://muzarde-chatter-app.netlify.app/forgot-password</loc>
+        <loc>https://chatter.mosesadebayo.me/forgot-password</loc>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
-        <loc>https://muzarde-chatter-app.netlify.app/verify-email</loc>
+        <loc>https://chatter.mosesadebayo.me/verify-email</loc>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
-        <loc>https://muzarde-chatter-app.netlify.app/bookmarks</loc>
+        <loc>https://chatter.mosesadebayo.me/bookmarks</loc>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
-        <loc>https://muzarde-chatter-app.netlify.app/settings</loc>
+        <loc>https://chatter.mosesadebayo.me/settings</loc>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
-        <loc>https://muzarde-chatter-app.netlify.app/notifications</loc>
+        <loc>https://chatter.mosesadebayo.me/notifications</loc>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
-        <loc>https://muzarde-chatter-app.netlify.app/teams</loc>
+        <loc>https://chatter.mosesadebayo.meteams</loc>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
-        <loc>https://muzarde-chatter-app.netlify.app/create-content</loc>
+        <loc>https://chatter.mosesadebayo.me/create-content</loc>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
-            <loc>https://muzarde-chatter-app.netlify.app/content/:postId</loc>
+            <loc>https://chatter.mosesadebayo.me/content/:postId</loc>
             <changefreq>daily</changefreq>
             <priority>0.9</priority>
      </url>
         <url>
-                <loc>https://muzarde-chatter-app.netlify.app/user/messages</loc>
+                <loc>https://chatter.mosesadebayo.me/user/messages</loc>
                 <changefreq>daily</changefreq>
                 <priority>0.9</priority>
         </url>
         <url>
-                <loc>https://muzarde-chatter-app.netlify.app/messages/:routeId</loc>
+                <loc>https://chatter.mosesadebayo.me/messages/:routeId</loc>
                 <changefreq>daily</changefreq>
                 <priority>0.9</priority>
         </url>      
