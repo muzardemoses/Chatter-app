@@ -10,11 +10,11 @@ export const store = configureStore({
     toggle: toggleSlice,
   },
   
-  devTools: {
-    serialize : true,
-  }, 
+  // devTools: {
+  //   serialize : true,
+  // }, 
 
-  //devTools: false,
+  devTools: false,
 
 })
 
