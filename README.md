@@ -150,7 +150,7 @@ Not yet available
 
 - Add loading state to post and comment section
 - Add loading state to bookmark page
-- Add auto-save functionality to create content page(supposed to be draft functionality but I will implement that later)
+- Add auto-save functionality to create content page(supposed to be draft     functionality but I will implement that later)
 - Implement analytics functionality fo posts
 - Add SEO to all pages
 
@@ -171,8 +171,6 @@ Not yet available
 **_July 20 - 21, 2023_**
 - Finalize the handleFollow functionality
 - Finalize action buttons in profile
-
- //TODO: update user profile in real time
 
 **_July 31, 2023_**
 - Finalize the profile page design

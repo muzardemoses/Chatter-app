@@ -53,7 +53,7 @@ export const SocialProfile = ({ routeUser }: any) => {
                     </div>
                 )}
             </div>
-            {routeUser.social && (
+            {routeUser.socials && (
                 <div className="grid grid-cols-2 grid-flow-row gap-2 gap-x-3 w-max">
                     {routeUser.socials.twitter && (
                         <a
