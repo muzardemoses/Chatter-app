@@ -10,6 +10,7 @@ import {
     where,
 } from "firebase/firestore";
 import { db } from "../../Config/firebase.js";
+import { unusableUsernames } from "../../Utils/unusableUsernames.js";
 import { toast } from "react-toastify";
 
 
@@ -51,6 +52,13 @@ export const MoreProfile = () => {
 
                 if (username === "") {
                     toast.error("Username cannot be empty");
+                    setUsername(user.username);
+                    setLoading(false);
+                    return;
+                }
+
+                if (unusableUsernames.includes(username)) {
+                    toast.error("Username is not allowed");
                     setUsername(user.username);
                     setLoading(false);
                     return;

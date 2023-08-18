@@ -36,6 +36,7 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
+import { unusableUsernames } from "../Utils";
 
 const apiKey = import.meta.env.VITE_FIREBASE_API_KEY;
 
@@ -85,12 +86,11 @@ additionalData: any) => {
     const lastLogin = serverTimestamp();
     //const bookmarkedPosts: Array<string> | undefined = [];
 
-    
 
     //Generate username from email
     if (email) {
       const username = email.split("@")[0].replace(/[^a-z]/g, "");
-      if (!username) return;
+      if (!username || unusableUsernames.includes(username)) return;
       let usernameTaken = true;
       let usernameToSave = username;
       let i = 1;
@@ -131,7 +131,7 @@ additionalData: any) => {
       }
     } else {
       const username = displayName?.replace(/\s+/g, "").toLowerCase();
-      if (!username) return;
+      if (!username || unusableUsernames.includes(username)) return;
       let usernameTaken = true;
       let usernameToSave = username;
       let i = 1;
