@@ -8,7 +8,7 @@ export const SubHeader = () => {
 
     const dispatch = useDispatch();
     const state = useSelector(selectToggle);
-    console.log(state)
+    //console.log(state)
 
     const handleMenu = () => {
         const barLinks = document.querySelector(".bar-links");

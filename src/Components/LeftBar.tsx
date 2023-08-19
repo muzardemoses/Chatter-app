@@ -1,7 +1,8 @@
 import { NavLink, useLocation } from "react-router-dom"
-import { FeedSVG, BookmarksSVG, ExploreSVG, TeamsSVG, DraftsSVG, MessagesSVG, MoreGridSVG } from ".";
+import { FeedSVG, BookmarksSVG, ExploreSVG, TeamsSVG, DraftsSVG, MessagesSVG } from ".";
 import { useDispatch, } from 'react-redux';
 import { toggleMenu } from '../Config/rightBarToggleSlice';
+import { MoreBar } from "../ReUsable";
 
 export const LeftBar = () => {
     const location = useLocation();
@@ -23,6 +24,9 @@ export const LeftBar = () => {
         dispatch(toggleMenu())
 
     }
+
+    //const [showMore, setShowMore] = useState(false);
+
     return (
         <div className="bar-links sm:z-2" onClick={handleMenu}>
             <div className="h-screen w-[268px] flex flex-col justify-between px-4 pt-8 pb-6 border-r border-gray-300 2xl:w-[240px] xl:w-max md:px-2 sm:absolute sm:bg-white sm:pt-24 sm:w-[200px]" onClick={(e) => e.stopPropagation()}>
@@ -104,12 +108,17 @@ export const LeftBar = () => {
                         </div>
                     </div>
                 </div>
-                <div className="flex gap-3.5 w-full h-10 items-center hover:bg-blue-50 rounded-md transition duration-500 ease-in-out py-3 pl-3.5 cursor-pointer sm:h-8">
-                    <MoreGridSVG />
-                    <h4 className="font-semibold text-base text-gray-900 xl:hidden sm:text-sm sm:block">
-                        More
-                    </h4>
-                </div>
+                <MoreBar />
+                {/* <div className="relative">
+                    <div
+                        className="flex gap-3.5 w-full h-10 items-center hover:bg-blue-50 rounded-md transition duration-500 ease-in-out py-3 pl-3.5 cursor-pointer sm:h-8"
+                    >
+                        <MoreGridSVG />
+                        <h4 className="font-semibold text-base text-gray-900 xl:hidden sm:text-sm sm:block">
+                            More
+                        </h4>
+                    </div>
+                </div> */}
             </div>
         </div>
     )

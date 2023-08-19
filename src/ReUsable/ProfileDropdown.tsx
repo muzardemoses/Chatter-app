@@ -1,9 +1,9 @@
+import { Fragment } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { logout, selectUser } from '../Config/userSlice';
 import { auth, signOut } from '../Config/firebase';
 import { toast } from 'react-toastify';
 import { Menu, Transition } from '@headlessui/react'
-import { Fragment } from 'react'
 import devAvatar from '../Images/Profile/avatar-default.png';
 import { NavLink } from 'react-router-dom';
 import {

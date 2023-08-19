@@ -1,17 +1,17 @@
 import { Link } from "react-router-dom"
-import { logEvent } from "firebase/analytics";
-import { analytics } from "../../Config/firebase";
+// import { logEvent } from "firebase/analytics";
+// import { analytics } from "../../Config/firebase";
 
 export const Drafts = () => {
 
 
   
-    logEvent(analytics, 'screen_view', {
-        firebase_screen: 'Drafts',
-        firebase_screen_class: 'Drafts',
-    });
-   //console log the event
-    console.log('Analytics event sent to Drafts screen_view' + logEvent);
+//     logEvent(analytics, 'screen_view', {
+//         firebase_screen: 'Drafts',
+//         firebase_screen_class: 'Drafts',
+//     });
+//    //console log the event
+//     console.log('Analytics event sent to Drafts screen_view' + logEvent);
     
 
     return (
