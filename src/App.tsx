@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Home, About, PageNotFound, Login, Register, ForgetPassword, Profile, VerifyEmail, Bookmarks, Notifications, Feed, CreateContent, Content, Messages, Drafts, Explore, Teams, SelectAndMessage, ChatRoom, FollowersAndFollowing, Followers, Following, Account, EditProfile } from './Pages'
+import { Home, About, PageNotFound, Login, Register, ForgetPassword, Profile, VerifyEmail, Bookmarks, Notifications, Feed, CreateContent, Content, Messages, Drafts, Explore, Teams, SelectAndMessage, ChatRoom, FollowersAndFollowing, Followers, Following, Settings, Account, EditProfile, EmailAndPassword, ConnectedAccounts, MutesAndBlocks } from './Pages'
 import { AuthLayout, DashboardLayout, DefaultLayout } from './Layouts'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { ToastContainer } from "react-toastify";
@@ -330,9 +330,9 @@ function App() {
           path="/settings/account"
           element={
             <DashboardLayout>
-              {/* <Settings> */}
+              <Settings>
                 <Account />
-              {/* </Settings> */}
+              </Settings>
             </DashboardLayout>
           }
         />
@@ -342,6 +342,39 @@ function App() {
           element={
             <DashboardLayout>
               <EditProfile />
+            </DashboardLayout>
+          }
+        />
+
+        <Route
+          path="/settings/email-and-password"
+          element={
+            <DashboardLayout>
+              <Settings>
+                <EmailAndPassword />
+              </Settings>
+            </DashboardLayout>
+          }
+        />
+
+        <Route
+          path="/settings/connected-accounts"
+          element={
+            <DashboardLayout>
+              <Settings>
+                <ConnectedAccounts />
+              </Settings>
+            </DashboardLayout>
+          }
+        />
+
+        <Route
+          path="/settings/mutes-and-blocks"
+          element={
+            <DashboardLayout>
+              <Settings>
+                <MutesAndBlocks />
+              </Settings>
             </DashboardLayout>
           }
         />

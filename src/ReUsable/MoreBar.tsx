@@ -1,4 +1,5 @@
 import { Fragment } from 'react';
+import { NavLink } from 'react-router-dom';
 import { logout } from '../Config/userSlice';
 import { useDispatch } from 'react-redux';
 import { auth, signOut } from '../Config/firebase';
@@ -66,15 +67,19 @@ export const MoreBar = () => {
                         <div className="py-1">
                             <Menu.Item>
                                 {({ active }) => (
-                                    <button
-                                        className={`${active ? 'bg-blue-300 text-white' : 'text-gray-900'
-                                            } flex gap-3.5 w-full h-10 items-center rounded-md transition duration-100 ease-in-out py-3 pl-2 cursor-pointer sm:h-8`}
+                                    <NavLink
+                                        to="/settings"
                                     >
-                                        {active ? <SettingsWhiteSVG /> : <SettingsSVG />}
-                                        <h4 className="font-medium text-base 2xl:text-[14px] xl:hidden sm:block">
-                                            Settings & Privacy
-                                        </h4>
-                                    </button>
+                                        <button
+                                            className={`${active ? 'bg-blue-300 text-white' : 'text-gray-900'
+                                                } flex gap-3.5 w-full h-10 items-center rounded-md transition duration-100 ease-in-out py-3 pl-2 cursor-pointer sm:h-8`}
+                                        >
+                                            {active ? <SettingsWhiteSVG /> : <SettingsSVG />}
+                                            <h4 className="font-medium text-base 2xl:text-[14px] xl:hidden sm:block">
+                                                Settings & Privacy
+                                            </h4>
+                                        </button>
+                                    </NavLink>
                                 )}
                             </Menu.Item>
                         </div>
