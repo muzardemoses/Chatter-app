@@ -5,6 +5,8 @@ export * from './ExploreSVG';
 export * from './TeamsSVG';
 export * from './DraftsSVG';
 export * from './MessagesSVG';
+export * from './ProfileSVG';
+export * from './MailShieldSVG';
 export * from './MoreGridSVG';
 export * from './SettingsSVG';
 export * from './SettingsWhiteSVG';

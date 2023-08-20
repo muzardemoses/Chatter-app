@@ -5,7 +5,7 @@ export const Settings = ({ children }: { children: ReactNode }) => {
     return (
         <div className="flex h-full overflow-hidden flex-row w-full">
             <SettingsSideBar />
-            <div className="">
+            <div className="min-h-[91vh] w-full border-l border-gray-300">
                 {children}
             </div>
         </div>

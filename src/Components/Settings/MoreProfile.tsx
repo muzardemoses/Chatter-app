@@ -127,7 +127,7 @@ export const MoreProfile = () => {
     }
 
     return (
-        <div className="flex gap-8 mb-12">
+        <div className="flex flex-col gap-8 mb-12">
             <div className="w-max">
                 <h5 className="text-gray-700 font-medium text-sm">Public profile</h5>
                 <p className="text-gray-600 font-normal text-sm w-max">

@@ -124,7 +124,7 @@ export const EditProfile = () => {
 
 
     return (
-        <div className="relative">
+        <div className="relative w-full">
             <div
                 className="w-full absolute top-0 z-10 h-60 bg-gradient-to-br from-purple-500 via-fuchsia-400 to-green-300"
             ></div>
@@ -150,7 +150,7 @@ export const EditProfile = () => {
                     </Link>
                 </div>
                 <div className="px-8 flex flex-col gap-5">
-                    <div className="flex gap-8">
+                    <div className="flex flex-col gap-8">
                         <div className="w-max">
                             <h5 className="text-gray-700 font-medium text-sm">Personal info</h5>
                             <p className="text-gray-600 font-normal text-sm w-max">

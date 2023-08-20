@@ -341,7 +341,9 @@ function App() {
           path="/settings/profile"
           element={
             <DashboardLayout>
-              <EditProfile />
+              <Settings>
+                <EditProfile />
+              </Settings>
             </DashboardLayout>
           }
         />
