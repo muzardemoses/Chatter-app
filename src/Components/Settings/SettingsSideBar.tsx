@@ -1,8 +1,6 @@
 import { useState } from 'react'
 import { Link, useLocation } from "react-router-dom"
-import { ProfileSVG, MailShieldSVG } from "../../Components/SVG"
-import connectedSVG from "../../assets/Svg/Settings/connected.svg"
-import mutedSVG from "../../assets/Svg/Settings/muted.svg"
+import { ProfileSVG, MailShieldSVG, ConnectedSVG, MutedSVG } from "../../Components/SVG"
 
 
 export const SettingsSideBar = () => {
@@ -10,6 +8,8 @@ export const SettingsSideBar = () => {
 
     const [profileOnHover, setProfileOnHover] = useState(false)
     const [mailShieldOnHover, setMailShieldOnHover] = useState(false)
+    const [connectedOnHover, setConnectedOnHover] = useState(false)
+    const [mutedOnHover, setMutedOnHover] = useState(false)
 
     return (
         <div className="h-[91vh] w-[350px] flex flex-col gap-9 px-4 pt-8 pb-6 ">
@@ -47,20 +47,28 @@ export const SettingsSideBar = () => {
 
                 <Link
                     to="/settings/connected-accounts"
-                    className={`flex items-center gap-3 px-2 h-11 w-full rounded-md border-l-2 border-transparent hover:bg-gray-200 transition duration-300 ease-in-out ${location.pathname === "/settings/connected-accounts" ? "bg-gray-100 border-gray-800" : ""}`}
+                    className={`flex items-center gap-3 px-2 h-11 w-full rounded-md border-l-2 border-transparent hover:bg-blue-400 transition duration-300 ease-in-out ${location.pathname === "/settings/connected-accounts" ? "bg-blue-500 border-blue-800" : ""}`}
+                    onMouseEnter={() => setConnectedOnHover(true)}
+                    onMouseLeave={() => setConnectedOnHover(false)}
                 >
-                    <img src={connectedSVG} alt="connected" className="h-6 w-6" />
-                    <h4>
+                    <ConnectedSVG connectedOnHover={connectedOnHover} />
+                    <h4 className={`font-bold text-blue-500 hover:text-white ${location.pathname === "/settings/connected-accounts" ? "text-white" : ""}`}
+                        style={connectedOnHover ? { color: "#fff" } : { color: "" }}
+                    >
                         Connected Accounts
                     </h4>
                 </Link>
 
                 <Link
                     to="/settings/mutes-and-blocks"
-                    className={`flex items-center gap-3 px-2 h-11 w-full rounded-md border-l-2 border-transparent hover:bg-gray-200 transition duration-300 ease-in-out ${location.pathname === "/settings/mutes-and-blocks" ? "bg-gray-100 border-gray-800" : ""}`}
+                    className={`flex items-center gap-3 px-2 h-11 w-full rounded-md border-l-2 border-transparent hover:bg-blue-400 transition duration-300 ease-in-out ${location.pathname === "/settings/mutes-and-blocks" ? "bg-blue-500 border-blue-800" : ""}`}
+                    onMouseEnter={() => setMutedOnHover(true)}
+                    onMouseLeave={() => setMutedOnHover(false)}
                 >
-                    <img src={mutedSVG} alt="mute" className="h-6 w-6" />
-                    <h4>
+                    <MutedSVG mutedOnHover={mutedOnHover} />
+                    <h4 className={`font-bold text-blue-500 hover:text-white ${location.pathname === "/settings/mutes-and-blocks" ? "text-white" : ""}`}
+                        style={mutedOnHover ? { color: "#fff" } : { color: "" }}
+                    >
                         Mutes & Blocks
                     </h4>
                 </Link>

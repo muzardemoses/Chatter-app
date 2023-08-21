@@ -323,7 +323,7 @@ function App() {
         <Route
           path="/settings"
           //redirect to account settings
-          element={<Navigate to="/settings/account" />}
+          element={<Navigate to="/settings/profile" />}
         />
 
         <Route
