@@ -195,8 +195,8 @@ export const Register = () => {
                                 methods.indexOf(GoogleAuthProvider.PROVIDER_ID) !== -1
                             ) {
                                 googleProvider.setCustomParameters({ login_hint: existingEmail });
-                                return signInWithPopup(auth, googleProvider).then((result) => {
-                                    return result.user;
+                                return signInWithRedirect(auth, googleProvider).then((result) => {
+                                    return result;
                                 })
                             } else {
                                 return Promise.reject("Unsupported Login Method.");
