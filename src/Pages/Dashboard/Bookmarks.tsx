@@ -49,7 +49,7 @@ export const Bookmarks = () => {
         if (!loggedInUser) {
             navigate('/login');
         }
-    }, [loggedInUser]);
+    }, [loggedInUser, navigate]);
 
 
 
