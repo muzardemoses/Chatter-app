@@ -22,6 +22,7 @@ import {
   updateEmail,
   updatePassword,
   linkWithCredential,
+  reauthenticateWithCredential,
 } from "firebase/auth";
 import {
   getFirestore,
@@ -237,5 +238,6 @@ export {
   updateEmail,
   updatePassword,
   linkWithCredential,
+  reauthenticateWithCredential,
 };
 

@@ -2,16 +2,24 @@
 //This is the one used for email and password in settings
 import {
     auth,
-    signInWithEmailAndPassword, googleProvider,
+    //signInWithEmailAndPassword,
+    googleProvider,
     twitterProvider, githubProvider,
-    signInWithPopup
+    signInWithPopup,
+    reauthenticateWithCredential,
+    EmailAuthProvider
 } from '../../Config/firebase'
 
 
 const handleSignInWithEmailTwo = async (currentUser: any, existingEmail: string, password: string, setEmailModal: any, setShowEmailInfo: any) => {
     if (currentUser) {
         try {
-            await signInWithEmailAndPassword(auth, existingEmail, password)
+            const credential = EmailAuthProvider.credential(
+                existingEmail,
+                password
+            );
+            await reauthenticateWithCredential(currentUser, credential)
+            //await signInWithEmailAndPassword(auth, existingEmail, password)
             setEmailModal(false)
             setShowEmailInfo(true)
             alert('Password confirmed successfully')

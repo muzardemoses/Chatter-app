@@ -1,16 +1,24 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
     auth,
-    signInWithEmailAndPassword, googleProvider,
+    //signInWithEmailAndPassword,
+    googleProvider,
     twitterProvider, githubProvider,
-    signInWithPopup
+    signInWithPopup,
+    reauthenticateWithCredential,
+    EmailAuthProvider
 } from '../../Config/firebase'
 
 
 const handleSignInWithEmail = async (currentUser: any, existingEmail: string, password: string, setEmailModal: any) => {
     if (currentUser) {
         try {
-            await signInWithEmailAndPassword(auth, existingEmail, password)
+            const credential = EmailAuthProvider.credential(
+                existingEmail,
+                password
+            );
+            await reauthenticateWithCredential(currentUser, credential)
+            //await signInWithEmailAndPassword(auth, existingEmail, password)
             setEmailModal(false)
             alert('Password confirmed successfully')
         } catch (error: any) {
